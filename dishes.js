@@ -200,8 +200,213 @@ const DISHES = [
     technique: 'Keep the noodles moving as they toast. Once the first strands begin to brown, the rest follow quickly.',
     swap: 'Break angel hair pasta into short lengths if you cannot find fideo. Start checking the pasta after 4 minutes.',
     foodNote: 'beans', foodLabel: 'What have researchers learned about meals with beans?'
+  },
+  {
+    image: 'assets/tuna-olive-cup.webp',
+    id: 'tuna-olive-cup', name: 'Tuna and black olive cup', style: 'Pantry cooking',
+    time: '5 minutes', minutes: 5, serves: 1,
+    pantry: {
+      staples: ['Canned light tuna', 'Canned black olives', 'Olive oil'], uses: ['desk', 'simple'], sugar: 'zero',
+      zeroFoods: [173709, 169094, 171413],
+      sugarNote: 'USDA lists 0 g total sugars per 100 g for plain water-packed light tuna, canned ripe olives and olive oil. USDA marks all three values as assumed zeros. Choose unflavored products without sweeteners.'
+    },
+    credit: 'Kelly Toups’s Niçoise-style salad for Oldways combines tuna, olives and olive oil with fresh vegetables. This small lunch uses just the three pantry ingredients.',
+    tradition: {label: 'Kelly Toups’s tuna salad at Oldways', url: 'https://oldwayspt.org/recipe/nicoise-tuna-salad/'},
+    ingredients: ['1 can (5 oz) plain light tuna packed in water, drained', '2 tablespoons pitted canned ripe black olives in plain brine, drained', '1 teaspoon plain olive oil'],
+    steps: [
+      'Chop the olives finely. Press half against the side of a small bowl with a fork, then stir the olive oil into the crushed olives.',
+      'Add the drained tuna and the remaining olives. Pull the tuna into bite-size flakes and fold them into the dressing. Eat with a fork.'
+    ],
+    technique: 'Crushing some of the olives spreads their briny flavor through the fish. The rest give you a bit of texture.',
+    foodNote: 'cannedFish', foodLabel: 'How much protein does canned fish provide?'
+  },
+  {
+    image: 'assets/sardine-water-crackers.webp',
+    id: 'sardine-water-crackers', name: 'Sardines on water crackers', style: 'Pantry cooking',
+    time: '5 minutes', minutes: 5, serves: 1,
+    pantry: {
+      staples: ['Canned sardines', 'Plain water crackers', 'Red wine vinegar'], uses: ['training', 'desk', 'simple'], sugar: 'zero',
+      zeroFoods: [175139, 171856, 172240],
+      sugarNote: 'USDA reports 0 g total sugars per 100 g for these reference foods. The cracker value comes from a label and the sardine value is an assumed zero. Choose unsweetened crackers labeled 0 g total sugars, plain sardines in oil and unflavored vinegar.'
+    },
+    credit: 'Chicken of the Sea serves sardines on crisp crackers with a tangy ponzu finish. This pantry version uses water crackers and a few drops of red wine vinegar.',
+    tradition: {label: 'Chicken of the Sea’s sardine cracker recipe', url: 'https://chickenofthesea.com/seafood-recipes/sardines-with-rice-crackers-and-ponzu/'},
+    ingredients: ['1 can (3.75 oz) plain Atlantic sardines in oil with their soft bones, drained', '6 plain unsweetened water crackers, labeled 0 g total sugars', '½ teaspoon plain red wine vinegar'],
+    steps: [
+      'Lift the sardines into a small bowl and break each into two or three pieces with a fork. Sprinkle the vinegar over them.',
+      'Spoon a piece onto each cracker as you eat. Mash the fish and the soft bones together if you prefer a spread.'
+    ],
+    technique: 'Keeping the crackers separate until the last minute preserves their snap.',
+    foodNote: 'cannedFish', foodLabel: 'What do sardines with edible bones contribute?'
+  },
+  {
+    image: 'assets/peanut-butter-oats.webp',
+    id: 'peanut-butter-oats', name: 'Peanut butter oats', style: 'Pantry cooking',
+    time: '10 minutes', minutes: 10, serves: 1,
+    pantry: {
+      staples: ['Rolled oats', 'Unsweetened peanut butter'], uses: ['training', 'simple'], sugar: 'no-added',
+      sugarNote: 'Plain oats and peanuts contain some naturally occurring sugar. Choose plain rolled oats and peanut butter made from peanuts, with or without salt.'
+    },
+    credit: 'University of Illinois Extension stirs peanut butter into its cooked chocolate oatmeal. Here the oats cook on the stove and a spoonful of their hot liquid helps smooth out the peanut butter.',
+    tradition: {label: 'Illinois Extension’s peanut butter oatmeal (PDF)', url: 'https://extension.illinois.edu/sites/default/files/pb_oatmeal_recipe_0.pdf'},
+    ingredients: ['½ cup plain old-fashioned rolled oats', '1 cup water, plus a splash to thin', '1 tablespoon unsweetened peanut butter made with peanuts and optional salt'],
+    steps: [
+      'Bring the water to a boil in a small saucepan. Stir in the oats, reduce to a gentle bubble and cook for about 5 minutes, stirring occasionally, until the flakes are tender.',
+      'Put the peanut butter in your bowl. Stir in a spoonful of the hot oatmeal liquid to loosen it, then fold in the rest of the oats. Add a splash more water if you like a softer porridge.'
+    ],
+    technique: 'Work a little hot liquid into the peanut butter first so each spoonful of oats gets some.',
+    foodNote: 'oats', foodLabel: 'What did researchers study about oat fiber?'
+  },
+  {
+    image: 'assets/black-bean-rice.webp',
+    id: 'black-bean-rice', name: 'Black bean and cumin rice', style: 'Pantry cooking',
+    time: '20 minutes', minutes: 20, serves: 2,
+    pantry: {
+      staples: ['Plain instant brown rice', 'Canned black beans', 'Ground cumin', 'Olive oil'], uses: ['training'], sugar: 'no-added',
+      sugarNote: 'Beans and rice contain starch and small amounts of naturally occurring sugars. Use unseasoned rice, single-spice cumin and beans canned in water with or without salt.'
+    },
+    credit: 'Oklahoma State University Extension seasons its black beans and rice with cumin. This shorter version uses instant brown rice and mashes a spoonful of beans into the cooking liquid.',
+    tradition: {label: 'Oklahoma State Extension’s black beans and rice', url: 'https://extension.okstate.edu/programs/oklahoma-gardening/recipes/black-beans-and-rice'},
+    ingredients: ['1 cup plain instant brown rice, dry', 'Water as directed on the rice package, plus ¼ cup for the beans', '1 can (15 oz) plain black beans in water, rinsed and drained', '½ teaspoon ground cumin', '2 teaspoons plain olive oil'],
+    steps: [
+      'Cook the instant rice with water according to its package. Cover and let it stand for the time on the box.',
+      'Meanwhile, heat the olive oil and cumin in a small skillet over medium heat for about 30 seconds. Stir in the beans and ¼ cup water. Mash a spoonful of beans, then simmer for 3–5 minutes until hot and lightly saucy.',
+      'Fluff the rice and spoon the beans over it. For a softer bowl, fold them together in the skillet.'
+    ],
+    technique: 'Mashing just a few beans gives their liquid enough body to coat the rice.',
+    foodNote: 'fuel', foodLabel: 'What have studies measured about carbohydrate during long rides?'
+  },
+  {
+    image: 'assets/white-bean-olive-mash.webp',
+    id: 'white-bean-olive-mash', name: 'White bean and olive mash', style: 'Pantry cooking',
+    time: '5 minutes', minutes: 5, serves: 2,
+    pantry: {
+      staples: ['Canned white beans', 'Canned black olives', 'Olive oil', 'Red wine vinegar'], uses: ['desk', 'simple'], sugar: 'no-added',
+      sugarNote: 'White beans contain naturally occurring sugars. Choose plain beans and ripe olives canned without sweeteners, plain olive oil and unflavored red wine vinegar.'
+    },
+    credit: 'Colorado State University Extension blends cannellini beans, olives and olive oil into its lemony dip. A fork and a little vinegar make a chunkier version for a desk lunch.',
+    tradition: {label: 'Colorado State Extension’s white bean dip', url: 'https://extension.colostate.edu/resource/lemony-white-bean-dip/'},
+    ingredients: ['1 can (15 oz) plain white beans in water, rinsed and drained', '¼ cup pitted canned ripe black olives in plain brine, drained', '1 tablespoon plain olive oil', '1 teaspoon plain red wine vinegar', '1–2 tablespoons water'],
+    steps: [
+      'Mash half the beans in a bowl with the olive oil, vinegar and a tablespoon of water. Add the remaining water a little at a time until the mash is easy to stir.',
+      'Chop the olives. Fold them in with the remaining whole beans and divide between two small bowls.'
+    ],
+    technique: 'Leaving some beans whole keeps this a spoonable lunch. For a smoother texture, mash them all together.',
+    foodNote: 'beans', foodLabel: 'What does the research say about eating legumes regularly?'
+  },
+  {
+    image: 'assets/salted-potato-mash.webp',
+    id: 'salted-potato-mash', name: 'Salted potato mash', style: 'Pantry cooking',
+    time: '25 minutes', minutes: 25, serves: 2,
+    pantry: {
+      staples: ['Russet potatoes'], uses: ['training'], sugar: 'no-added',
+      sugarNote: 'Plain russet potatoes supply starch and contain naturally occurring sugars. The cooking water and salt add no sugar.'
+    },
+    credit: 'A University of Illinois cycling study used potato purée in measured carbohydrate portions. This is a hand-mashed side for a meal around training. The portions here are ordinary kitchen servings.',
+    tradition: {label: 'Salvador and colleagues’ potato cycling study', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6962613/'},
+    ingredients: ['2 medium russet potatoes (about 12 oz total), peeled and cut into ¾-inch cubes', 'Cold water to cover', '⅛ teaspoon salt, or to taste'],
+    steps: [
+      'Put the potato cubes in a small pot. Cover with cold water by an inch. Bring to a boil, then simmer gently for 10–12 minutes, until a fork slips through the middle without resistance.',
+      'Scoop out ½ cup of the cooking water before draining. Return the potatoes to the pot, add the salt and mash by hand. Beat in the warm cooking water a tablespoon at a time until you like the texture.'
+    ],
+    technique: 'Cutting the pieces to the same size helps the centers soften at the same time. Mash while the potatoes are still hot.',
+    foodNote: 'fuel', foodLabel: 'How did potatoes compare with gels during a cycling trial?'
   }
 ];
+
+// Variations share the base recipe's yield, timing and ingredient research unless overridden.
+const PANTRY_VARIANTS = [
+  {
+    baseId: 'tuna-olive-cup', id: 'tuna-olive-cup-no-oil', name: 'Tuna and black olives without added oil',
+    ingredients: ['1 can (5 oz) plain light tuna packed in water, drained', '2 tablespoons pitted canned ripe black olives in plain brine, drained'],
+    steps: [
+      'Chop the olives. Mash half against the side of a bowl with a fork.',
+      'Break the tuna into small flakes. Toss it with the crushed and chopped olives, pressing a few flakes into the olives to help the mixture hold together.'
+    ],
+    credit: 'Kelly Toups pairs tuna with olives in her Niçoise-style salad for Oldways. Here mashed olives dress the tuna on their own.',
+    pantry: {
+      staples: ['Canned light tuna', 'Canned black olives'], sugar: 'zero', zeroFoods: [173709, 169094],
+      sugarNote: 'USDA records assumed zeros for total sugars in water-packed light tuna and canned ripe black olives. Choose plain fish in water and plain olives in brine without sweeteners.'
+    }
+  },
+  {
+    baseId: 'sardine-water-crackers', id: 'sardine-water-crackers-no-vinegar', name: 'Two-ingredient sardine crackers',
+    ingredients: ['1 can (3.75 oz) plain Atlantic sardines in oil with their soft bones, drained', '6 plain unsweetened water crackers, labeled 0 g total sugars'],
+    steps: [
+      'Transfer the drained sardines to a plate. Press each one with a fork to break up the soft bones and make a coarse spread.',
+      'Top each cracker with a forkful just before eating. Keep any unassembled crackers dry until you need them.'
+    ],
+    credit: 'Chicken of the Sea pairs sardines with crisp crackers. This two-ingredient variation uses the drained fish as a spread.',
+    pantry: {
+      staples: ['Canned sardines', 'Plain water crackers'], sugar: 'zero', zeroFoods: [175139, 171856],
+      sugarNote: 'USDA lists 0 g total sugars per 100 g for oil-packed Atlantic sardines and plain water biscuits. The fish value is an assumed zero and the cracker value comes from a label. Choose plain fish and unsweetened water crackers labeled 0 g total sugars.'
+    }
+  },
+  {
+    baseId: 'peanut-butter-oats', id: 'almond-butter-oats', name: 'Almond butter oats', image: 'assets/almond-butter-oats.webp',
+    ingredients: ['½ cup plain old-fashioned rolled oats', '1 cup water, plus a splash to thin', '1 tablespoon unsweetened almond butter made from almonds and optional salt'],
+    steps: [
+      'Bring the water to a boil. Add the rolled oats and simmer, stirring now and then, until the flakes soften, about 5 minutes.',
+      'Stir the almond butter in its jar if the oil has separated. Put a spoonful of hot porridge in your bowl and mix in the measured almond butter. Add the remaining oats and thin with warm water if needed.'
+    ],
+    technique: 'Mixing the almond butter with a little warm porridge first helps it spread through the oats.',
+    credit: 'Illinois Extension’s oats use peanut butter. This version uses plain almond butter stirred into a warm bowl of rolled oats.',
+    pantry: {
+      staples: ['Rolled oats', 'Unsweetened almond butter'], sugar: 'no-added',
+      sugarNote: 'Oats and almonds contain naturally occurring sugars. Choose plain rolled oats and almond butter made from almonds, with or without salt.'
+    }
+  },
+  {
+    baseId: 'black-bean-rice', id: 'pinto-bean-rice', name: 'Pinto bean and cumin rice', image: 'assets/pinto-bean-rice.webp',
+    ingredients: ['1 cup plain instant brown rice, dry', 'Water as directed on the rice package, plus ¼ cup for the beans', '1 can (15 oz) plain pinto beans in water, rinsed and drained', '½ teaspoon ground cumin', '2 teaspoons plain olive oil'],
+    steps: [
+      'Cook the instant brown rice with water and let it stand according to the package.',
+      'Warm the olive oil and cumin in a skillet for about 30 seconds. Add the pinto beans and ¼ cup water. Simmer for 3–5 minutes, pressing a few beans against the pan to thicken the liquid.',
+      'Divide the fluffed rice between bowls and spoon the saucy pinto beans on top.'
+    ],
+    credit: 'Oklahoma State Extension pairs black beans and cumin with brown rice. Here softer pinto beans make a creamy topping for the rice.',
+    pantry: {
+      staples: ['Plain instant brown rice', 'Canned pinto beans', 'Ground cumin', 'Olive oil'], sugar: 'no-added',
+      sugarNote: 'Pinto beans and brown rice contain naturally occurring sugars. Choose unseasoned rice, plain canned pinto beans, single-spice cumin and unflavored olive oil.'
+    }
+  },
+  {
+    baseId: 'white-bean-olive-mash', id: 'chickpea-olive-mash', name: 'Chickpea and olive mash', image: 'assets/chickpea-olive-mash.webp',
+    ingredients: ['1 can (15 oz) plain chickpeas in water, rinsed and drained', '¼ cup pitted canned ripe black olives in plain brine, drained', '1 tablespoon plain olive oil', '1 teaspoon plain red wine vinegar', '2–3 tablespoons water'],
+    steps: [
+      'Chop the olives. Put the chickpeas in a shallow bowl and press them against its base with a fork until most have split.',
+      'Stir the vinegar and olive oil through the chickpeas. Mash again, adding water a spoonful at a time to make a coarse, spoonable mixture. Fold in the chopped olives and divide between bowls.'
+    ],
+    technique: 'A shallow bowl gives your fork more leverage against the firm chickpeas. A few pieces left whole add texture.',
+    credit: 'Colorado State Extension’s white bean dip pairs beans with olives and olive oil. This fork-mashed variation uses chickpeas and a splash of red wine vinegar.',
+    pantry: {
+      staples: ['Canned chickpeas', 'Canned black olives', 'Olive oil', 'Red wine vinegar'], sugar: 'no-added',
+      sugarNote: 'Chickpeas contain naturally occurring sugars. Use beans and olives canned without sweeteners, plain olive oil and unflavored red wine vinegar.'
+    }
+  },
+  {
+    baseId: 'salted-potato-mash', id: 'olive-oil-potato-mash', name: 'Olive oil potato mash',
+    ingredients: ['2 medium russet potatoes (about 12 oz total), peeled and cut into ¾-inch cubes', 'Cold water to cover', '1 tablespoon plain olive oil', '⅛ teaspoon salt, or to taste'],
+    steps: [
+      'Cover the potato cubes with cold water by an inch. Bring to a boil, then simmer for 10–12 minutes until the cubes break easily under a fork.',
+      'Reserve ½ cup of cooking water, then drain the potatoes. Mash them in the warm pot with the olive oil and salt. Add the reserved water a spoonful at a time until the mash is soft enough to scoop.'
+    ],
+    credit: 'The cycling study used measured portions of a potato purée. Here a spoonful of olive oil gives a home-style potato side a richer texture.',
+    pantry: {
+      staples: ['Russet potatoes', 'Olive oil'], sugar: 'no-added',
+      sugarNote: 'Russet potatoes contain naturally occurring sugars. Plain olive oil, water and salt add no sugar.'
+    }
+  }
+].map(variation => {
+  const base = DISHES.find(dish => dish.id === variation.baseId);
+  return {...base, ...variation, pantry: {...base.pantry, ...variation.pantry}};
+});
+
+const ALL_DISHES = [...DISHES, ...PANTRY_VARIANTS];
+
+function dishById(id) {
+  return ALL_DISHES.find(dish => dish.id === id);
+}
 
 function ingredientWords(text) {
   // Match ingredient words irrespective of quantities, plurals or punctuation.
@@ -213,7 +418,7 @@ function ingredientWords(text) {
 
 function plannedDish(text) {
   const title = text.trim().toLowerCase();
-  return DISHES.find(dish => dish.name.toLowerCase() === title);
+  return ALL_DISHES.find(dish => dish.name.toLowerCase() === title);
 }
 
 function filterDishes(dishes, query, style, maxMinutes) {

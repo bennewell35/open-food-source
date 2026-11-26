@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/webp" href="assets/maple-leaf.webp">
 <script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
-<script defer src="dishes.js"></script><script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="cookbook.js"></script>
+<script defer src="dishes.js"></script><script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="cookbook.js"></script><script defer src="pantry-picker.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -20,10 +20,30 @@
 <section class="hero"><div class="wrap hero-grid"><div class="hero-copy">
 <h1>Open Food<br><em>Source.</em></h1>
 <p class="lede">Find recipes by ingredient, explore what human studies found, and plan the meals you want to repeat.</p>
-<div class="hero-actions"><a class="primary" href="#cookbook">Find a recipe</a><a class="inline" href="#cold-season">Cold-season kitchen</a><a class="inline" href="#weekly-map">Open my weekly map</a></div></div>
+<div class="hero-actions"><a class="primary" href="#pantry-picker">Open pantry picker</a><a class="inline" href="#cookbook">Browse recipes</a><a class="inline" href="#cold-season">Cold-season kitchen</a><a class="inline" href="#weekly-map">Weekly map</a></div></div>
 <figure class="hero-art"><img alt="Botanical watercolor of a sugar maple leaf, sliced ginger, an olive branch and blueberries" src="assets/botanical-plate.webp" width="1200" height="800">
 <figcaption>Sugar maple · Ginger · Olive · Blueberry</figcaption></figure>
 </div></section>
+<section class="section wrap picker" id="pantry-picker" aria-labelledby="picker-title">
+<div class="section-head"><div><p class="eyebrow">Pantry picker</p><h2 id="picker-title">Cook from your shelves.</h2></div><a class="inline" href="#picker-shopping">My shopping list</a></div>
+<p class="intro">Check the staples you have, then open a recipe to choose your version. Add what’s missing to your shopping list or put the meal straight into your week.</p>
+<div class="picker-layout">
+<div class="picker-controls">
+<label for="picker-use">What are you cooking for?<select id="picker-use"><option value="">Any occasion</option><option value="training">Training day</option><option value="desk">Desk lunch</option><option value="simple">Low-prep / ADHD-friendly</option></select></label>
+<label for="picker-sugar">Sugar preference<select id="picker-sugar"><option value="no-added">No added sugar</option><option value="zero">USDA lists 0 g total sugars</option></select></label>
+<details><summary>How we check sugar</summary><p>Every recipe here uses unsweetened ingredients. Oats, beans and other whole foods can still contain naturally occurring sugars. The 0 g filter requires a USDA record listing 0 g total sugars per 100 g for every ingredient. Some values are assumed or rounded. Check your product’s ingredients and label.</p><a class="inline" href="https://www.fda.gov/food/nutrition-facts-label/added-sugars-nutrition-facts-label">FDA guide to added sugars</a></details>
+<details id="picker-stock"><summary>My staples <span id="picker-checked"></span></summary><p>Check what you have. Water and salt are assumed. Check amounts in the recipe.</p><div id="picker-staples"></div></details>
+<label class="picker-check"><input type="checkbox" id="picker-ready">Only recipes I can make now</label>
+<p class="quiet" id="picker-storage" role="status"></p>
+</div>
+<div class="picker-matches">
+<aside id="picker-guide" class="picker-guide" aria-label="Research for this occasion" hidden></aside>
+<p id="picker-count" class="picker-count" role="status"></p>
+<div id="picker-results"></div><div id="picker-empty" hidden><p>No recipes match these choices.</p><button id="picker-reset" class="text-button" type="button">Show all pantry recipes</button></div>
+</div></div>
+<div id="picker-detail-slot"></div>
+<section id="picker-shopping" aria-labelledby="shopping-title"><h3 id="shopping-title" tabindex="-1">My shopping list</h3><p id="shopping-summary" role="status"></p><ul id="shopping-ingredients"></ul><div id="shopping-recipes"></div></section>
+</section>
 <section class="section wrap" id="cookbook" aria-labelledby="cookbook-title">
 <div class="section-head"><div><p class="eyebrow">Community cookbook</p><h2 id="cookbook-title">What can I cook?</h2></div><a class="inline" href="https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md">Contribute a recipe</a></div>
 <p class="intro">Start with what’s in your kitchen. Choose a dish for the method, a swap and the research behind one of its foods.</p>
@@ -34,7 +54,7 @@
 </div>
 <div class="dish-results"><p id="dish-count" role="status"></p><button id="reset-dishes" class="text-button" hidden>Clear filters</button></div>
 <div id="dish-list" class="dish-list"></div><div id="dish-empty" hidden><p>Try fewer ingredients or clear a filter. You can also look up a food’s nutrients.</p><a class="inline" id="pantry-search-link" href="#pantry">Search the food index</a></div>
-<section id="dish-detail" aria-label="Selected recipe" hidden></section>
+<div id="cookbook-detail-slot"><section id="dish-detail" aria-label="Selected recipe" hidden></section></div>
 <p class="map-legend">Planning <strong id="cookbook-week"></strong> · <a href="#weekly-map">Change week</a></p>
 <p class="intro"><a href="?drink=cherry-apple#kitchen">Try the tart cherry &amp; apple cooler</a> · <a href="#kitchen">Browse all drinks</a></p>
 </section>

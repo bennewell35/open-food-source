@@ -36,6 +36,14 @@ Set `coldSeason: true` on a dish or drink to include it in the cold-season colle
 
 For a sourced ingredient lesson, add a short entry to `MEAL_LESSONS` in `research.js`, keyed to the dish’s `foodNote`. Say what was measured and how the study food or portion compares with the dish. Readers see that text and its sources when they save a meal and when they reopen the day. For a culinary reference, use the dish’s `tradition` field to credit the cook or publication separately.
 
+## Add a pantry option
+
+Add a `pantry` object to the dish in `dishes.js`. Pick the display names for `staples` from existing dishes when the ingredient is the same. Make the full recipe specific enough for someone to check the preparation and product. Use one or more of `training`, `desk` or `simple` in `uses` to describe where the meal fits. A training-day tag can help someone choose a meal to pack. A claim about exercise performance needs human outcome evidence.
+
+For a swap, add a `PANTRY_VARIANTS` entry with the original dish’s `baseId`, a unique stable ID and name, and the ingredients, steps, staples and sugar evidence for that version.
+
+Set `sugar` to `'no-added'` when the recipe as written uses no added sugar. Specify unsweetened products where needed. In `sugarNote`, tell cooks which labels or substitutions matter. For `'zero'`, find a matching SR Legacy entry for **every** ingredient, including oil and seasonings. Match the food and its preparation, then record the numeric FoodData Central IDs in ingredient order in `zeroFoods`. Check that every record reports **0 g total sugars per 100 g**. A missing value means unknown. These values describe the named foods and preparations. [USDA data documentation](https://fdc.nal.usda.gov/data-documentation/)
+
 ## Check your edit
 
 From the repository folder, run the tests (Node.js 20 or later) and start the preview (Python 3).
@@ -46,6 +54,8 @@ python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
 Open the [local site](http://127.0.0.1:8000/) in a fresh browser profile or private window. Find your dish in the cookbook or your drink in the kitchen. Check the ingredients, amounts and directions and open each source you added. Save the recipe to a day, reload, and confirm the same recipe appears on that day. For a cold-season submission, check that it also appears in the collection. Press Ctrl+C in the terminal to stop the preview.
+
+For a pantry submission, try its staple and sugar selections in the [local picker](http://127.0.0.1:8000/#pantry-picker). Leave one required staple unchecked, then check it and confirm the dish moves into the matches. For a zero-sugar option, compare each linked USDA food with the corresponding ingredient.
 
 ## Send your edit
 

@@ -14,7 +14,7 @@ function dishCard(dish) {
   const button = action('', () => openDish(dish), 'dish-tile');
   button.id = 'tile-' + dish.id;
   button.setAttribute('aria-controls', 'dish-detail');
-  button.setAttribute('aria-expanded', String(openDishId === dish.id));
+  button.setAttribute('aria-expanded', 'false');
   if (dish.image) {
     const photo = node('img');
     photo.src = dish.image;
@@ -38,7 +38,8 @@ function mealPicker(dish) {
   const dayLabel = node('label', 'Day');
   const mealLabel = node('label', 'Meal');
   mapDays.forEach((name, i) => day.add(new Option(name, String(i))));
-  for (const name of ['Lunch', 'Dinner']) meal.add(new Option(name, name.toLowerCase()));
+  for (const name of ['Breakfast', 'Lunch', 'Dinner']) meal.add(new Option(name, name.toLowerCase()));
+  meal.value = 'lunch';
   dayLabel.append(day);
   mealLabel.append(meal);
   const result = node('div', '', 'meal-feedback');
@@ -59,16 +60,49 @@ function mealPicker(dish) {
   return picker;
 }
 
+function stepReader(steps, instructions) {
+  const box = node('div', undefined, 'step-reader');
+  const reading = node('div', undefined, 'step-reading');
+  reading.hidden = true;
+  const current = node('p');
+  current.setAttribute('role', 'status');
+  let index = 0;
+  function showStep() {
+    current.replaceChildren(node('strong', 'Step ' + (index + 1) + ' of ' + steps.length), ' ', steps[index]);
+    previous.disabled = index === 0;
+    next.disabled = index === steps.length - 1;
+  }
+  const previous = action('Previous step', () => { index--; showStep(); if (previous.disabled) next.focus(); });
+  const next = action('Next step', () => { index++; showStep(); if (next.disabled) previous.focus(); });
+  const toggle = action('Read one step at a time', () => {
+    reading.hidden = !reading.hidden;
+    instructions.hidden = !reading.hidden;
+    toggle.textContent = reading.hidden ? 'Read one step at a time' : 'Show all steps';
+    toggle.setAttribute('aria-expanded', String(!reading.hidden));
+    if (!reading.hidden) showStep();
+  }, 'text-button');
+  toggle.setAttribute('aria-expanded', 'false');
+  reading.append(current, previous, next);
+  box.append(toggle, reading, instructions);
+  return box;
+}
+
 function openDish(dish, moveFocus = true, collectionButton) {
+  const fromPantry = Boolean(collectionButton?.closest('#pantry-picker'));
+  byId(fromPantry ? 'picker-detail-slot' : 'cookbook-detail-slot').append(dishDetail);
   openDishId = dish.id;
+  const baseId = dish.baseId || dish.id;
   for (const button of byId('dish-list').children) {
-    button.setAttribute('aria-expanded', String(button.id === 'tile-' + dish.id));
+    button.setAttribute('aria-expanded', String(button === (byId('tile-' + dish.id) || byId('tile-' + baseId))));
   }
   const heading = node('h3', dish.name);
   heading.tabIndex = -1;
-  const back = action(collectionButton ? 'Back to cold-season recipes' : 'Back to recipes', () => {
+  const backLabel = fromPantry ? 'Back to pantry results' : collectionButton ? 'Back to cold-season recipes' : 'Back to recipes';
+  const back = action(backLabel, () => {
     closeDish();
-    (collectionButton || byId('tile-' + dish.id))?.focus();
+    const opener = collectionButton?.isConnected ? collectionButton :
+      fromPantry ? byId('pick-' + baseId) || byId('picker-use') : byId('tile-' + dish.id) || byId('tile-' + baseId);
+    opener?.focus();
   }, 'text-button');
   const header = node('div', undefined, 'detail-heading');
   header.append(heading, back);
@@ -78,8 +112,24 @@ function openDish(dish, moveFocus = true, collectionButton) {
   steps.append(...dish.steps.map(text => node('li', text)));
   const left = node('div');
   left.append(node('h4','Ingredients'), ingredients);
+  if (dish.pantry) {
+    left.append(node('h4', 'Sugar in this recipe'), node('p', dish.pantry.sugarNote));
+    if (dish.pantry.zeroFoods) {
+      const records = node('details');
+      records.append(node('summary', 'Check the USDA ingredient records'));
+      const refs = node('ul');
+      for (const id of dish.pantry.zeroFoods) {
+        const food = COMPOSITION.foods.find(entry => entry[0] === id);
+        const item = node('li');
+        item.append(link(food[1], 'https://fdc.nal.usda.gov/food-details/' + id + '/nutrients'));
+        refs.append(item);
+      }
+      records.append(refs);
+      left.append(records);
+    }
+  }
   const right = node('div');
-  right.append(node('h4', 'Method'), steps);
+  right.append(node('h4', 'Method'), stepReader(dish.steps, steps));
   if (dish.technique) right.append(node('h4', 'Why it works'), node('p', dish.technique));
   if (dish.swap) right.append(node('h4', 'A swap to try'), node('p', dish.swap));
   if (dish.coldSeasonTip) right.append(node('h4', 'Serving tip'), node('p', dish.coldSeasonTip));
@@ -89,9 +139,37 @@ function openDish(dish, moveFocus = true, collectionButton) {
   const citation = link('Link to this recipe', '?dish=' + encodeURIComponent(dish.id) + '#dish-detail');
   const credit = node('p', dish.credit, 'dish-credit');
   if (dish.tradition) credit.append(' ', link(dish.tradition.label, dish.tradition.url));
+  const origin = document.createDocumentFragment();
+  origin.append(credit);
+  if (dish.pantry && versionsFor(dish).length > 1) {
+    const label = node('label', 'Customize this recipe', 'picker-version');
+    const select = node('select');
+    select.id = 'dish-version';
+    for (const v of versionsFor(dish)) select.add(new Option(v.name, v.id));
+    select.value = dish.id;
+    select.addEventListener('change', () => {
+      const next = dishById(select.value);
+      const mealInputs = [...dishDetail.querySelectorAll('.dish-picker select')].map(el => el.value);
+      rememberVersion(next, Boolean(choices.get(baseId)?.shop));
+      drawShoppingList();
+      drawPantryResults();
+      const opener = fromPantry ? byId('pick-' + baseId) || byId('picker-use') : collectionButton;
+      openDish(next, false, opener);
+      dishDetail.querySelectorAll('.dish-picker select').forEach((el, i) => { el.value = mealInputs[i]; });
+      byId('dish-version').focus();
+    });
+    label.append(select);
+    origin.append(label);
+  }
   dishDetail.replaceChildren(node('p', dish.style + ' · ' + dish.time + ' · serves ' + dish.serves, 'eyebrow'),
-    header, credit, instructions, node('h4','Plan this dish'),
+    header, origin, instructions, node('h4','Plan this dish'),
     mealPicker(dish), citation);
+  if (dish.pantry) {
+    const feedback = new URL('https://github.com/bennewell35/open-food-source/issues/new');
+    feedback.searchParams.set('title', 'Kitchen check — ' + dish.name);
+    feedback.searchParams.set('body', 'Recipe: ' + dish.name + '\n\nTime and yield when I made it:\n\nIngredient or step I changed:\n\nWhat I learned or found unclear:\n\nWould I make it again?');
+    dishDetail.append(' · ', link('Share a kitchen note', feedback.href));
+  }
   dishDetail.hidden = false;
   if (moveFocus) heading.focus();
 }
@@ -104,9 +182,12 @@ function closeDish() {
 
 function showDishes() {
   const query = dishSearch.value.trim();
-  const filtered = filterDishes(DISHES, query, styleFilter.value, Number(timeFilter.value));
-  if (openDishId && !filtered.some(dish => dish.id === openDishId)) closeDish();
+  const filtered = filterDishes(query ? ALL_DISHES : DISHES, query, styleFilter.value, Number(timeFilter.value));
+  const selected = dishById(openDishId);
+  if (selected && dishDetail.parentElement.id === 'cookbook-detail-slot' &&
+    !filtered.some(dish => dish.id === selected.id || dish.id === selected.baseId)) closeDish();
   byId('dish-list').replaceChildren(...filtered.map(dishCard));
+  if (openDishId) (byId('tile-' + openDishId) || byId('tile-' + selected?.baseId))?.setAttribute('aria-expanded', 'true');
   byId('dish-count').textContent = filtered.length + (filtered.length === 1 ? ' recipe' : ' recipes');
   byId('reset-dishes').hidden = !query && !styleFilter.value && !timeFilter.value;
   byId('dish-empty').hidden = filtered.length > 0;
@@ -165,5 +246,7 @@ for (const [index, recipe] of RECIPES.entries()) {
   byId('season-drinks').append(item);
 }
 byId('season-evidence').addEventListener('click', () => showNote('warm'));
-const requestedDish = DISHES.find(dish => dish.id === new URLSearchParams(location.search).get('dish'));
-if (requestedDish) openDish(requestedDish, location.hash === '#dish-detail');
+document.addEventListener('DOMContentLoaded', () => {
+  const requestedDish = dishById(new URLSearchParams(location.search).get('dish'));
+  if (requestedDish) openDish(requestedDish, location.hash === '#dish-detail');
+}, {once: true});

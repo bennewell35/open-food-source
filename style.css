@@ -125,3 +125,47 @@ dialog{color:var(--ink);border:1px solid #bcc4b5;border-radius:5px;padding:clamp
   .season-grid { grid-template-columns: minmax(0, 1fr); }
   .season-meal img { width: min(23%, 5rem); }
 }
+
+.picker { border-bottom: 1px solid var(--line); }
+.picker-layout { display: grid; grid-template-columns: minmax(14rem, 1fr) minmax(0, 2.6fr); gap: clamp(1rem, 3.2vw, 3rem); align-items: start; }
+.picker-controls { padding: 1.1rem; background: var(--pale); border: 1px solid var(--line); border-radius: 4px; }
+.picker-controls > label:not(.picker-check) { display: block; margin-bottom: .8rem; font-weight: 700; font-size: .91rem; }
+.picker-controls select { display: block; margin-top: .3rem; width: 100%; min-width: 0; }
+.picker-controls summary { min-height: 2.75rem; padding: .7rem 0; font-size: .92rem; font-weight: 700; }
+.picker-controls details { border-bottom: 1px solid var(--line); }
+.picker-controls details p { font-size: .9rem; }
+.picker-controls .picker-check { font-weight: 500; }
+.picker-check { display: flex; gap: .55rem; align-items: center; min-height: 2.75rem; font-size: .9rem; cursor: pointer; }
+.picker-check input { flex: none; width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--ink); }
+#picker-staples { padding-block: .3rem; }
+#picker-storage:empty { display: none; }
+.picker-guide { background: var(--sage); border-left: 3px solid #758375; padding: .85rem 1rem; margin-bottom: .75rem; }
+.picker-guide p { font-size: .96rem; max-width: 72ch; }
+.picker-count { font-weight: 700; margin: 0 0 .7rem; }
+#picker-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.picker-card { background: #fffdf7; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; }
+.picker-opener { text-align: left; width: 100%; padding: 0; }
+.picker-opener:focus-visible { outline-offset: -4px; }
+.picker-opener img { display: block; width: 100%; height: auto; aspect-ratio: 768/340; object-fit: cover; }
+.picker-caption { padding: .8rem .9rem .25rem; display: grid; gap: .15rem; }
+.picker-caption small, .picker-sugar-note { font-size: .82rem; color: var(--soft); }
+.picker-caption strong { font: 400 clamp(1.6rem, 2.3vw, 2.15rem)/1.1 var(--serif); }
+.picker-opener:hover strong { color: var(--copper); text-decoration: underline; }
+.picker-card-body { padding: .1rem .9rem .35rem; display: flex; flex: 1; flex-direction: column; gap: .45rem; }
+.picker-card-body p:not(.picker-sugar-note) { font-size: .9rem; }
+.picker-card-body p strong { display: block; }
+.picker-card-body .picker-check { margin-top: auto; }
+#picker-shopping { padding: 1.15rem clamp(1rem, 2.5vw, 2rem); background: var(--pale); margin-top: 1.5rem; }
+#shopping-summary { margin-top: .5rem; }
+#shopping-ingredients:empty { display: none; }
+.shopping-row { display: flex; gap: 1rem; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); }
+.shopping-row button { text-align: left; min-height: 2.75rem; }
+.step-reading { padding: .85rem; border-left: 3px solid #758375; background: var(--paper); }
+.step-reading strong { display: block; margin-bottom: .3rem; }
+.step-reading button { border: 1px solid var(--line); padding: .35rem .7rem; margin: .65rem .4rem 0 0; min-height: 2.75rem; }
+.step-reading button:disabled { opacity: .48; cursor: default; }
+#dish-detail details summary { padding-block: .75rem; font-weight: 700; }
+.picker-version { display: block; width: fit-content; max-width: 100%; font-weight: 700; margin-top: .85rem; }
+.picker-version select { width: 100%; margin-top: .3rem; display: block; }
+@media (max-width: 740px) { .picker-layout { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) { #picker-results { grid-template-columns: minmax(0, 1fr); } }

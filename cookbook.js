@@ -165,10 +165,8 @@ function openDish(dish, moveFocus = true, collectionButton) {
     header, origin, instructions, node('h4','Plan this dish'),
     mealPicker(dish), citation);
   if (dish.pantry) {
-    const feedback = new URL('https://github.com/bennewell35/open-food-source/issues/new');
-    feedback.searchParams.set('title', 'Kitchen check — ' + dish.name);
-    feedback.searchParams.set('body', 'Recipe: ' + dish.name + '\n\nTime and yield when I made it:\n\nIngredient or step I changed:\n\nWhat I learned or found unclear:\n\nWould I make it again?');
-    dishDetail.append(' · ', link('Share a kitchen note', feedback.href));
+    const feedback = 'kitchen-check.html?recipe=' + encodeURIComponent(dish.id) + '#cook';
+    dishDetail.append(' · ', link('Share a kitchen note', feedback));
   }
   dishDetail.hidden = false;
   if (moveFocus) heading.focus();

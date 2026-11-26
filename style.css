@@ -169,3 +169,18 @@ dialog{color:var(--ink);border:1px solid #bcc4b5;border-radius:5px;padding:clamp
 .picker-version select { width: 100%; margin-top: .3rem; display: block; }
 @media (max-width: 740px) { .picker-layout { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 520px) { #picker-results { grid-template-columns: minmax(0, 1fr); } }
+
+.kitchen-check { max-width: 46rem; }
+.kitchen-check h1 { font-size: clamp(3.5rem, 8vw, 6rem); }
+.kitchen-check h2 { font-size: clamp(2rem, 5vw, 3rem); }
+.kitchen-check fieldset, #report-box { margin: 1.6rem 0; padding: clamp(.85rem, 3vw, 1.65rem); border: 1px solid var(--line); border-radius: 4px; background: var(--pale); min-inline-size: 0; }
+.kitchen-check legend { padding-inline: .4rem; font: 400 1.7rem/1.2 var(--serif); }
+.kitchen-check label { display: block; margin: .85rem 0 .3rem; font-weight: 700; }
+.kitchen-check label small, .check-hint { font-weight: 400; color: var(--soft); }
+.kitchen-check label :is(input, select, textarea) { display: block; margin-top: .3rem; }
+.kitchen-check :is(input, select, textarea) { width: 100%; min-width: 0; max-width: 100%; font: inherit; }
+.kitchen-check textarea { resize: vertical; }
+.kitchen-check p + p, .kitchen-check .check-hint, .kitchen-check #check-time { margin: .5rem 0 .8rem; }
+.check-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .85rem; margin-top: .75rem; }
+.check-hint { font-size: .9rem; }
+.check-actions button:disabled { opacity: .55; cursor: default; }

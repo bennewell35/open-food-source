@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1e3a2e">
+<title>Kitchen check · Open Food Source</title>
+<link rel="stylesheet" href="style.css"><link rel="icon" type="image/webp" href="assets/maple-leaf.webp">
+<script defer src="dishes.js"></script><script defer src="kitchen-check.js"></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<header class="mast"><div class="wrap mast-inner">
+<a class="wordmark" href="./"><span class="compass" aria-hidden="true">✳</span>Open Food Source</a>
+<a class="inline" href="./#pantry-picker">Pantry picker</a>
+</div></header>
+<main id="main" class="wrap section kitchen-check">
+<p class="eyebrow">Reader feedback</p><h1>Kitchen check.</h1>
+<p class="intro">Tell us what happened when you used the picker or cooked a recipe. An unfinished attempt is worth sharing. You can copy your answers and reply to whoever invited you.</p>
+<noscript>With JavaScript turned off, try the <a href="./#pantry-picker">pantry picker</a> and reply to your inviter with the recipe, what happened and how long it took.</noscript>
+<form id="check-form" hidden>
+<label for="check-kind">What would you like to report?</label>
+<select id="check-kind"><option value="picker">My first pantry task</option><option value="cook">A recipe I cooked</option><option value="return">Whether I came back</option></select>
+<label for="check-code">Your participant code <small>(optional)</small></label>
+<input id="check-code" name="code" data-prompt="Participant code" maxlength="36" aria-describedby="code-hint" autocomplete="off">
+<p class="check-hint" id="code-hint">Choose a short made-up code and reuse it if you report back next week. Leave names and health details out.</p>
+
+<fieldset id="check-picker"><legend>Try the pantry picker</legend>
+<p>You have plain canned light tuna in water and canned black olives. Find a desk lunch where USDA lists 0 g total sugars. Which version can you make now? What would you need for the other version? Choose one and save it for Friday lunch. Reload the planner and see what you find.</p>
+<p>To keep the exercise separate from your own meal plan, open this kitchen check in a private window before starting. The picker opens in a new tab. Come back here and finish the timer after checking Friday, or when you decide to stop.</p>
+<div class="check-actions"><a class="primary" id="check-start" href="./#pantry-picker" target="_blank" rel="noopener">Start timer and open picker</a><button type="button" id="check-finish" class="text-button">Finish timer</button><button type="button" id="check-restart" class="text-button" hidden>Restart timer</button></div>
+<p id="check-time" class="quiet" role="status"></p>
+<label>Had you used this picker before?<select name="familiar" data-prompt="Prior experience" required><option value="">Choose one</option><option>First time</option><option>Used it before</option></select></label>
+<label>How did it go?<select name="outcome" data-prompt="Task outcome" required><option value="">Choose one</option><option>Finished without help</option><option>Finished with help</option><option>Stopped before finishing</option></select></label>
+<label>Time from your own clock <small>(if needed)</small><input name="elapsed" data-prompt="Manually timed duration" placeholder="Minutes and seconds" maxlength="40"></label>
+<label>What could you make, and what ingredient did the other version need?<textarea name="choice" data-prompt="Version and missing staple" rows="2"></textarea></label>
+<label>What appeared at Friday lunch after reload? If you stopped, where did you get stuck?<textarea name="planner" data-prompt="Planner result or stopping point" rows="2"></textarea></label>
+<label>What does the sugar claim mean for your lunch? How does it compare with peanut butter oats?<textarea name="explanation" data-prompt="Explanation in the reader’s words" rows="2"></textarea></label>
+<label>Which source did you use? <small>(title or link, if you found one)</small><input name="source" data-prompt="Source found" maxlength="350"></label>
+</fieldset>
+
+<fieldset id="check-cook" hidden disabled><legend>What happened at the stove?</legend>
+<label>Recipe and version you tried<input name="recipe" data-prompt="Recipe and version" required maxlength="150"></label>
+<label>What happened?<select name="outcome" data-prompt="Cooking outcome" required><option value="">Choose one</option><option>Made and served it</option><option>Started and stopped</option></select></label>
+<label>Minutes from first ingredient to serving or stopping<input name="minutes" data-prompt="Actual cooking minutes" type="number" min="0" step="any"></label>
+<label>How much did it make?<input name="yield" data-prompt="Actual yield" placeholder="For example, two small bowls" maxlength="120"></label>
+<label>Any swaps, extra tools, ingredients or unclear steps?<textarea name="observations" data-prompt="Kitchen observations" rows="3"></textarea></label>
+</fieldset>
+
+<fieldset id="check-return" hidden disabled><legend>A week later</legend>
+<label>When did you first try the picker?<input name="first" data-prompt="First visit date" type="date"></label>
+<label>When did you return, if you did?<input name="returned" data-prompt="Return visit date" type="date"></label>
+<label>What have you done since the first try?<select name="activity" data-prompt="Actual return activity" required><option value="">Choose one</option><option>Planned another meal</option><option>Cooked another meal</option><option>Visited again without choosing a meal</option><option>Did not return before this check</option></select></label>
+<label>Which meal, if any? What brought you back or got in the way?<textarea name="followup" data-prompt="Meal and reason" rows="3"></textarea></label>
+</fieldset>
+
+<p class="check-hint">Your answers stay on this page until you choose how to share. Save a copy before closing or reloading this page.</p>
+<button type="submit" class="dark-button" id="make-report">Preview my report</button>
+</form>
+<section id="report-box" hidden aria-labelledby="report-title"><h2 id="report-title">Your report</h2>
+<label for="check-report">Review before sharing</label><textarea id="check-report" readonly rows="9"></textarea>
+<p>Copy or download your report and reply to the person who shared this check. Opening a GitHub issue draft sends the text to GitHub. It becomes public when you submit the issue.</p>
+<div class="check-actions"><button type="button" class="dark-button" id="check-copy">Copy report</button><button type="button" class="text-button" id="check-download">Download text</button><a class="inline" id="check-public" href="https://github.com/bennewell35/open-food-source/issues/new" rel="noreferrer">Open a GitHub draft with my report</a></div>
+<p id="report-status" role="status" class="quiet"></p>
+</section>
+</main></body></html>

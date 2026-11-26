@@ -20,7 +20,7 @@ Open [Open Food Source](http://127.0.0.1:8000/). The site runs as ordinary HTML,
 
 Use the [pantry picker](https://bennewell35.github.io/open-food-source/#pantry-picker) to find a training-day meal, desk lunch or low-prep option. Check the staples you have, choose a sugar preference and open a recipe to customize it. Try rolled oats with peanut or almond butter. The shopping list combines missing staples, and the weekly planner saves the version you chose. Water and salt are assumed. Selections stay in this browser.
 
-After making a dish, use **Share a kitchen note** on its recipe to report actual time, yield or a confusing step. Volunteers can also [try the three-minute pantry task](docs/recipe-site-comparison.md#a-pantry-check-volunteers-can-run).
+After making a dish, use **Share a kitchen note** on its recipe to record actual time, yield or a confusing step. New readers can [try the three-minute pantry check](https://bennewell35.github.io/open-food-source/kitchen-check.html#picker). Copy or download your report and reply to the person who invited you. If you use the picker again the following week, you can [report what you came back for](https://bennewell35.github.io/open-food-source/kitchen-check.html#return).
 
 “No added sugar” can include naturally occurring sugars from foods such as oats. The 0 g option matches recipes whose specified ingredients each have a USDA record reporting 0 g total sugars per 100 g. Check the sugar note when choosing a product or making a swap.
 

@@ -55,6 +55,13 @@ function showDrinkRecipe(container, recipe) {
   container.append(details);
 }
 
+function syncMealLink(anchor, title) {
+  const dish = plannedDish(title);
+  anchor.hidden = !dish;
+  if (dish) anchor.href = '?dish=' + encodeURIComponent(dish.id) + '#dish-detail';
+  else anchor.removeAttribute('href');
+}
+
 function dayEditor(date, suggestion) {
   const day = weekdayFormat.format(date);
   const dateKey = calendarKey(date);
@@ -81,7 +88,10 @@ function dayEditor(date, suggestion) {
     const label = node('label', title);
     label.htmlFor = input.id;
     input.setAttribute('aria-label', day + ' ' + meal);
+    const recipeLink = node('a', 'Open ' + meal + ' recipe', 'meal-recipe-link');
+    recipeLink.id = input.id + '-recipe';
     const updateSummary = () => {
+      syncMealLink(recipeLink, input.value);
       if (meal === 'dinner') dinnerText.textContent = input.value.trim() || 'Dinner unplanned';
     };
     input.addEventListener('input', () => {
@@ -91,7 +101,9 @@ function dayEditor(date, suggestion) {
     });
     updateSummary();
     label.append(input);
-    fields.append(label);
+    const fieldBox = node('div');
+    fieldBox.append(label, recipeLink);
+    fields.append(fieldBox);
   }
 
   const select = node('select');
@@ -154,6 +166,7 @@ window.addEventListener('storage', event => {
   const row = control.closest('.planner-day');
   const dayIndex = Array.from(byId('planner-days').children).indexOf(row);
   control.value = event.newValue ?? suggestedWeek[dayIndex][field];
+  if (field !== 'drink') syncMealLink(byId(control.id + '-recipe'), control.value);
   if (field === 'dinner') row.querySelector('.day-dinner').textContent = control.value.trim() || 'Dinner unplanned';
   if (field === 'drink') {
     if (control.selectedIndex < 0) control.value = 'none';

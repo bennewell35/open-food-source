@@ -2,6 +2,8 @@
 const pub = id => 'https://pubmed.ncbi.nlm.nih.gov/' + id + '/';
 const ods = name => 'https://ods.od.nih.gov/factsheets/' + name + '-HealthProfessional/';
 const SOURCES = {
+  firmTofu: ['USDA · SR Legacy 172475', 'Raw firm tofu prepared with calcium sulfate', 'Food composition', 'https://fdc.nal.usda.gov/food-details/172475/nutrients'],
+  nigariTofu: ['USDA · SR Legacy 172448', 'Firm tofu prepared with calcium sulfate and nigari', 'Food composition', 'https://fdc.nal.usda.gov/food-details/172448/nutrients'],
   hibiscusCoffee: ['Almalki et al. · 2026', 'Hibiscus versus coffee during three hours of sitting', 'Crossover trial', pub(42993332)],
   cherryRelay: ['Kuehl et al. · 2010', 'Cherry–apple juice and pain at the finish of a long-distance relay', 'Team-randomized trial', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC2874510/'],
   cherryReview: ['Daab et al. · 2026', 'Tart cherry juice and recovery in athletes across 19 trials', 'Systematic review and meta-analysis', pub(41945263)],
@@ -54,6 +56,14 @@ const SOURCES = {
 const PATHS = ['Heart & circulation','Blood sugar','Gut & inflammation','Attention & sleep','Comfort during a cold','Training & nourishment','Cancer risk'];
 // Title, evidence type, outcome groups, biology, human finding, kitchen use, source keys.
 const NOTES = {
+  soy: ['How much protein is in firm tofu?', 'Food composition', [5],
+    'Tofu is made by coagulating soy milk into curds. Pressing removes some of the water. Different preparations can have different amounts of water and protein per gram.',
+    'Two USDA entries for firm tofu list 17.27 g and 9.04 g protein per 100 g. Their ingredient and preparation descriptions differ. Both numbers describe particular foods in the database.',
+    'Look at your package for the serving weight and protein. To estimate protein in your bowl, multiply the label value by the number of servings you use.', ['firmTofu','nigariTofu']],
+  tomatoCooking: ['What changes when tomatoes are processed?', 'Human feeding study', [5],
+    'Lycopene is a pigment in tomatoes. Processing can break down the structures that surround it and change how readily the body can absorb it.',
+    'A small feeding study compared fresh tomatoes and tomato paste with equal lycopene amounts, each served with oil. Researchers measured a higher blood response to lycopene from the paste.',
+    'Use canned diced tomatoes when you want pieces and tomato paste when you want concentrated flavor. This skillet uses diced tomatoes. The study tested paste and measured absorption.', ['tomatoForm']],
   cherry: [
     'Tart cherry juice after a long run', 'Mixed trial results', [5],
     'Tart cherries contain anthocyanins. Researchers have proposed that these compounds might influence inflammation after hard exercise. Runners’ pain ratings and tests of how much force a muscle produces answer different questions.',

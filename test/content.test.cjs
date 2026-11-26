@@ -21,10 +21,24 @@ test('a community dish can be browsed, cooked and credited', () => {
   for (const dish of dishes) {
     for (const key of ['id', 'name', 'style', 'time', 'credit']) assert.ok(dish[key]?.trim(), key);
     assert.ok(Number.isInteger(dish.serves) && dish.serves > 0, dish.name);
+    assert.ok(Number.isInteger(dish.minutes) && dish.minutes > 0, dish.name);
+    if (dish.foodNote) assert.ok(NOTES[dish.foodNote] && dish.foodLabel.trim(), dish.name);
+    if (dish.image) assert.ok(readFileSync(path.join(__dirname, '..', dish.image)).length, dish.image);
     for (const list of [dish.ingredients, dish.steps]) {
       assert.ok(list.length && list.every(text => text.trim()), dish.name);
     }
   }
+});
+
+test('recipe search intersects ingredients, cooking style and maximum time', () => {
+  const { DISHES, filterDishes } = vm.runInContext('({ DISHES, filterDishes })', context);
+  const ids = (query, style = '', time = 0) =>
+    Array.from(filterDishes(DISHES, query, style, time), dish => dish.id);
+  assert.deepEqual(ids('Tomato and chickpea', 'Mediterranean-inspired', 25), ['tomato-chickpeas']);
+  assert.deepEqual(ids('spinach, lentils', '', 20), []);
+  assert.deepEqual(ids('spina'), []);
+  assert.deepEqual(ids('tofu', 'Mexican-inspired'), []);
+  assert.ok(ids('').length >= 4);
 });
 
 test('recipes have stable unique IDs, usable instructions and valid evidence links', () => {

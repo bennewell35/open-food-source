@@ -28,6 +28,8 @@ Fork the repository and work on a branch. Add or update the relevant files.
 
 Keep existing recipe IDs stable so older saved plans still open. Reference third-party papers with links and your own summary. Include a source and redistribution license for any new asset.
 
+For a dish, supply the total time in minutes as well as the display text, including any assumption such as having cooked rice ready. Include one visible cue for doneness and a practical swap when possible. Dish illustrations and linked food notes are optional. Use a note only when the sources actually speak to that food.
+
 Run `node --test` (Node 20 or later), then start the site using the [README](README.md). Select your recipe through its goal filter, open its sources, add it to a day in a test browser and reload. For a weekly-map change, also check the food row in a narrow window and navigate to the lesson using the keyboard.
 
 Open a pull request describing the finding or behavior, the files changed and what you verified. By contributing original work you agree to offer it under the project’s [MIT License](LICENSE).

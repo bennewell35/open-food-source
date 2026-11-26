@@ -63,7 +63,7 @@ function entriesForDay(date) {
   const key = calendarKey(date);
   return mapMeals.map(meal => {
     const input = byId(key + '-' + meal);
-    const recipe = meal === 'drink' && drinkRecipes.get(input.value);
+    const recipe = meal === 'drink' ? drinkRecipes.get(input.value) : plannedDish(input.value);
     const text = meal === 'drink' ? input.selectedOptions[0].textContent : input.value;
     const searchable = recipe ? [text, ...recipe.ingredients].join(' ') : text;
     return {meal, input, text, searchable:searchable.replace(/[‐‑–—]/g, '-')};

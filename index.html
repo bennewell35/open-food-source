@@ -7,7 +7,7 @@
 <title>Open Food Source — Food, drink &amp; human research</title>
 <link rel="stylesheet" href="style.css">
 <script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
-<script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="dishes.js"></script><script defer src="cookbook.js"></script>
+<script defer src="dishes.js"></script><script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="cookbook.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -20,16 +20,22 @@
 <p class="eyebrow rule">An open-source food &amp; drink guide</p>
 <h1>Open Food<br><em>Source.</em></h1>
 <p class="lede">Explore the food people cook, the studies behind it, and the recipes you want to bring to your table this week.</p>
-<div class="hero-actions"><a class="primary" href="#weekly-map">Open the weekly food map</a><a class="inline" href="#cookbook">Browse the cookbook</a></div></div>
+<div class="hero-actions"><a class="primary" href="#cookbook">Find a recipe</a><a class="inline" href="#weekly-map">Open my weekly map</a></div></div>
 <figure class="hero-art"><img alt="Botanical watercolor of a sugar maple leaf, sliced ginger, an olive branch and blueberries" src="assets/botanical-plate.webp" width="1200" height="800">
 <figcaption>Sugar maple · Ginger · Olive · Blueberry</figcaption></figure>
 </div></section>
 <section class="section wrap" id="cookbook" aria-labelledby="cookbook-title">
-<div class="section-head"><div><p class="eyebrow">Community cookbook</p><h2 id="cookbook-title">Recipes by cooking style.</h2></div></div>
-<p class="intro">Browse the dishes, add one to your week, or share a version from your own kitchen. <a href="https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md">Contribute a recipe</a></p>
-<label class="drink-goal" for="cooking-style">Cooking style<select id="cooking-style"><option value="">All cooking styles</option></select></label>
+<div class="section-head"><div><p class="eyebrow">Community cookbook</p><h2 id="cookbook-title">What can I cook?</h2></div><a class="inline" href="https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md">Contribute a recipe</a></div>
+<p class="intro">Start with what’s in your kitchen. Choose a dish for the method, a swap and the research behind one of its foods.</p>
+<div class="dish-filters">
+<label for="dish-search">Ingredients or dish<input type="search" id="dish-search" placeholder="Try lentils, tofu or black beans"></label>
+<label for="cooking-style">Cooking style<select id="cooking-style"><option value="">All cooking styles</option></select></label>
+<label for="cook-time">Total time<select id="cook-time"><option value="">Any time</option><option value="20">20 minutes or less</option><option value="25">25 minutes or less</option><option value="30">30 minutes or less</option></select></label>
+</div>
+<div class="dish-results"><p id="dish-count" role="status"></p><button id="reset-dishes" class="text-button" hidden>Clear filters</button></div>
+<div id="dish-list" class="dish-list"></div><div id="dish-empty" hidden><p>Try fewer ingredients or clear a filter. You can also look up a food’s nutrients.</p><a class="inline" id="pantry-search-link" href="#pantry">Search the food index</a></div>
+<section id="dish-detail" aria-label="Selected recipe" hidden></section>
 <p class="map-legend">Planning <strong id="cookbook-week"></strong> · <a href="#weekly-map">Change week</a></p>
-<div id="dish-list" class="dish-list"></div>
 <p class="intro"><a href="?drink=cherry-apple#kitchen">Try the tart cherry &amp; apple cooler</a> · <a href="#kitchen">Browse all drinks</a></p>
 </section>
 <section class="section wrap" id="atlas">
@@ -57,7 +63,7 @@
 <div class="week-actions" aria-label="Choose a week"><button id="previous-week">Previous week</button><button id="current-week">This week</button><button id="next-week">Next week</button></div></div>
 <div class="weekly-workbench">
 <div class="weekly-chart"><div id="food-matrix"></div>
-<p class="map-legend">Each number counts meals or drinks mentioning a tracked food, including ingredients in drink recipes. A dash means no match. Recipe alternatives can both appear.</p></div>
+<p class="map-legend">Each number counts meals or drinks mentioning a tracked food. Saved cookbook dishes and drinks include their listed ingredients. A dash means no match. Recipe alternatives can both appear.</p></div>
 <article id="weekly-lesson" class="weekly-lesson" aria-label="Selected food lesson"></article></div>
 <div class="weekly-journal"><label for="weekly-reflection">What did you try? What would you repeat?</label>
 <textarea id="weekly-reflection" rows="2" placeholder="A kitchen note for this week"></textarea><p id="learning-status" role="status" class="quiet"></p></div>

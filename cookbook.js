@@ -1,22 +1,37 @@
 'use strict';
 
 const styleFilter = byId('cooking-style');
+const timeFilter = byId('cook-time');
+const dishSearch = byId('dish-search');
+const dishDetail = byId('dish-detail');
+let openDishId;
+
 for (const style of [...new Set(DISHES.map(dish => dish.style))].sort()) {
   styleFilter.add(new Option(style, style));
 }
 
 function dishCard(dish) {
-  const card = node('details', undefined, 'dish-card');
-  const summary = node('summary');
-  summary.append(node('span', dish.style, 'eyebrow'), node('strong', dish.name),
+  const button = action('', () => openDish(dish), 'dish-tile');
+  button.id = 'tile-' + dish.id;
+  button.setAttribute('aria-controls', 'dish-detail');
+  button.setAttribute('aria-expanded', String(openDishId === dish.id));
+  if (dish.image) {
+    const photo = node('img');
+    photo.src = dish.image;
+    photo.alt = '';
+    photo.width = 600;
+    photo.height = 400;
+    photo.loading = 'lazy';
+    button.append(photo);
+  }
+  const caption = node('span', undefined, 'dish-caption');
+  caption.append(node('span', dish.style, 'eyebrow'), node('strong', dish.name),
     node('span', dish.time + ' · serves ' + dish.serves, 'dish-yield'));
-  const ingredients = node('ul');
-  ingredients.append(...dish.ingredients.map(text => node('li', text)));
-  const steps = node('ol');
-  steps.append(...dish.steps.map(text => node('li', text)));
-  const inside = node('div', undefined, 'dish-inside');
-  inside.append(node('p', dish.credit), node('h4', 'Ingredients'), ingredients, node('h4', 'Method'), steps);
+  button.append(caption);
+  return button;
+}
 
+function mealPicker(dish) {
   const picker = node('div', undefined, 'dish-picker');
   const day = node('select');
   const meal = node('select');
@@ -35,17 +50,74 @@ function dishCard(dish) {
     field.dispatchEvent(new Event('input'));
     result.textContent = shortDateFormat.format(date) + ' ' + meal.value + ' · ' + dish.name + '. ' + byId('planner-status').textContent;
   }, 'dark-button');
-  picker.append(dayLabel, mealLabel, add);
-  inside.append(node('h4', 'Plan this dish'), node('p', 'Sets the selected meal in the week shown in your planner.'), picker, result);
-  card.append(summary, inside);
-  return card;
+  picker.append(dayLabel, mealLabel, add, result);
+  return picker;
+}
+
+function openDish(dish, moveFocus = true) {
+  openDishId = dish.id;
+  for (const button of byId('dish-list').children) {
+    button.setAttribute('aria-expanded', String(button.id === 'tile-' + dish.id));
+  }
+  const heading = node('h3', dish.name);
+  heading.tabIndex = -1;
+  const back = action('Back to recipes', () => {
+    closeDish();
+    byId('tile-' + dish.id)?.focus();
+  }, 'text-button');
+  const header = node('div', undefined, 'detail-heading');
+  header.append(heading, back);
+  const ingredients = node('ul');
+  ingredients.append(...dish.ingredients.map(text => node('li', text)));
+  const steps = node('ol');
+  steps.append(...dish.steps.map(text => node('li', text)));
+  const left = node('div');
+  left.append(node('h4','Ingredients'), ingredients);
+  const right = node('div');
+  right.append(node('h4', 'Method'), steps);
+  if (dish.technique) right.append(node('h4', 'Why it works'), node('p', dish.technique));
+  if (dish.swap) right.append(node('h4', 'A swap to try'), node('p', dish.swap));
+  if (dish.foodNote) right.append(action(dish.foodLabel, () => showNote(dish.foodNote), 'text-button'));
+  const instructions = node('div', undefined, 'recipe-columns');
+  instructions.append(left, right);
+  const citation = link('Link to this recipe', '?dish=' + encodeURIComponent(dish.id) + '#dish-detail');
+  dishDetail.replaceChildren(node('p', dish.style + ' · ' + dish.time + ' · serves ' + dish.serves, 'eyebrow'),
+    header, node('p', dish.credit, 'dish-credit'), instructions, node('h4','Plan this dish'),
+    mealPicker(dish), citation);
+  dishDetail.hidden = false;
+  if (moveFocus) heading.focus();
+}
+
+function closeDish() {
+  openDishId = null;
+  dishDetail.hidden = true;
+  byId('dish-list').querySelector('[aria-expanded="true"]')?.setAttribute('aria-expanded', 'false');
 }
 
 function showDishes() {
-  const visible = DISHES.filter(dish => !styleFilter.value || dish.style === styleFilter.value);
-  const cards = visible.map(dishCard);
-  if (cards.length === 1) cards[0].open = true;
-  byId('dish-list').replaceChildren(...cards);
+  const query = dishSearch.value.trim();
+  const filtered = filterDishes(DISHES, query, styleFilter.value, Number(timeFilter.value));
+  if (openDishId && !filtered.some(dish => dish.id === openDishId)) closeDish();
+  byId('dish-list').replaceChildren(...filtered.map(dishCard));
+  byId('dish-count').textContent = filtered.length + (filtered.length === 1 ? ' recipe' : ' recipes');
+  byId('reset-dishes').hidden = !query && !styleFilter.value && !timeFilter.value;
+  byId('dish-empty').hidden = filtered.length > 0;
 }
+
+dishSearch.addEventListener('input', showDishes);
 styleFilter.addEventListener('change', showDishes);
+timeFilter.addEventListener('change', showDishes);
+byId('reset-dishes').addEventListener('click', () => {
+  dishSearch.value = styleFilter.value = timeFilter.value = '';
+  showDishes();
+  dishSearch.focus();
+});
+byId('pantry-search-link').addEventListener('click', () => {
+  byId('group').value = '';
+  byId('query').value = dishSearch.value.trim();
+  byId('query').dispatchEvent(new Event('input'));
+  byId('query').focus();
+});
 showDishes();
+const requestedDish = DISHES.find(dish => dish.id === new URLSearchParams(location.search).get('dish'));
+if (requestedDish) openDish(requestedDish, location.hash === '#dish-detail');

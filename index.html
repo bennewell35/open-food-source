@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1e3a2e">
+<meta name="description" content="Explore everyday foods and tonics through human research, real portions and practical recipes.">
+<title>Open Food Source — Food, drink &amp; human research</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
+<script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="dishes.js"></script><script defer src="cookbook.js"></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+<header class="mast"><div class="wrap mast-inner">
+<a class="wordmark" href="#main" aria-label="Open Food Source home"><span class="compass" aria-hidden="true">✳</span>Open Food Source</a>
+<nav aria-label="Main navigation"><a href="#atlas">Atlas</a><a href="#cookbook">Cookbook</a><a href="#kitchen">Drinks</a><a href="#planner">Weekly planner</a><a href="#pantry">Food index</a><a href="#sources">Sources</a></nav>
+</div></header>
+<main id="main">
+<section class="hero"><div class="wrap hero-grid"><div class="hero-copy">
+<p class="eyebrow rule">An open-source food &amp; drink guide</p>
+<h1>Open Food<br><em>Source.</em></h1>
+<p class="lede">Explore the food people cook, the studies behind it, and the recipes you want to bring to your table this week.</p>
+<div class="hero-actions"><a class="primary" href="#weekly-map">Open the weekly food map</a><a class="inline" href="#cookbook">Browse the cookbook</a></div></div>
+<figure class="hero-art"><img alt="Botanical watercolor of a sugar maple leaf, sliced ginger, an olive branch and blueberries" src="assets/botanical-plate.webp" width="1200" height="800">
+<figcaption>Sugar maple · Ginger · Olive · Blueberry</figcaption></figure>
+</div></section>
+<section class="section wrap" id="cookbook" aria-labelledby="cookbook-title">
+<div class="section-head"><div><p class="eyebrow">Community cookbook</p><h2 id="cookbook-title">Recipes by cooking style.</h2></div></div>
+<p class="intro">Browse the dishes, add one to your week, or share a version from your own kitchen. <a href="https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md">Contribute a recipe</a></p>
+<label class="drink-goal" for="cooking-style">Cooking style<select id="cooking-style"><option value="">All cooking styles</option></select></label>
+<p class="map-legend">Planning <strong id="cookbook-week"></strong> · <a href="#weekly-map">Change week</a></p>
+<div id="dish-list" class="dish-list"></div>
+<p class="intro"><a href="?drink=cherry-apple#kitchen">Try the tart cherry &amp; apple cooler</a> · <a href="#kitchen">Browse all drinks</a></p>
+</section>
+<section class="section wrap" id="atlas">
+<div class="section-head"><div><p class="eyebrow">The atlas</p><h2>Map the evidence.</h2></div><div class="switch" aria-label="Atlas views"><button id="geo-toggle" aria-pressed="true" aria-controls="geo">Study locations</button><button id="path-toggle" aria-pressed="false" aria-controls="paths">Food pathways</button></div></div>
+<div id="geo"><p class="intro">Select a study location to see which food researchers tested and what they measured.</p>
+<div class="geo-layout"><div class="cartography"><div class="map" id="map"><canvas aria-hidden="true" width="1200" height="500" id="land"></canvas><div id="pins"></div></div>
+<div class="map-footer"><span class="dot-key"></span>Selected human studies <span class="map-credit">Base map · Natural Earth</span></div></div>
+<article class="place-card" id="place-card" aria-live="polite"></article></div>
+<div class="country-list" id="country-list" aria-label="Study locations"></div></div>
+<div id="paths" hidden><p class="intro">Choose an outcome to trace it back to a food, the biology, and the evidence behind it.</p><div class="filters" id="path-filters" aria-label="Filter by outcome"></div><p id="path-count" class="meta" role="status"></p><div id="path-list" class="note-grid"></div></div>
+</section>
+<section class="kitchen" id="kitchen"><div class="section wrap">
+<div class="section-head"><div><p class="eyebrow">At the stove</p><h2>The tonic kitchen.</h2></div></div>
+<p class="intro">Choose an outcome to see the drinks researchers tested, how they compared, and a recipe for one glass or mug.</p>
+<label class="drink-goal" for="drink-goal">Explore drinks by goal<select id="drink-goal"><option value="all">All recipes</option></select></label>
+<div class="recipe-layout"><div id="recipes" class="recipe-list" aria-label="Choose a recipe"></div><article id="recipe-card" class="recipe-card" aria-live="polite"></article></div>
+<div class="drink-planning"><div><h3>Plan this drink</h3><p id="drink-plan-week"></p></div>
+<label for="recipe-day">Day<select id="recipe-day"></select></label><button id="use-recipe">Set day’s drink</button>
+<a href="#weekly-map">View weekly map</a><p id="drink-plan-status" role="status"></p></div>
+</div></section>
+<section class="section wrap planner" id="planner" aria-labelledby="planner-title">
+<div id="weekly-map"><p class="eyebrow">Weekly planner</p><h2 id="planner-title">Your weekly food map.</h2></div>
+<p class="intro">Choose a food to see where it appears in your menu and what researchers learned about it. <a href="#week-menu">Edit this week’s meals</a></p>
+<div class="week-bar"><h3 id="week-title" aria-live="polite"></h3>
+<div class="week-actions" aria-label="Choose a week"><button id="previous-week">Previous week</button><button id="current-week">This week</button><button id="next-week">Next week</button></div></div>
+<div class="weekly-workbench">
+<div class="weekly-chart"><div id="food-matrix"></div>
+<p class="map-legend">Each number counts meals or drinks mentioning a tracked food, including ingredients in drink recipes. A dash means no match. Recipe alternatives can both appear.</p></div>
+<article id="weekly-lesson" class="weekly-lesson" aria-label="Selected food lesson"></article></div>
+<div class="weekly-journal"><label for="weekly-reflection">What did you try? What would you repeat?</label>
+<textarea id="weekly-reflection" rows="2" placeholder="A kitchen note for this week"></textarea><p id="learning-status" role="status" class="quiet"></p></div>
+<h3 id="week-menu" class="menu-heading">This week’s meals</h3>
+<p class="intro">Open a day to change its suggested meals or drink. Edits update the map and save in this browser.</p>
+<div id="planner-days"></div><p id="planner-status" role="status" class="quiet"></p>
+<aside class="prevention" aria-labelledby="risk-title"><div><p class="eyebrow">Research behind the menu</p><h3 id="risk-title">Food and cancer risk</h3></div>
+<div><p>Whole grains and foods containing fiber are linked to lower colorectal cancer risk. That’s why oats, beans and lentils show up several times this week. The American Cancer Society also recommends limiting processed meat and sugary drinks and says it is best to avoid alcohol. <a href="https://www.wcrf.org/research-policy/evidence-for-our-recommendations/wholegrains-veg-fruit-beans/">WCRF evidence</a> · <a href="https://www.cancer.org/cancer/risk-prevention/diet-physical-activity/acs-guidelines-nutrition-physical-activity-cancer-prevention.html">ACS guideline</a></p>
+<p><strong>For prostate cancer specifically,</strong> dietary lycopene studies have mixed results. Human research has yet to establish that beetroot juice or a turmeric tonic prevents or treats prostate cancer. In the MEAL trial, increasing vegetables did not significantly slow progression in men already on active surveillance. Enjoy tomatoes, beets and spices for the foods they are. <a href="https://www.cancer.gov/types/prostate/patient/prostate-prevention-pdq">NCI prevention review</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/31935026/">MEAL trial</a></p></div></aside>
+</section>
+<section class="section wrap" id="pantry"><div class="section-head"><div><p class="eyebrow">Food composition</p><h2>Inside the pantry.</h2></div></div>
+<p class="intro">Search all 7,793 food records in USDA’s April 2018 SR Legacy collection. Choose a preparation and portion to see what it contributes.</p>
+<div class="food-plot"><div class="plot-head"><div><h3>Nutrient map</h3><p>Each dot is a food record per 100 g. Select a dot or use the food search below.</p></div><label for="axes">Compare nutrients<select id="axes"><option value="fiber">Fiber and protein</option><option value="maple" selected>Vitamin B2 and manganese</option><option value="sugar">Carbohydrate and total sugars</option><option value="iron">Iron and vitamin C</option></select></label></div>
+<canvas id="nutrient-map" role="img" aria-describedby="plot-description" aria-label="Nutrient distribution of foods"></canvas><div class="plot-key"><i></i><span id="plot-description"></span></div><p id="plot-selection" class="plot-selection" role="status"></p></div>
+<div class="index-layout"><div class="index-controls"><label for="query">Find a food</label><input type="search" id="query" placeholder="Try maple syrup, spinach or lentils" value="maple syrup">
+<label for="group">Food group</label><select id="group"><option value="">All food groups</option></select>
+<p class="meta" role="status" id="result-count"></p><label for="matches">Matching foods</label><select id="matches"></select></div>
+<article class="nutrients" id="nutrients" aria-label="Food composition"></article></div></section>
+<section class="field-note"><div class="wrap goal-grid"><div><p class="eyebrow">One week in the kitchen</p><h2>A goal you can taste.</h2></div><div><p>At three breakfasts this week, pair a food you already eat with a plant food you enjoy. Try plain yogurt with berries and oats. On a rushed morning, add a handful of frozen berries.</p><p>Pick one drink from the tonic kitchen to try alongside a meal. At the end of the week, ask which combination tasted good, fit your day, and is worth repeating. Three breakfasts is a practical starting point. A week of trying a recipe cannot establish a change in inflammation or immunity.</p></div></div></section>
+<section class="section wrap shelf" id="sources"><div><p class="eyebrow">Research notes</p><h2>The source shelf.</h2></div>
+<p class="intro">Selected human trials, food composition tables, and guidance from public health agencies. Sources checked November 26, 2026.</p>
+<details><summary>How to read the evidence</summary><p>A cardiovascular event is a clinical outcome. LDL cholesterol and blood pressure are risk markers. An attention task or symptom rating answers a narrower question. Nutrient content tells you what a food contributes. A plausible biological mechanism is a reason to test a claim.</p><p>This is a curated guide. We selected studies that speak to these foods, checked comparison groups and serving sizes, and included conflicting findings where they affect a kitchen decision. Study pins identify selected research settings, not where foods originated. Multi-site trials have one representative pin.</p></details>
+<details id="source-disclosure"><summary id="source-count">Browse sources</summary><div id="source-list" class="source-list"></div></details>
+<details><summary>Contribute a study or recipe</summary>
+<p>Have a paper that changes a recipe, a correction to a finding, or a drink worth testing? Include the paper, what people consumed and what the researchers measured. For a family or regional dish, share the cooking method and credit its source. Anyone with a GitHub account can suggest a change.</p>
+<p><a href="https://github.com/bennewell35/open-food-source/issues/new?template=study-or-recipe.md">Suggest a study or recipe</a> · <a href="https://github.com/bennewell35/open-food-source/blob/main/CONTRIBUTING.md">Contributor guide</a></p></details>
+</section>
+</main><footer><div class="wrap"><a href="#main" class="wordmark"><span aria-hidden="true">✳</span> Open Food Source</a><a href="https://github.com/bennewell35/open-food-source" class="inline">Contribute on GitHub</a><a href="#main" class="inline">Back to top</a></div></footer>
+<dialog id="note-dialog" aria-labelledby="note-title"><div class="dialog-tools"><span class="eyebrow">Food field note</span><button id="close-note" aria-label="Close food field note" autofocus>Close</button></div><div id="note-body"></div></dialog>
+<noscript><p>Enable JavaScript to explore the maps and food index. Primary references include <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11522891/">the maple trial</a> and <a href="https://fdc.nal.usda.gov/download-datasets/">USDA food data</a>.</p></noscript>
+</body></html>

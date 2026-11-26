@@ -234,6 +234,6 @@
   #tonic-evidence-list { grid-template-columns: 1fr; }
 }
 @media (max-width: 30rem) {
-  .tonic-controls, .tonic-results { grid-template-columns: minmax(0,1fr); }
+  .region-filters, .tonic-results { grid-template-columns: minmax(0,1fr); }
   .tonic-result { gap: .2rem; padding: .85rem 1rem; }
 }

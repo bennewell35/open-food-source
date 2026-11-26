@@ -4,19 +4,21 @@ You can contribute a conflicting finding, correct a unit, test a recipe, or chan
 
 ## Share a cooking tradition
 
-Use the [community recipe form](https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md) to propose a dish or a new style, region or technique. Describe whose version it is, give credit you have permission to share, and use your own wording. You can explain what makes the dish meaningful or how you adapt it. A recipe can stand on its taste and method. If you make a health claim, include evidence for that claim.
+Use the [community recipe form](https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md) to propose a meal, drink or cooking technique. Describe whose version it is, give credit you have permission to share, and use your own wording. If you adapted a published dish, link to the cook's original and describe what you changed. A recipe can stand on its taste and method. Sign in to GitHub, add a short title and submit the issue for discussion.
+
+For the cold-season collection, tell us what makes the recipe practical on a sick day. A soft texture, a short hands-on time or a broth you can make from the pantry are all useful details. If you describe a health effect, tell us whether the evidence concerns symptom relief, illness duration or prevention. A family tradition and a cooking tip are welcome on their own.
 
 ## Suggest a finding
 
-1. Link the original human study. Give the number of people enrolled and analyzed when they differ, the preparation and dose, the timing, and the comparison group.
+1. Open a [study or correction issue](https://github.com/bennewell35/open-food-source/issues/new?template=study-or-recipe.md). For a clinical finding, link the original human study. Give the number of people enrolled and analyzed when they differ, the preparation and dose, the timing, and the comparison group.
 2. Name the measured outcome and when it was measured. Give the absolute result and units when reported. Include a conflicting trial or a current synthesis when it affects the interpretation. Distinguish a food-composition fact or proposed mechanism from a change demonstrated in people.
 3. Explain how the recipe differs from the trial. Include quantities, yield and preparation in your own words. Identify untested changes such as dilution, a single serving, switching from juice to concentrate, or starting after exercise.
 
 For the cherry cooler, the relay finish-line pain score and next-day marathon soreness belong on separate lines of evidence. Papers that measured only strength or an inflammatory marker cannot answer the soreness question by themselves.
 
-## Make a pull request
+## Work in your fork
 
-Fork the repository and work on a branch. Add or update the relevant files.
+[Create a fork](https://github.com/bennewell35/open-food-source/fork) under your account and keep the default repository name. Follow the [README clone and branch steps](README.md#contribute). Your clone will have two remotes. `origin` points to your fork, where you can push changes. `upstream` points to the shared cookbook. Run `git remote -v` to check them before editing.
 
 | File | What belongs there |
 | --- | --- |
@@ -26,12 +28,37 @@ Fork the repository and work on a branch. Add or update the relevant files.
 | `weekly-map.js` | Food matching, weekly lessons and suggested applications |
 | `planner.js` | The sample menu, calendar and browser-local storage |
 
-Keep existing recipe IDs stable so older saved plans still open. Reference third-party papers with links and your own summary. Include a source and redistribution license for any new asset.
+Keep existing dish names and drink IDs stable. The planner uses those values to reopen saved recipes. Existing recipe IDs also appear in shared links. Reference third-party papers with links and your own summary. Include a source and redistribution license for any new asset.
 
 For a dish, supply the total time in minutes as well as the display text, including any assumption such as having cooked rice ready. Include one visible cue for doneness and a practical swap when possible. Dish illustrations and linked food notes are optional. Use a note only when the sources actually speak to that food.
 
+Set `coldSeason: true` on a dish or drink to include it in the cold-season collection. For a dish, add a `coldSeasonTip` with one practical adjustment, such as how to loosen thick porridge with broth.
+
 For a sourced ingredient lesson, add a short entry to `MEAL_LESSONS` in `research.js`, keyed to the dish’s `foodNote`. Say what was measured and how the study food or portion compares with the dish. Readers see that text and its sources when they save a meal and when they reopen the day. For a culinary reference, use the dish’s `tradition` field to credit the cook or publication separately.
 
-Run `node --test` (Node 20 or later), then start the site using the [README](README.md). Select your recipe through its goal filter, open its sources, add it to a day in a test browser and reload. For a weekly-map change, also check the food row in a narrow window and navigate to the lesson using the keyboard.
+## Check your edit
 
-Open a pull request describing the finding or behavior, the files changed and what you verified. By contributing original work you agree to offer it under the project’s [MIT License](LICENSE).
+From the repository folder, run the tests (Node.js 20 or later) and start the preview (Python 3).
+
+```sh
+node --test
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Open the [local site](http://127.0.0.1:8000/) in a fresh browser profile or private window. Find your dish in the cookbook or your drink in the kitchen. Check the ingredients, amounts and directions and open each source you added. Save the recipe to a day, reload, and confirm the same recipe appears on that day. For a cold-season submission, check that it also appears in the collection. Press Ctrl+C in the terminal to stop the preview.
+
+## Send your edit
+
+These commands show a dish-only contribution. Adjust the paths in `git add` to match your changes, including new assets. Review the staged files before committing.
+
+```sh
+git status --short
+git add dishes.js
+git diff --cached
+git commit -m "feat: add a cold-season soup"
+git push -u origin my-recipe
+```
+
+Open the [upstream comparison page](https://github.com/bennewell35/open-food-source/compare) and choose **compare across forks**. Set the base repository to `bennewell35/open-food-source` and base branch to `main`. Choose your fork as the head repository and `my-recipe` as the compare branch. Check the diff, then select **Create pull request**. Describe what you added, where the recipe or evidence came from and what you tested. Maintainers review the contribution before it appears on the site.
+
+By contributing original work you agree to offer it under the project’s [MIT License](LICENSE).

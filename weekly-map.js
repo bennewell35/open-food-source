@@ -2,6 +2,10 @@
 
 // Topics are a text index into the menu. Keep food-form and population limits with each lesson.
 const weeklyTopics = [
+  {id:'soup', name:'Soups & broths', match:/\b(?:soups?|broths?|stock)\b/i,
+    title: NOTES.broth[0], study: MEAL_LESSONS.broth[1],
+    limit:'The experiment used chicken soup. A vegetable stock or a bowl of rice porridge is a different preparation.',
+    tryIt: NOTES.broth[5], refs: NOTES.broth[6]},
   {id:'tart-cherry', name:'Tart cherries', match:/\b(?:tart|sour|montmorency)\s+cherr(?:y|ies)\b/i,
     title:'Does tart cherry juice ease soreness after a long run?',
     study:'In a relay trial, runners drinking cherry–apple juice for the week before the event reported a smaller rise in pain at the finish. A marathon trial that followed runners for two more days found faster strength recovery and no clear difference in soreness.',

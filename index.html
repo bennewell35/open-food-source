@@ -20,7 +20,7 @@
 <section class="hero"><div class="wrap hero-grid"><div class="hero-copy">
 <h1>Open Food<br><em>Source.</em></h1>
 <p class="lede">Find recipes by ingredient, explore what human studies found, and plan the meals you want to repeat.</p>
-<div class="hero-actions"><a class="primary" href="#cookbook">Find a recipe</a><a class="inline" href="#weekly-map">Open my weekly map</a></div></div>
+<div class="hero-actions"><a class="primary" href="#cookbook">Find a recipe</a><a class="inline" href="#cold-season">Cold-season kitchen</a><a class="inline" href="#weekly-map">Open my weekly map</a></div></div>
 <figure class="hero-art"><img alt="Botanical watercolor of a sugar maple leaf, sliced ginger, an olive branch and blueberries" src="assets/botanical-plate.webp" width="1200" height="800">
 <figcaption>Sugar maple · Ginger · Olive · Blueberry</figcaption></figure>
 </div></section>
@@ -38,6 +38,18 @@
 <p class="map-legend">Planning <strong id="cookbook-week"></strong> · <a href="#weekly-map">Change week</a></p>
 <p class="intro"><a href="?drink=cherry-apple#kitchen">Try the tart cherry &amp; apple cooler</a> · <a href="#kitchen">Browse all drinks</a></p>
 </section>
+<section class="season" id="cold-season" aria-labelledby="season-title"><div class="section wrap">
+<div class="section-head"><div><p class="eyebrow">Recipe collection</p><h2 id="season-title">Cold-season kitchen.</h2></div>
+<a class="inline" href="https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md">Share a cold-season recipe</a></div>
+<p class="intro">Soft rice, brothy noodles and something warm to sip. Choose what sounds good today and add it to your week.</p>
+<div class="season-grid">
+<div><h3>Meals by cooking time</h3><ul class="season-meals" id="season-meals"></ul></div>
+<div><h3>Something to sip</h3><ul class="season-drinks" id="season-drinks"></ul>
+<aside class="season-research" aria-labelledby="season-research-title"><h3 id="season-research-title">Can a warm drink help?</h3>
+<p>In a study of 30 people with cold or flu symptoms, those who drank hot fruit cordial reported less throat pain for up to 30 minutes. The study ended before researchers could tell how long anyone’s cold lasted.</p>
+<button class="text-button" type="button" id="season-evidence">Read the warm drink and honey studies</button>
+<a class="inline" href="https://github.com/bennewell35/open-food-source/issues/new?template=study-or-recipe.md">Suggest a study</a></aside>
+</div></div></div></section>
 <section class="section wrap" id="atlas">
 <div class="section-head"><div><p class="eyebrow">The atlas</p><h2>Map the evidence.</h2></div><div class="switch" aria-label="Atlas views"><button id="geo-toggle" aria-pressed="true" aria-controls="geo">Study locations</button><button id="path-toggle" aria-pressed="false" aria-controls="paths">Food pathways</button></div></div>
 <div id="geo"><p class="intro">Select a study location to see which food researchers tested and what they measured.</p>

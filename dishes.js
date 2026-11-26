@@ -3,6 +3,8 @@
 const DISHES = [
   {
     id: 'red-lentil-dal',
+    coldSeason: true,
+    coldSeasonTip: 'For a looser bowl, whisk in warm water a spoonful at a time after the lentils soften.',
     name: 'Red lentils with cumin and spinach',
     style: 'South Asian-inspired',
     time: '30 minutes',
@@ -75,6 +77,8 @@ const DISHES = [
   },
   {
     id: 'groundnut-soup', name: 'Groundnut soup with sweet potato', style: 'Ghanaian-inspired',
+    coldSeason: true,
+    coldSeasonTip: 'Keep the chile at the table so each person can choose the heat in their bowl.',
     aliases: ['nkate nkwan', 'nkatenkwan', 'peanut soup'],
     time: '35 minutes', minutes: 35, serves: 2, image: 'assets/groundnut-soup.webp',
     credit: 'Nkate nkwan is a Ghanaian groundnut soup. Vanessa Bolosier describes the version she learned through her family and tasted in Accra. This vegetable variation uses sweet potato and a tomato broth.',
@@ -99,6 +103,8 @@ const DISHES = [
   },
   {
     id: 'sopa-de-quinua', name: 'Sopa de quinua with potatoes and peas', style: 'Peruvian-inspired',
+    coldSeason: true,
+    coldSeasonTip: 'Press a few tender potato cubes against the pot with your spoon for a thicker broth.',
     aliases: ['sopa de quinoa'],
     time: '35 minutes', minutes: 35, serves: 2, image: 'assets/sopa-de-quinua.webp',
     credit: 'Acomer.pe’s Peruvian sopa de quinua combines quinoa, potato and vegetables in broth. This small-pot version uses green peas and cilantro to finish.',
@@ -108,6 +114,92 @@ const DISHES = [
     technique: 'Small, even potato cubes cook in about the same time as the quinoa. The grains keep taking up broth as the soup stands.',
     swap: 'Use corn kernels in place of peas. Stir them in near the end and simmer until tender.',
     foodNote: 'quinoa', foodLabel: 'What did a study of cooked quinoa actually measure?'
+  },
+  {
+    id: 'arroz-caldo', name: 'Chicken arroz caldo with ginger', style: 'Filipino-inspired',
+    image: 'assets/arroz-caldo.webp',
+    aliases: ['chicken rice porridge', 'lugaw na manok'],
+    time: '50 minutes', minutes: 50, serves: 2, coldSeason: true,
+    coldSeasonTip: 'Serve a little extra warm broth alongside the porridge. Stir it in to loosen each bowl as the rice thickens.',
+    credit: 'Vanjo Merano makes a version of this Filipino rice porridge with rotisserie chicken. Here scallion whites and fresh ginger season the broth, and the shredded meat goes in once the rice is soft.',
+    tradition: {label: 'Vanjo Merano’s rotisserie chicken arroz caldo', url: 'https://panlasangpinoy.com/rotisserie-chicken-arroz-caldo-recipe/'},
+    ingredients: [
+      '2 scallions, thinly sliced, whites and greens separated', '2 teaspoons neutral oil', '1 tablespoon finely grated fresh ginger',
+      '1 garlic clove, minced', '½ cup uncooked jasmine rice', '4 cups low-sodium chicken broth, plus more as needed',
+      '1 cup shredded cooked chicken', '1 teaspoon fish sauce, optional', 'Calamansi or lime wedges to serve'
+    ],
+    steps: [
+      'Warm the oil in a saucepan over medium heat. Soften the scallion whites for 1 minute, then add the ginger and garlic. Stir just until you can smell them.',
+      'Stir in the rice and broth. Bring to a boil, then partly cover and simmer gently for 30–35 minutes. Stir along the bottom every few minutes, until the grains split and the broth turns creamy.',
+      'Fold in the chicken and enough extra broth or water for a loose porridge. Simmer until the chicken reaches 165°F (74°C). Taste, add fish sauce if you like, and divide between bowls. Scatter the scallion greens on top and pass the citrus.'
+    ],
+    technique: 'Stir more often toward the end. The rice gives up starch as it softens, and the thick porridge can catch on the base of the pan.',
+    swap: 'Use cooked turkey in place of chicken. Shred the meat across the grain so it fits on a spoon.',
+    foodNote: 'broth', foodLabel: 'What did the hot chicken soup study measure?'
+  },
+  {
+    id: 'tofu-egg-drop', name: 'Egg drop soup with tofu and sweet corn', style: 'Chinese American-inspired',
+    image: 'assets/tofu-egg-drop.webp',
+    aliases: ['egg flower soup', 'dan hua tang', '蛋花汤', '蛋花湯'],
+    time: '20 minutes', minutes: 20, serves: 2, coldSeason: true,
+    coldSeasonTip: 'For a softer spoonful, crumble the tofu between your fingers as you add it.',
+    credit: 'Bill Leung recalls making egg drop soup each morning at his parents’ Chinese restaurant. This take on the soup keeps the egg ribbons and adds tofu and corn for a light lunch.',
+    tradition: {label: 'Bill Leung on restaurant-style egg drop soup', url: 'https://thewoksoflife.com/egg-drop-soup/'},
+    ingredients: [
+      '3 cups low-sodium vegetable broth', '¾ cup frozen sweet corn kernels', '6 oz firm tofu, cut into small cubes',
+      '2 teaspoons cornstarch', '1 tablespoon cold water', '2 eggs, lightly beaten', '1 scallion, sliced thinly',
+      '1 teaspoon soy sauce, or to taste'
+    ],
+    steps: [
+      'Bring the broth and corn to a boil in a saucepan. Add the tofu and simmer for 4–5 minutes, until the corn is tender and the tofu is hot.',
+      'Mix the cornstarch with the cold water in a cup. Stir it into the broth and let it bubble for a minute, until the broth lightly coats a spoon.',
+      'Turn the heat down to a gentle simmer. Give the broth a slow swirl, then trickle the beaten eggs into the moving liquid. Wait for ribbons to form and simmer until the eggs are completely set. Season with soy sauce to taste and finish with the sliced scallion.'
+    ],
+    technique: 'A thin stream gives the egg time to set into ribbons as it hits the warm broth. Stop stirring after you pour to keep the ribbons intact.',
+    swap: 'Replace the frozen corn with canned corn, drained and rinsed. Add it with the tofu.',
+    foodNote: 'soy', foodLabel: 'How much protein does firm tofu contribute?'
+  },
+  {
+    id: 'mercimek-corbasi', name: 'Red lentil soup with carrot and lemon', style: 'Turkish-inspired',
+    image: 'assets/mercimek-corbasi.webp',
+    aliases: ['mercimek çorbası', 'mercimek corbasi', 'kırmızı mercimek çorbası'],
+    time: '35 minutes', minutes: 35, serves: 2, coldSeason: true,
+    coldSeasonTip: 'The lentils break down on their own. Grating the carrot gives you a soft soup even without a blender.',
+    credit: 'Özlem Warren writes that mercimek çorbası is served for breakfast in Anatolia. She adds carrots and potatoes to her pot. This version uses grated carrot, red lentils and a lemon wedge for each bowl.',
+    tradition: {label: 'Özlem Warren’s kırmızı mercimek çorbası', url: 'https://ozlemsturkishtable.com/2010/11/hearty-red-lentil-soup-kirmizi-mercimek-corbasi/'},
+    ingredients: [
+      '1 small onion, finely chopped', '1 tablespoon olive oil', '1 large carrot, coarsely grated', '½ teaspoon ground cumin',
+      '⅔ cup split red lentils, rinsed', '3 cups water, plus more to thin', '¼ teaspoon salt, or to taste', '½ lemon, cut into wedges'
+    ],
+    steps: [
+      'Cook the onion in the olive oil in a saucepan over medium heat for 4–5 minutes. Stir in the grated carrot and cumin and cook for another minute.',
+      'Add the lentils, water and salt. Bring to a boil, then simmer, partly covered, for 18–22 minutes. Stir now and then. The lentils are ready when you can smear one against the side of the pan with a spoon.',
+      'Take the pot off the heat. Whisk for a little texture, or use an immersion blender with the head submerged for a smoother soup. Thin with warm water as needed, taste for salt and serve with the lemon.'
+    ],
+    technique: 'Split red lentils have their outer skins removed. They collapse as they cook and thicken the soup without any flour.',
+    swap: 'If you have only whole carrots and no grater, slice them thinly and simmer until they crush easily against the pan.',
+    foodNote: 'roots', foodLabel: 'What does the beta-carotene in a carrot do?'
+  },
+  {
+    id: 'sopa-de-fideo', name: 'Sopa de fideo with pinto beans', style: 'Mexican-inspired',
+    image: 'assets/sopa-de-fideo.webp',
+    aliases: ['sopa de fideos', 'Mexican noodle soup'],
+    time: '25 minutes', minutes: 25, serves: 2, coldSeason: true,
+    coldSeasonTip: 'The short noodles fit on a spoon. If they soak up the broth while the soup stands, add a splash of water to your bowl.',
+    credit: 'Isabel Orozco-Moore toasts short fideo noodles before simmering them in tomato broth. Here canned tomato purée skips the blending step, and pinto beans turn the soup into a one-pot meal.',
+    tradition: {label: 'Isabel Orozco-Moore’s sopa de fideo', url: 'https://www.isabeleats.com/sopa-de-fideo/'},
+    ingredients: [
+      '3 oz dry fideo noodles', '2 teaspoons neutral oil', '1 garlic clove, finely grated', '¾ cup canned tomato purée',
+      '3 cups low-sodium vegetable broth', '1 can (15 oz) pinto beans, rinsed and drained', '1 tablespoon chopped cilantro, optional'
+    ],
+    steps: [
+      'Warm the oil over medium heat in a deep saucepan. Add the dry noodles and stir for 2–3 minutes, until some of the strands turn golden.',
+      'Lower the heat, stir in the garlic for a few seconds, then carefully pour in the tomato purée. Scrape up any toasted bits and stir in the broth and beans.',
+      'Bring to a simmer and cook until the noodles are tender, about 6–10 minutes depending on their thickness. Crush a few beans with the back of a spoon for a thicker broth. Taste for seasoning and scatter the cilantro over the bowls if you like.'
+    ],
+    technique: 'Keep the noodles moving as they toast. Once the first strands begin to brown, the rest follow quickly.',
+    swap: 'Break angel hair pasta into short lengths if you cannot find fideo. Start checking the pasta after 4 minutes.',
+    foodNote: 'beans', foodLabel: 'What have researchers learned about meals with beans?'
   }
 ];
 

@@ -52,6 +52,7 @@ function showDrinkRecipe(container, recipe) {
   const ingredients = node('ul');
   for (const item of recipe.ingredients) ingredients.append(node('li', item));
   details.append(node('summary', 'Recipe for ' + recipe.name), ingredients, node('p', recipe.method));
+  details.append(node('h4', 'What the evidence supports'), node('p', recipe.reason), citations(recipe.refs));
   container.append(details);
 }
 

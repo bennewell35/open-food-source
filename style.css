@@ -100,3 +100,28 @@ dialog{color:var(--ink);border:1px solid #bcc4b5;border-radius:5px;padding:clamp
 @media(max-width:900px){.dish-list{grid-template-columns:repeat(2,minmax(0,1fr))}.mast-inner{flex-wrap:wrap;padding-block:.65rem}.mast nav{flex-wrap:wrap;gap:.15rem .85rem}}
 @media(max-width:680px){.dish-filters{grid-template-columns:1fr 1fr;gap:.65rem}.dish-filters label:first-child{grid-column:1/-1}.recipe-columns{grid-template-columns:1fr}.dish-caption{padding:.7rem}.dish-tile .eyebrow{font-size:.64rem}.dish-tile strong{font-size:1.45rem}}
 @media(max-width:410px){.dish-filters{grid-template-columns:1fr}.dish-filters label:first-child{grid-column:auto}.dish-list{gap:.6rem}.dish-yield{font-size:.78rem}}
+
+.season { background: #f4f1e6; border-bottom: 1px solid var(--line); }
+.season-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(15rem, 1fr); gap: clamp(1.5rem, 4vw, 4rem); }
+.season h3 { font-size: clamp(1.75rem, 3vw, 2.3rem); }
+.season-meals, .season-drinks { list-style: none; margin: 1rem 0 0; padding: 0; }
+.season-meals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.25rem; }
+.season-meals li, .season-drinks li { border-top: 1px solid var(--line); }
+.season-meal { display: flex; gap: .8rem; width: 100%; height: 100%; align-items: center; padding: .7rem 0; text-align: left; }
+.season-meal img { width: clamp(3.5rem, 6vw, 5.5rem); height: auto; aspect-ratio: 4/3; object-fit: cover; border-radius: 3px; }
+.season-meal strong { display: block; font: 400 1.4rem/1.12 var(--serif); }
+.season-meal span { min-width: 0; overflow-wrap: anywhere; }
+.season-meal small { display: block; margin-top: .3rem; color: var(--soft); font-size: .8rem; }
+.season-drinks button { width: 100%; text-align: left; padding: .65rem .1rem; min-height: 2.75rem; }
+.season-meal:hover strong, .season-drinks button:hover { color: var(--copper); text-decoration: underline; }
+.season-research { padding: 1.25rem; background: #e4e9dc; margin-top: 1.15rem; }
+.season-research h3 { font-size: 1.65rem; }
+.season-research p { margin-top: .6rem; font-size: .93rem; }
+.season-research button { text-align: left; }
+.season-research .inline, .recipe-card > .text-button { display: flex; align-items: center; width: fit-content; }
+.recipe-card > a { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: .5rem; }
+@media (max-width: 1000px) { .season-meals { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 680px) {
+  .season-grid { grid-template-columns: minmax(0, 1fr); }
+  .season-meal img { width: min(23%, 5rem); }
+}

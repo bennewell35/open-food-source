@@ -1,8 +1,10 @@
 # Open Food Source
 
-An open-source food and drink guide for people who want to read the evidence, make a recipe and plan their week. Each recipe links to the original work and explains how the homemade version compares with the preparation studied.
+Open Food Source is a community cookbook and weekly meal planner. Find something to cook, learn where the dish comes from, and follow an ingredient note back to the study or food record behind it.
 
 [Open the website](https://bennewell35.github.io/open-food-source/) · [Community cookbook](https://bennewell35.github.io/open-food-source/#cookbook) · [Contribute a recipe](https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md)
+
+Looking for something to make when a cold hits? The [cold-season collection](https://bennewell35.github.io/open-food-source/#cold-season) brings together soft meals, brothy dishes and drinks you can add to your week. Its research notes explain which symptoms researchers measured and how the preparations compare with what you make at home.
 
 ## Run locally
 
@@ -22,9 +24,19 @@ Open the [tart cherry and apple cooler](https://bennewell35.github.io/open-food-
 
 ## Contribute
 
-Share a dish from a regional, family or personal cooking tradition using the [community recipe form](https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md). Include the ingredients, amounts, method, servings and credit. Traditional and personal recipes are welcome without a health claim.
+**Share a recipe or study without writing code.** Sign in to GitHub and open a [recipe suggestion](https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md) or [study or correction](https://github.com/bennewell35/open-food-source/issues/new?template=study-or-recipe.md). For a recipe, tell us how much it makes, how you cook it and whom to credit. For a paper, link the original and tell us what the researchers measured. Once you submit the issue, contributors can discuss it there.
 
-Readers can [suggest a study, correction or recipe](https://github.com/bennewell35/open-food-source/issues/new?template=study-or-recipe.md). A useful suggestion includes the paper, the outcome and a sentence explaining what would change on the site. To make the edit yourself, follow the [contributor guide](CONTRIBUTING.md).
+**Edit the cookbook yourself.** [Fork Open Food Source](https://github.com/bennewell35/open-food-source/fork) into your GitHub account. To get started, replace `YOUR-USERNAME` below with your GitHub username.
+
+```sh
+git clone https://github.com/YOUR-USERNAME/open-food-source.git
+cd open-food-source
+git remote add upstream https://github.com/bennewell35/open-food-source.git
+git fetch upstream
+git switch --no-track -c my-recipe upstream/main
+```
+
+Meals live in `dishes.js`, drinks in `recipes.js`, and ingredient studies in `research.js`. Preview your edit with the command under **Run locally**, then run `node --test` with Node.js 20 or later. Push your branch to your fork and open a pull request into `bennewell35/open-food-source` on `main`. The [contributor guide](CONTRIBUTING.md#send-your-edit) walks through the commit, push and pull request.
 
 ## Related projects
 

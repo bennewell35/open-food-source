@@ -136,7 +136,7 @@ function choosePath(id) {
 choosePath(-1);
 
 let selectedRecipeIndex = 0;
-function chooseRecipe(i) {
+function chooseRecipe(i, collectionButton) {
   selectedRecipeIndex = i;
   byId('drink-plan-status').textContent = '';
   const r=RECIPES[i];
@@ -150,7 +150,12 @@ function chooseRecipe(i) {
   const searchLink = link('Find recent studies on PubMed','https://pubmed.ncbi.nlm.nih.gov/?' + new URLSearchParams({term:query,sort:'date'}));
   more.append(node('summary','How to find more studies'),node('p','Look for people drinking the same preparation. Check the dose, comparator, duration and outcome. A capsule, lab extract or different recipe may deliver a different exposure. Read the original trial and look for studies reporting no benefit.'),searchLink);
   note.append(more);
-  byId('recipe-card').replaceChildren(node('p',r.time,'eyebrow'),node('h3',r.name),ingredients,node('h4','Make it'),node('p',r.method),note);
+  const heading = node('h3', r.name);
+  heading.tabIndex = -1;
+  const card = byId('recipe-card');
+  card.replaceChildren(node('p',r.time,'eyebrow'),heading,ingredients,node('h4','Make it'),node('p',r.method),note);
+  card.append(link('Link to this drink', '?drink=' + encodeURIComponent(r.id) + '#recipe-card'));
+  if (collectionButton) card.append(action('Back to cold-season recipes', () => collectionButton.focus(), 'text-button'));
 }
 RECIPES.forEach((r,i)=>byId('recipes').append(action(r.name,()=>chooseRecipe(i))));
 for (const goal of Object.keys(drinkGoals)) byId('drink-goal').add(new Option(goal,goal));

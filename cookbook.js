@@ -59,16 +59,16 @@ function mealPicker(dish) {
   return picker;
 }
 
-function openDish(dish, moveFocus = true) {
+function openDish(dish, moveFocus = true, collectionButton) {
   openDishId = dish.id;
   for (const button of byId('dish-list').children) {
     button.setAttribute('aria-expanded', String(button.id === 'tile-' + dish.id));
   }
   const heading = node('h3', dish.name);
   heading.tabIndex = -1;
-  const back = action('Back to recipes', () => {
+  const back = action(collectionButton ? 'Back to cold-season recipes' : 'Back to recipes', () => {
     closeDish();
-    byId('tile-' + dish.id)?.focus();
+    (collectionButton || byId('tile-' + dish.id))?.focus();
   }, 'text-button');
   const header = node('div', undefined, 'detail-heading');
   header.append(heading, back);
@@ -82,6 +82,7 @@ function openDish(dish, moveFocus = true) {
   right.append(node('h4', 'Method'), steps);
   if (dish.technique) right.append(node('h4', 'Why it works'), node('p', dish.technique));
   if (dish.swap) right.append(node('h4', 'A swap to try'), node('p', dish.swap));
+  if (dish.coldSeasonTip) right.append(node('h4', 'Serving tip'), node('p', dish.coldSeasonTip));
   if (dish.foodNote) right.append(action(dish.foodLabel, () => showNote(dish.foodNote), 'text-button'));
   const instructions = node('div', undefined, 'recipe-columns');
   instructions.append(left, right);
@@ -126,5 +127,43 @@ byId('pantry-search-link').addEventListener('click', () => {
   byId('query').focus();
 });
 showDishes();
+
+const seasonalMeals = DISHES.filter(dish => dish.coldSeason).sort((a, b) => a.minutes - b.minutes);
+for (const dish of seasonalMeals) {
+  const button = action('', () => openDish(dish, true, button), 'season-meal');
+  button.setAttribute('aria-controls', 'dish-detail');
+  if (dish.image) {
+    const image = node('img');
+    image.src = dish.image;
+    image.alt = '';
+    image.width = 96;
+    image.height = 72;
+    image.loading = 'lazy';
+    button.append(image);
+  }
+  const caption = node('span');
+  caption.append(node('strong', dish.name), node('small', dish.time + ' · ' + dish.style));
+  button.append(caption);
+  const item = node('li');
+  item.append(button);
+  byId('season-meals').append(item);
+}
+for (const [index, recipe] of RECIPES.entries()) {
+  if (!recipe.coldSeason) continue;
+  const button = action(recipe.name, () => {
+    const goal = byId('drink-goal');
+    if (byId('recipes').children[index].hidden) {
+      goal.value = 'all';
+      goal.dispatchEvent(new Event('change'));
+    }
+    chooseRecipe(index, button);
+    byId('recipe-card').querySelector('h3').focus();
+  });
+  button.setAttribute('aria-controls', 'recipe-card');
+  const item = node('li');
+  item.append(button);
+  byId('season-drinks').append(item);
+}
+byId('season-evidence').addEventListener('click', () => showNote('warm'));
 const requestedDish = DISHES.find(dish => dish.id === new URLSearchParams(location.search).get('dish'));
 if (requestedDish) openDish(requestedDish, location.hash === '#dish-detail');

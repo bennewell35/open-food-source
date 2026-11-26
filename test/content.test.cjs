@@ -88,3 +88,13 @@ test('each food note links to a source and each source has an HTTPS URL', () => 
     assert.equal(new URL(source[3]).protocol, 'https:', id);
   }
 });
+
+test('honey advice travels with cold-season drinks into the saved planner method', () => {
+  const honeyDrinks = RECIPES.filter(recipe => recipe.coldSeason &&
+    recipe.ingredients.some(ingredient => /\bhoney\b/i.test(ingredient)));
+  assert.ok(honeyDrinks.some(recipe => recipe.id === 'honey-turmeric'));
+  for (const drink of honeyDrinks) {
+    assert.match(drink.method, /(?:under|younger than) (?:12 months|1 year)/i, drink.name);
+    assert.ok(drink.refs.includes('infant') || drink.refs.includes('coldCare'), drink.name);
+  }
+});

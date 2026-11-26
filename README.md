@@ -4,6 +4,8 @@ Open Food Source is a community cookbook and weekly meal planner. Find something
 
 [Open the website](https://bennewell35.github.io/open-food-source/) · [Community cookbook](https://bennewell35.github.io/open-food-source/#cookbook) · [Contribute a recipe](https://github.com/bennewell35/open-food-source/issues/new?template=community-recipe.md)
 
+[Browse Seasonal Tonics](https://bennewell35.github.io/open-food-source/#seasonal-tonics) to find a drink by ingredient, season or holiday. The guide pairs cooking directions with recipe credits and links to human studies or care guidance where they apply. Thanksgiving and Christmas recipes also include drinks chosen for their culinary traditions. You can save a drink and add it to your weekly planner.
+
 Looking for something to make when a cold hits? The [cold-season collection](https://bennewell35.github.io/open-food-source/#cold-season) brings together soft meals, brothy dishes and drinks you can add to your week. Its research notes explain which symptoms researchers measured and how the preparations compare with what you make at home.
 
 ## Run locally

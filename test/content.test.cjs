@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 // Load the same declarations as the static site without a browser or build step.
 const context = vm.createContext({});
-for (const file of ['research.js', 'recipes.js', 'dishes.js']) {
+for (const file of ['research.js', 'tonic-evidence.js', 'seasonal-holiday.js', 'seasonal-everyday.js', 'recipes.js', 'dishes.js']) {
   const source = readFileSync(path.join(__dirname, '..', file), 'utf8');
   vm.runInContext(source, context, { filename: file });
 }
@@ -54,9 +54,10 @@ test('recipes have stable unique IDs, usable instructions and valid evidence lin
     assert.ok(recipe.steps.length && recipe.steps.every(step => step.trim()), recipe.id + ' needs directions');
     assert.equal(recipe.steps.join(' '), recipe.method, recipe.id + ' has conflicting directions');
     assert.ok(recipe.ingredients.length > 0 && recipe.ingredients.every(item => item.trim()));
-    assert.ok(NOTES[recipe.note], 'Missing food note for ' + recipe.id);
-    assert.ok(drinkQueries[recipe.id]?.trim(), 'Missing PubMed query for ' + recipe.id);
-    assert.ok(recipe.refs.length > 0);
+    if (recipe.note) assert.ok(NOTES[recipe.note], 'Unknown food note for ' + recipe.id);
+    if (!recipe.seasons) {
+      assert.ok(recipe.note && drinkQueries[recipe.id]?.trim() && recipe.refs.length > 0, recipe.id);
+    }
     for (const key of recipe.refs) assert.ok(SOURCES[key], 'Unknown source: ' + key);
   }
   const grouped = new Set(Object.values(drinkGoals).flat());
@@ -93,11 +94,30 @@ test('each food note links to a source and each source has an HTTPS URL', () => 
 });
 
 test('honey advice travels with cold-season drinks into the saved planner method', () => {
-  const honeyDrinks = RECIPES.filter(recipe => recipe.coldSeason &&
+  const honeyDrinks = RECIPES.filter(recipe => (recipe.coldSeason || recipe.seasons?.includes('cold-flu')) &&
     recipe.ingredients.some(ingredient => /\bhoney\b/i.test(ingredient)));
   assert.ok(honeyDrinks.some(recipe => recipe.id === 'honey-turmeric'));
   for (const drink of honeyDrinks) {
     assert.match(drink.method, /(?:under|younger than) (?:12 months|1 year)/i, drink.name);
     assert.ok(drink.refs.includes('infant') || drink.refs.includes('coldCare'), drink.name);
+  }
+});
+
+
+test('seasonal recipes carry a culinary source and an appropriate evidence label into the catalog', () => {
+  const {TONIC_EVIDENCE, TONIC_FLU_GUIDANCE} = vm.runInContext('({TONIC_EVIDENCE, TONIC_FLU_GUIDANCE})', context);
+  const occasions = ['cold-flu', 'thanksgiving', 'christmas', 'winter', 'spring', 'summer', 'autumn'];
+  const drinks = RECIPES.filter(recipe => recipe.seasons);
+  for (const occasion of occasions) assert.ok(drinks.some(recipe => recipe.seasons.includes(occasion)), occasion);
+  for (const recipe of drinks) {
+    assert.ok(recipe.seasons.length && recipe.seasons.every(key => occasions.includes(key)), recipe.id);
+    assert.ok(TONIC_EVIDENCE[recipe.evidence] && recipe.credit && recipe.tradition.label, recipe.id);
+    assert.equal(new URL(recipe.tradition.url).protocol, 'https:');
+    if (recipe.evidence !== 'tradition') assert.ok(recipe.refs.length, recipe.id);
+    assert.ok(drinkGoals['Seasonal tonics'].includes(recipe.id), recipe.id);
+  }
+  for (const group of [...Object.values(TONIC_EVIDENCE), TONIC_FLU_GUIDANCE]) {
+    assert.ok(group.finding || group.text);
+    assert.ok(group.sources.length && group.sources.every(source => source.label && new URL(source.url).protocol === 'https:'));
   }
 });

@@ -8,15 +8,15 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="kitchen.css">
 <link rel="icon" type="image/webp" href="assets/maple-leaf.webp">
-<script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
+<script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="tonic-evidence.js"></script><script defer src="seasonal-holiday.js"></script><script defer src="seasonal-everyday.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
 <script defer src="dishes.js"></script><script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="cookbook.js"></script><script defer src="pantry-picker.js"></script>
-<script defer src="regional-data.js"></script><script defer src="quick-kitchen.js"></script><script defer src="regions.js"></script>
+<script defer src="regional-data.js"></script><script defer src="quick-kitchen.js"></script><script defer src="regions.js"></script><script defer src="seasonal-guide.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 <header class="mast kitchen-mast"><div class="wrap mast-inner">
 <a class="wordmark" href="#main" aria-label="Open Food Source home"><span class="compass" aria-hidden="true">✳</span>Open Food Source</a>
-<nav aria-label="Main navigation"><a href="#quick-kitchen">Quick kitchen</a><a href="#regions">By state</a><a href="#weekly-map">My week</a><details id="kitchen-menu"><summary>More</summary><div><a href="#pantry-picker">Pantry picker</a><a href="#cookbook">Full cookbook</a><a href="#kitchen">Drink kitchen</a><a href="#cold-season">Cold-season kitchen</a><a href="#atlas">Research atlas</a><a href="#pantry">USDA food index</a><a href="#sources">Sources &amp; contributions</a></div></details></nav>
+<nav aria-label="Main navigation"><a href="#quick-kitchen">Quick kitchen</a><a href="#seasonal-tonics" aria-label="Seasonal tonics">Tonics</a><a href="#regions">By state</a><a href="#weekly-map">My week</a><details id="kitchen-menu"><summary>More</summary><div><a href="#pantry-picker">Pantry picker</a><a href="#cookbook">Full cookbook</a><a href="#kitchen">Drink kitchen</a><a href="#cold-season">Cold-season kitchen</a><a href="#atlas">Research atlas</a><a href="#pantry">USDA food index</a><a href="#sources">Sources &amp; contributions</a></div></details></nav>
 </div></header>
 <main id="main">
 <section class="daily" id="quick-kitchen" aria-labelledby="daily-title"><div class="wrap daily-inner">
@@ -28,6 +28,18 @@
 <p id="daily-count" role="status" class="daily-count"></p><div id="daily-results" class="daily-results"></div>
 <div class="daily-foot"><button type="button" id="daily-more" class="k-outline" hidden>Show more recipes</button><button type="button" id="daily-clear" class="text-button" hidden>Reset filters</button></div>
 <p id="daily-status" role="status" class="quiet"></p></div></section>
+<section id="seasonal-tonics" class="tonic-guide" aria-labelledby="tonic-title"><div class="section wrap">
+<div class="tonic-heading"><div><h2 id="tonic-title">Seasonal tonics.</h2>
+<p class="intro">Find a warm cup for a sore throat, a punch for the holiday table, or a cool drink for summer. Open a recipe for its directions, source and research.</p></div>
+<img src="assets/botanical-plate.webp" alt="" width="500" height="333" loading="lazy"></div>
+<div class="tonic-controls region-filters"><label for="tonic-season">Season or occasion<select id="tonic-season"></select></label>
+<label for="tonic-search">Drink or ingredient<input id="tonic-search" type="search" placeholder="Try honey, pear or cocoa" autocomplete="off"></label></div>
+<p id="tonic-season-note"></p>
+<details class="tonic-care" id="tonic-care"><summary>When flu symptoms need medical care</summary><div id="tonic-care-body"></div></details>
+<div class="tonic-results-heading"><p id="tonic-count" role="status"></p><a id="tonic-share" class="inline" href="#seasonal-tonics">Link to this collection</a></div>
+<ul id="tonic-results" class="tonic-results"></ul><div class="tonic-actions"><button class="k-outline" id="tonic-more" type="button" hidden>Show more drinks</button><button class="text-button" id="tonic-clear" type="button" hidden>Show all seasonal drinks</button></div>
+<details class="tonic-shelf" id="tonic-studies"><summary>Read the cold and flu research</summary><div id="tonic-evidence-list"></div></details>
+</div></section>
 <section id="regions" class="region-section" aria-labelledby="regions-title"><div class="section wrap">
 <div class="section-head"><div><p class="eyebrow">Regional food guide</p><h2 id="regions-title">Explore by state.</h2></div></div>
 <p class="intro">Browse all 50 states. See what residents chose in a survey, what stands out in grocery orders, and what you can cook at home.</p>
@@ -75,7 +87,7 @@
 <p class="intro">Soft rice, brothy noodles and something warm to sip. Choose what sounds good today and add it to your week.</p>
 <div class="season-grid">
 <div><h3>Meals by cooking time</h3><ul class="season-meals" id="season-meals"></ul></div>
-<div><h3>Something to sip</h3><ul class="season-drinks" id="season-drinks"></ul>
+<div><h3>Something to sip</h3><a class="inline" href="?season=cold-flu#seasonal-tonics">Browse the seasonal tonic guide</a><ul class="season-drinks" id="season-drinks"></ul>
 <aside class="season-research" aria-labelledby="season-research-title"><h3 id="season-research-title">Can a warm drink help?</h3>
 <p>In a study of 30 people with cold or flu symptoms, those who drank hot fruit cordial reported less throat pain for up to 30 minutes. The study ended before researchers could tell how long anyone’s cold lasted.</p>
 <button class="text-button" type="button" id="season-evidence">Read the warm drink and honey studies</button>

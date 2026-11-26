@@ -32,6 +32,9 @@ const RECIPES = [
   },
   {
     id: 'ginger-lemon',
+    seasons: ['cold-flu', 'winter'], evidence: 'warm',
+    credit: 'An original Open Food Source recipe.',
+    tradition: {label: 'Original recipe record', url: 'https://github.com/bennewell35/open-food-source/blob/fa69ba89a95e900215fd87f8b42e69bc3a14c39c/recipes.js#L34'},
     name: 'Ginger & lemon infusion',
     coldSeason: true,
     equipment: 'Mug, knife and spoon', minutes: 10, time: '10 min · start with hot water',
@@ -70,6 +73,9 @@ const RECIPES = [
     ],reason:'Tomatoes supply lycopene. Human studies disagree about its relationship to prostate cancer risk. This savory drink is an option when you want a vegetable drink without adding sugar.',refs:['prostate','fdc'],note:'prostate'},
   {
     id: 'honey-turmeric',
+    seasons: ['cold-flu', 'thanksgiving', 'autumn'], evidence: 'honey',
+    credit: 'An original Open Food Source recipe.',
+    tradition: {label: 'Original recipe record', url: 'https://github.com/bennewell35/open-food-source/blob/fa69ba89a95e900215fd87f8b42e69bc3a14c39c/recipes.js#L72'},
     name: 'Honey & turmeric tonic',
     coldSeason: true,
     equipment: 'Mug, spoon and fine strainer', minutes: 5, time: '5 min · start with hot water',
@@ -79,12 +85,15 @@ const RECIPES = [
       'Pour in the hot water, stir and steep for about 3 minutes. Strain into a clean mug to remove the whole clove and garlic.',
       'Stir in the lemon and honey. Let the drink cool until comfortable to sip. Never give honey to a baby under 12 months.'
     ],
-    reason: 'In a one-night trial, parents of children aged 1–5 reported greater cough relief with honey than with a date syrup placebo. The trial tested honey on its own. No clinical study cited here tested this spice blend for colds or cancer.',
-    refs: ['honey','turmeric','coldCare','infant'],
+    reason: 'Trials of honey for nighttime cough in children have mixed results. They tested honey by mouth. The garlic, turmeric, pepper and honey mixture here has no established effect on illness duration.',
+    refs: ['honey','honeyPlacebo','turmeric','coldCare','infant'],
     note: 'spices'
   },
   {
     id: 'gold-kiwi-crush',
+    seasons: ['cold-flu', 'spring'], evidence: 'kiwi',
+    credit: 'An original Open Food Source recipe.',
+    tradition: {label: 'Original recipe record', url: 'https://github.com/bennewell35/open-food-source/blob/fa69ba89a95e900215fd87f8b42e69bc3a14c39c/recipes.js#L87'},
     name: 'Gold kiwi crush',
     coldSeason: true,
     equipment: 'Knife, spoon, fork and glass', minutes: 3, time: '3 min · makes 1 small glass',
@@ -99,6 +108,9 @@ const RECIPES = [
   },
   {
     id: 'apple-cinnamon-cup',
+    seasons: ['cold-flu', 'autumn', 'thanksgiving'], evidence: 'warm',
+    credit: 'An original Open Food Source recipe.',
+    tradition: {label: 'Original recipe record', url: 'https://github.com/bennewell35/open-food-source/blob/fa69ba89a95e900215fd87f8b42e69bc3a14c39c/recipes.js#L101'},
     name: 'Warm apple and cinnamon cup',
     coldSeason: true,
     equipment: 'Small lidded saucepan and mug', minutes: 12, time: '12 min · makes 1 mug',
@@ -113,6 +125,9 @@ const RECIPES = [
   },
   {
     id: 'scallion-broth',
+    seasons: ['cold-flu', 'winter'], evidence: 'broth',
+    credit: 'An original Open Food Source recipe.',
+    tradition: {label: 'Original recipe record', url: 'https://github.com/bennewell35/open-food-source/blob/fa69ba89a95e900215fd87f8b42e69bc3a14c39c/recipes.js#L115'},
     name: 'Scallion sipping broth',
     coldSeason: true,
     equipment: 'Small lidded saucepan, knife, spoon and mug', minutes: 12, time: '12 min · makes 1 mug',
@@ -149,9 +164,34 @@ const RECIPES = [
   {id:'mint-lime',name:'Mint & lime seltzer',equipment: 'Glass and spoon', minutes: 2, time: '2 min · start with cold seltzer',ingredients:['1 cup plain seltzer','2 mint leaves','1 lime wedge'],steps: [
       'Put the mint leaves in a glass and gently press them with the back of a spoon until fragrant. Squeeze in the lime wedge.',
       'Pour the cold seltzer slowly into the glass. Stir once to lift the mint and serve.'
-    ],reason:'This swap removes the added sugar from that drinking occasion. The six-month CHOICE trial assigned 318 adults to water, diet drinks or dietary changes they chose themselves. Average weight change did not differ significantly among the groups. Mint and lime were not tested.',refs:['beverageSwap','who'],note:'waterSwap'}
+    ],reason:'This swap removes the added sugar from that drinking occasion. The six-month CHOICE trial assigned 318 adults to water, diet drinks or dietary changes they chose themselves. Average weight change did not differ significantly among the groups. Mint and lime were not tested.',refs:['beverageSwap','who'],note:'waterSwap'},
+  {
+    id: 'warm-blackcurrant-cordial', name: 'Warm apple & blackcurrant cordial', seasons: ['cold-flu', 'winter'],
+    evidence: 'warm', minutes: 5, time: '5 min · makes 1 mug', equipment: 'Kettle, mug and measuring spoon',
+    ingredients: ['Apple and blackcurrant squash or cordial concentrate, enough for 1 mug according to its label', 'Warm drinking water to make 1 cup (240 mL)'],
+    steps: ['Warm the water in a kettle or saucepan. Measure the amount of cordial concentrate the bottle recommends for one cup of finished drink.',
+      'Put the cordial in the mug and add the warm water. Stir, taste and add more water if you prefer. Let it cool to a comfortable sipping temperature.'],
+    credit: 'Inspired by the apple and blackcurrant cordial in the Cardiff beverage study. Use the dilution on your own bottle.',
+    tradition: {label: 'Drink preparation in the original paper', url: 'https://www.rhinologyjournal.com/Rhinology_issues/719.pdf'},
+    reason: 'The researchers compared the same fruit cordial served hot or at room temperature. Product formulas and dilution instructions vary.',
+    refs: ['warm'], note: 'warm', query: '"hot drink" AND common cold AND symptoms'
+  },
+  {
+    id: 'lemon-honey-cup', name: 'Warm lemon & honey cup', seasons: ['cold-flu', 'winter'], evidence: 'honey',
+    minutes: 5, time: '5 min · makes 1 mug', equipment: 'Kettle, mug and teaspoon',
+    ingredients: ['1 cup (240 mL) warm water', '½ lemon', '1 teaspoon honey'],
+    steps: ['Warm the water and pour it into a heatproof mug. Squeeze the lemon through a strainer or your fingers to catch the pips.',
+      'Stir the honey into the lemon water until dissolved. Cool before sipping. Never give honey to a baby under 12 months.'],
+    credit: 'Adapted from the NHS home drink for a sore throat.',
+    tradition: {label: 'NHS lemon and honey drink', url: 'https://www.nhs.uk/conditions/common-cold/'},
+    reason: 'The NHS includes this cup as a sore-throat comfort measure. The pediatric cough trials studied honey taken by mouth. They did not test this diluted drink.',
+    refs: ['honey', 'honeyPlacebo', 'coldCare', 'infant'], note: 'warm', query: 'honey AND cough AND children'
+  },
+  ...HOLIDAY_TONICS,
+  ...EVERYDAY_TONICS
 ].map(recipe => ({...recipe, method: recipe.steps.join(' ')}));
 const drinkGoals = {
+  'Seasonal tonics': RECIPES.filter(recipe => recipe.seasons).map(recipe => recipe.id),
   'Blood pressure': ['hibiscus','beet-citrus'],
   'Exercise & recovery': ['cherry-apple','beet-citrus','cherry-spritz'],
   'Attention': ['green-tea'],
@@ -160,6 +200,7 @@ const drinkGoals = {
   'Protein or fiber': ['cocoa-maple','beet-berry','gold-kiwi-crush','maine-blueberry-shake']
 };
 const drinkQueries = {
+  ...Object.fromEntries(RECIPES.filter(recipe => recipe.query).map(recipe => [recipe.id, recipe.query])),
   'maine-blueberry-shake': '(blueberries OR bilberry) AND "vascular function" AND trial',
   'florida-orange-spritz': '("vitamin C" OR ascorbic acid) AND nonheme iron AND absorption AND meal',
   'ginger-lemon':'("hot drink" OR "warm beverage") AND (cold OR throat)',

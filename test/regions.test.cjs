@@ -5,7 +5,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const context = vm.createContext({document: {addEventListener() {}}});
-for (const file of ['dishes.js', 'recipes.js', 'regional-data.js', 'regions.js']) {
+for (const file of ['dishes.js', 'seasonal-holiday.js', 'seasonal-everyday.js', 'recipes.js', 'regional-data.js', 'regions.js']) {
   const source = readFileSync(path.join(__dirname, '..', file), 'utf8');
   vm.runInContext(source, context, {filename: file});
 }

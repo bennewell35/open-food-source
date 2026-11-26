@@ -171,16 +171,42 @@ function chooseRecipe(i, collectionButton) {
   Array.from(byId('recipes').children).forEach((button,n)=>button.setAttribute('aria-pressed',String(i===n)));
   renderDrink(byId('recipe-card'),r,collectionButton);
 }
+function tonicReferences(sources) {
+  const list = node('div', undefined, 'sources-inline');
+  for (const source of sources) list.append(link(source.label, source.url));
+  return list;
+}
+
+function drinkEvidence(recipe) {
+  const note = node('div', undefined, 'study-note');
+  const culinary = recipe.evidence === 'tradition';
+  const evidence = TONIC_EVIDENCE[recipe.evidence];
+  note.append(node('h4', culinary ? 'At the seasonal table' : 'What the evidence supports'), node('p', recipe.reason));
+  if (evidence && !culinary) {
+    const detail = node('details', undefined, 'find-research');
+    detail.append(node('summary', evidence.label), node('p', evidence.finding), tonicReferences(evidence.sources));
+    note.append(detail);
+  }
+  if (!culinary && recipe.refs.length) note.append(citations(recipe.refs));
+  if (!culinary && recipe.note) note.append(action('Read the food note', () => showNote(recipe.note), 'text-button'));
+  if (recipe.tradition) {
+    const credit = node('p', recipe.credit ? recipe.credit + ' ' : '', 'dish-credit');
+    credit.append(link(recipe.tradition.label, recipe.tradition.url));
+    note.append(credit);
+  }
+  return note;
+}
 function renderDrink(card,r,collectionButton) {
   const ingredients=node('ul');
   ingredients.append(...r.ingredients.map(item=>node('li',item)));
-  const note=node('div',undefined,'study-note');
-  note.append(node('h4','What the evidence supports'),node('p',r.reason),citations(r.refs),action('Read the food note',()=>showNote(r.note),'text-button'));
-  const more = node('details',undefined,'find-research');
-  const query = '(' + drinkQueries[r.id] + ') AND (randomized controlled trial[pt] OR clinical trial[pt] OR meta-analysis[pt] OR randomised[tiab] OR randomized[tiab])';
-  const searchLink = link('Find recent studies on PubMed','https://pubmed.ncbi.nlm.nih.gov/?' + new URLSearchParams({term:query,sort:'date'}));
-  more.append(node('summary','How to find more studies'),node('p','Look for people drinking the same preparation. Check the dose, comparator, duration and outcome. A capsule, lab extract or different recipe may deliver a different exposure. Read the original trial and look for studies reporting no benefit.'),searchLink);
-  note.append(more);
+  const note = drinkEvidence(r);
+  if (drinkQueries[r.id]) {
+    const more = node('details', undefined, 'find-research');
+    const query = '(' + drinkQueries[r.id] + ') AND (randomized controlled trial[pt] OR clinical trial[pt] OR meta-analysis[pt] OR randomised[tiab] OR randomized[tiab])';
+    const searchLink = link('Find recent studies on PubMed', 'https://pubmed.ncbi.nlm.nih.gov/?' + new URLSearchParams({term:query,sort:'date'}));
+    more.append(node('summary', 'How to find more studies'), node('p', 'Compare the preparation, dose and outcome with the drink you plan to make. Look for studies reporting no benefit as well.'), searchLink);
+    note.append(more);
+  }
   const heading = node('h3', r.name);
   heading.tabIndex = -1;
   const directions = node('ol');
@@ -188,11 +214,6 @@ function renderDrink(card,r,collectionButton) {
   card.replaceChildren(node('p', r.time, 'eyebrow'), heading, node('h4', 'Equipment'),
     node('p', r.equipment), node('h4', 'Ingredients'), ingredients, node('h4', 'Make it'),
     stepReader(r.steps, directions), note);
-  if (r.tradition) {
-    const credit = node('p', r.credit ? r.credit + ' ' : '', 'dish-credit');
-    credit.append(link(r.tradition.label, r.tradition.url));
-    card.append(credit);
-  }
   card.append(link('Link to this drink', '?drink=' + encodeURIComponent(r.id) + '#recipe-card'));
   if (collectionButton) card.append(action('Back to cold-season recipes', () => collectionButton.focus(), 'text-button'));
 }

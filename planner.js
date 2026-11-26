@@ -59,7 +59,7 @@ function showDrinkRecipe(container, recipe) {
   steps.append(...recipe.steps.map(text => node('li', text)));
   details.append(node('summary', 'Recipe for ' + recipe.name), node('p', recipe.time + ' · ' + recipe.equipment),
     node('h4', 'Ingredients'), ingredients, node('h4', 'Method'), steps);
-  details.append(node('h4', 'What the evidence supports'), node('p', recipe.reason), citations(recipe.refs));
+  details.append(drinkEvidence(recipe));
   container.append(details);
 }
 

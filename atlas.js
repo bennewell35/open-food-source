@@ -27,6 +27,16 @@ function citations(keys) {
   }
   return list;
 }
+
+function ingredientLesson(dish) {
+  const lesson = MEAL_LESSONS[dish.foodNote];
+  if (!lesson) return null;
+  const [ingredient, finding] = lesson;
+  const box = node('div', undefined, 'ingredient-lesson');
+  box.append(node('strong', ingredient + ' in this meal'), node('p', finding),
+    citations(NOTES[dish.foodNote][6]));
+  return box;
+}
 const dialog = byId('note-dialog');
 function showNote(key) {
   const [title,type,,biology,finding,kitchen,refs] = NOTES[key];

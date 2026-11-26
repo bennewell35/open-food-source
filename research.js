@@ -2,6 +2,11 @@
 const pub = id => 'https://pubmed.ncbi.nlm.nih.gov/' + id + '/';
 const ods = name => 'https://ods.od.nih.gov/factsheets/' + name + '-HealthProfessional/';
 const SOURCES = {
+  peanutServing: ['USDA · SR Legacy 172470', 'Smooth peanut butter without salt, including tablespoon weights', 'Food composition', 'https://fdc.nal.usda.gov/food-details/172470/nutrients'],
+  peanutBreakfast: ['Reis et al. · 2013', 'Peanut butter at breakfast and the glucose response to lunch', 'Acute crossover trial', pub(23122211)],
+  kimchiCompare: ['Kim et al. · 2011', 'Fresh and fermented kimchi during two four-week periods', 'Crossover trial', pub(21745625)],
+  quinoaPilot: ['Zafar · 2026', 'Cooked quinoa and white bread at matched carbohydrate doses', 'Pilot crossover trial', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC13464660/'],
+  quinoaServing: ['USDA · SR Legacy 168917', 'Cooked quinoa, nutrients and cup weight', 'Food composition', 'https://fdc.nal.usda.gov/food-details/168917/nutrients'],
   firmTofu: ['USDA · SR Legacy 172475', 'Raw firm tofu prepared with calcium sulfate', 'Food composition', 'https://fdc.nal.usda.gov/food-details/172475/nutrients'],
   nigariTofu: ['USDA · SR Legacy 172448', 'Firm tofu prepared with calcium sulfate and nigari', 'Food composition', 'https://fdc.nal.usda.gov/food-details/172448/nutrients'],
   hibiscusCoffee: ['Almalki et al. · 2026', 'Hibiscus versus coffee during three hours of sitting', 'Crossover trial', pub(42993332)],
@@ -56,6 +61,22 @@ const SOURCES = {
 const PATHS = ['Heart & circulation','Blood sugar','Gut & inflammation','Attention & sleep','Comfort during a cold','Training & nourishment','Cancer risk'];
 // Title, evidence type, outcome groups, biology, human finding, kitchen use, source keys.
 const NOTES = {
+  lentilRice: ['What changes when lentils replace some rice?', 'Human feeding study', [1],
+    'Cooked lentils provide starch, fiber and protein. Comparing meals with equal amounts of digestible carbohydrate lets researchers examine how the food supplying it affects the response.',
+    'In the rice arm of a crossover trial, 24 healthy adults ate white rice alone and meals in which lentils supplied half the available carbohydrate. The two-hour glucose response averaged roughly 20% lower with the lentil substitutions. The size varied by lentil type.',
+    'Rice and lentils are natural partners in mujadara. The researchers weighed foods by available carbohydrate, so equal scoops in a kitchen bowl will give a different ratio.', ['lentilSwap']],
+  groundnuts: ['What do two tablespoons of peanut butter contribute?', 'Food composition and feeding trial', [1,5],
+    'Grinding peanuts makes a paste that disperses in broth. The peanuts supply fat and protein as well as the flavor and body of groundnut soup.',
+    'USDA lists 22.21 g protein per 100 g of smooth unsalted peanut butter. Two tablespoons weigh 32 g in that record, which works out to about 7 g protein. Separately, a crossover trial in 15 women at higher risk of type 2 diabetes found a smaller glucose response to lunch after a breakfast containing 42.5 g of peanut butter than after the peanut-free breakfast.',
+    'This soup uses roughly two tablespoons per bowl when divided evenly. Check the serving weight on your jar. The breakfast experiment used a different portion and meal.', ['peanutServing','peanutBreakfast']],
+  kimchi: ['What did researchers compare in fresh and fermented kimchi?', 'Small crossover trial', [1],
+    'During kimchi fermentation, microbes turn sugars into acids. The resulting sourness is one reason well-ripened kimchi gives fried rice such a distinct flavor.',
+    'Twenty-two adults with overweight or obesity ate fresh and fermented kimchi in separate four-week periods. Fasting glucose and blood pressure fell more during the fermented-kimchi period. The trial was small and the comparison lasted four weeks.',
+    'Choose the ripeness you like for fried rice and add the brine to taste. The trial compared kimchi preparations. It did not establish a benefit from stir-frying kimchi with rice.', ['kimchiCompare']],
+  quinoa: ['What did a study of cooked quinoa actually measure?', 'Pilot crossover trial', [1,5],
+    'Quinoa absorbs water as it cooks. When using nutrient tables, match your measurement to the cooked or dry entry. USDA lists about 5 g fiber in a 185 g cup of cooked quinoa.',
+    'In a small crossover study, healthy young women ate cooked quinoa and white bread on separate visits. At both amounts of available carbohydrate tested, quinoa produced a smaller blood-glucose rise over two hours. Both foods were served with butter.',
+    'This soup adds potato, peas and broth. Those ingredients and the amount of quinoa in each bowl change how closely it resembles the test meal.', ['quinoaPilot','quinoaServing']],
   soy: ['How much protein is in firm tofu?', 'Food composition', [5],
     'Tofu is made by coagulating soy milk into curds. Pressing removes some of the water. Different preparations can have different amounts of water and protein per gram.',
     'Two USDA entries for firm tofu list 17.27 g and 9.04 g protein per 100 g. Their ingredient and preparation descriptions differ. Both numbers describe particular foods in the database.',
@@ -93,6 +114,16 @@ const NOTES = {
   iron:['Peppers, citrus & plant iron','Nutrient physiology',[5],'Vitamin C improves absorption of nonheme iron in a meal. Lentils and spinach contain this form. Meat such as steak supplies both heme and nonheme iron.','NIH lists about 95 mg vitamin C in half a cup of raw red sweet pepper. The amount in a squeeze of lemon depends on its size. Iron absorption also depends on iron status and the rest of the meal.','Pair lentils with sliced bell pepper, broccoli or lemon. Keep onions and garlic for flavor.',['iron','c']],
   banana:['Bananas & potatoes','Food composition',[5],'Potassium is an electrolyte involved in nerve and muscle function. The foods around it also supply water, carbohydrate and other nutrients.','NIH lists roughly 422 mg in a medium banana and 610 mg in the flesh of a medium baked potato. Those are composition values. Individual sweat losses and hydration needs vary.','Slice banana into yogurt, or eat a potato with dinner. Added sea salt and coconut water are optional recipe ingredients.',['k','fdc']],
   cinnamon:['Cinnamon','Recipe untested',[1,4],'Cinnamon adds aroma and can make a drink taste sweeter without increasing its sugar. Cassia contains variable amounts of coumarin.','NIH finds inconsistent evidence for cinnamon supplements as a diabetes intervention. A pinch in a warm drink cannot be assigned a blood-glucose effect.','Use a pinch of ground cinnamon on oats or in warm milk. Avoid making concentrated cassia doses a daily routine, especially with liver disease.',['cinnamon']]
+};
+// Short notes shown when a dish is saved. The full note supplies the study context.
+const MEAL_LESSONS = {
+  lentilRice: ['Lentils', 'In 24 healthy adults, using lentils for half the available carbohydrate in a rice meal lowered the two-hour glucose response by about 20% on average. The proportion was measured by carbohydrate weight.'],
+  beans: ['Beans', 'A three-month trial in adults with type 2 diabetes studied a whole eating pattern that included a daily cup of legumes. Its blood-sugar result cannot be assigned to one serving of tacos.'],
+  soy: ['Tofu', 'Two USDA entries for firm tofu range from about 9 to 17 g of protein per 100 g. Your package label is the best guide to the tofu in this bowl.'],
+  tomatoCooking: ['Tomatoes', 'People absorbed more lycopene from tomato paste than from fresh tomatoes in a feeding study with equal lycopene and added oil. This skillet uses diced tomatoes, a different preparation.'],
+  groundnuts: ['Peanuts', 'Two tablespoons of smooth unsalted peanut butter supply about 7 g of protein in the USDA record. That is roughly the peanut butter in one bowl of this soup.'],
+  kimchi: ['Kimchi', 'In a small trial, fasting glucose fell more after four weeks of fermented kimchi than after fresh kimchi. Whether a serving of kimchi fried rice has that effect is unknown.'],
+  quinoa: ['Quinoa', 'In a small feeding study, cooked quinoa produced a smaller two-hour glucose rise than white bread with the same available carbohydrate. This potato-and-quinoa soup was not tested.']
 };
 const PLACES = [
   {name:'Canada',label:'Québec',lon:-71.2,lat:46.8,note:'maple',headline:'Maple syrup in Québec',source:'maple'},

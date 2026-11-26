@@ -60,6 +60,25 @@ test('recipes have stable unique IDs, usable instructions and valid evidence lin
   assert.deepEqual(grouped, ids, 'Goal filters and recipes must cover the same IDs');
 });
 
+test('traditional dish names lead to the same dishes and sourced planner lessons', () => {
+  const { DISHES, MEAL_LESSONS, filterDishes, plannedDish } = vm.runInContext(
+    '({ DISHES, MEAL_LESSONS, filterDishes, plannedDish })', context);
+  const searches = {'mujaddara':'mujadara', 'nkate nkwan':'groundnut-soup',
+    '김치볶음밥':'kimchi-fried-rice', 'sopa de quínua':'sopa-de-quinua'};
+  for (const [query, id] of Object.entries(searches)) {
+    const matches = filterDishes(DISHES, query, '', 0);
+    assert.equal(matches.length, 1, query);
+    const dish = matches[0];
+    assert.equal(dish.id, id);
+    assert.equal(plannedDish(dish.name).id, id);
+    assert.equal(new URL(dish.tradition.url).protocol, 'https:');
+    assert.ok(MEAL_LESSONS[dish.foodNote], id);
+  }
+  for (const [key, [food, finding]] of Object.entries(MEAL_LESSONS)) {
+    assert.ok(food.trim() && finding.trim() && NOTES[key]?.[6]?.length, key);
+  }
+});
+
 test('each food note links to a source and each source has an HTTPS URL', () => {
   for (const [id, note] of Object.entries(NOTES)) {
     assert.ok(note[6].length > 0, 'Missing sources for ' + id);

@@ -41,14 +41,19 @@ function mealPicker(dish) {
   for (const name of ['Lunch', 'Dinner']) meal.add(new Option(name, name.toLowerCase()));
   dayLabel.append(day);
   mealLabel.append(meal);
-  const result = node('p', '', 'quiet');
+  const result = node('div', '', 'meal-feedback');
+  result.id = 'dish-save-feedback';
   result.setAttribute('role', 'status');
+  for (const select of [day, meal]) select.addEventListener('change', () => result.replaceChildren());
   const add = action('Set meal', () => {
     const date = addDays(displayedMonday, Number(day.value));
     const field = byId(calendarKey(date) + '-' + meal.value);
     field.value = dish.name;
     field.dispatchEvent(new Event('input'));
-    result.textContent = shortDateFormat.format(date) + ' ' + meal.value + ' · ' + dish.name + '. ' + byId('planner-status').textContent;
+    const receipt = shortDateFormat.format(date) + ' ' + meal.value + ' · ' + dish.name + '. ' + byId('planner-status').textContent;
+    result.replaceChildren(node('p', receipt));
+    const lesson = ingredientLesson(dish);
+    if (lesson) result.append(lesson);
   }, 'dark-button');
   picker.append(dayLabel, mealLabel, add, result);
   return picker;
@@ -81,8 +86,10 @@ function openDish(dish, moveFocus = true) {
   const instructions = node('div', undefined, 'recipe-columns');
   instructions.append(left, right);
   const citation = link('Link to this recipe', '?dish=' + encodeURIComponent(dish.id) + '#dish-detail');
+  const credit = node('p', dish.credit, 'dish-credit');
+  if (dish.tradition) credit.append(' ', link(dish.tradition.label, dish.tradition.url));
   dishDetail.replaceChildren(node('p', dish.style + ' · ' + dish.time + ' · serves ' + dish.serves, 'eyebrow'),
-    header, node('p', dish.credit, 'dish-credit'), instructions, node('h4','Plan this dish'),
+    header, credit, instructions, node('h4','Plan this dish'),
     mealPicker(dish), citation);
   dishDetail.hidden = false;
   if (moveFocus) heading.focus();

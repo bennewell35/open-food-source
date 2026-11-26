@@ -30,6 +30,8 @@ Keep existing recipe IDs stable so older saved plans still open. Reference third
 
 For a dish, supply the total time in minutes as well as the display text, including any assumption such as having cooked rice ready. Include one visible cue for doneness and a practical swap when possible. Dish illustrations and linked food notes are optional. Use a note only when the sources actually speak to that food.
 
+For a sourced ingredient lesson, add a short entry to `MEAL_LESSONS` in `research.js`, keyed to the dish’s `foodNote`. Say what was measured and how the study food or portion compares with the dish. Readers see that text and its sources when they save a meal and when they reopen the day. For a culinary reference, use the dish’s `tradition` field to credit the cook or publication separately.
+
 Run `node --test` (Node 20 or later), then start the site using the [README](README.md). Select your recipe through its goal filter, open its sources, add it to a day in a test browser and reload. For a weekly-map change, also check the food row in a narrow window and navigate to the lesson using the keyboard.
 
 Open a pull request describing the finding or behavior, the files changed and what you verified. By contributing original work you agree to offer it under the project’s [MIT License](LICENSE).

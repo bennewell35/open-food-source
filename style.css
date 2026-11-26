@@ -93,6 +93,10 @@ dialog{color:var(--ink);border:1px solid #bcc4b5;border-radius:5px;padding:clamp
 .recipe-columns ul,.recipe-columns ol{padding-left:1.35rem}.recipe-columns li+li{margin-top:.45rem}.recipe-columns h4{margin:1rem 0 .4rem}
 .recipe-columns .text-button{margin-top:.65rem}.dish-picker{display:flex;gap:.65rem;align-items:end;flex-wrap:wrap;margin:.5rem 0 .85rem}
 .dish-picker [role=status]:not(:empty){width:100%}
+.meal-feedback:empty{display:none}
+.ingredient-lesson{margin:.65rem 0;padding:.85rem 1rem;border-left:3px solid #697b50;background:#edf0e5;color:var(--ink)}
+.ingredient-lesson strong{display:block;font-family:var(--serif);font-size:1.3rem;font-weight:400}
+.ingredient-lesson p{max-width:65ch;margin:.25rem 0;font-size:.94rem}.ingredient-lesson .sources-inline{margin-top:.4rem}
 @media(max-width:900px){.dish-list{grid-template-columns:repeat(2,minmax(0,1fr))}.mast-inner{flex-wrap:wrap;padding-block:.65rem}.mast nav{flex-wrap:wrap;gap:.15rem .85rem}}
 @media(max-width:680px){.dish-filters{grid-template-columns:1fr 1fr;gap:.65rem}.dish-filters label:first-child{grid-column:1/-1}.recipe-columns{grid-template-columns:1fr}.dish-caption{padding:.7rem}.dish-tile .eyebrow{font-size:.64rem}.dish-tile strong{font-size:1.45rem}}
 @media(max-width:410px){.dish-filters{grid-template-columns:1fr}.dish-filters label:first-child{grid-column:auto}.dish-list{gap:.6rem}.dish-yield{font-size:.78rem}}

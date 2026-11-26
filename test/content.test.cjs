@@ -47,9 +47,12 @@ test('recipes have stable unique IDs, usable instructions and valid evidence lin
     assert.match(recipe.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     assert.ok(!ids.has(recipe.id), 'Duplicate recipe: ' + recipe.id);
     ids.add(recipe.id);
-    for (const field of ['name', 'time', 'method', 'reason']) {
+    for (const field of ['name', 'time', 'equipment', 'method', 'reason']) {
       assert.ok(recipe[field]?.trim(), recipe.id + ' needs ' + field);
     }
+    assert.ok(Number.isInteger(recipe.minutes) && recipe.minutes > 0, recipe.id + ' needs filterable minutes');
+    assert.ok(recipe.steps.length && recipe.steps.every(step => step.trim()), recipe.id + ' needs directions');
+    assert.equal(recipe.steps.join(' '), recipe.method, recipe.id + ' has conflicting directions');
     assert.ok(recipe.ingredients.length > 0 && recipe.ingredients.every(item => item.trim()));
     assert.ok(NOTES[recipe.note], 'Missing food note for ' + recipe.id);
     assert.ok(drinkQueries[recipe.id]?.trim(), 'Missing PubMed query for ' + recipe.id);

@@ -1,0 +1,203 @@
+:root {
+  --kitchen-target: max(48px, 3rem);
+  --kitchen-radius: 4px;
+}
+.kitchen-mast {
+  position: relative;
+  z-index: 2;
+}
+.kitchen-mast .mast-inner { padding-block: .3rem; }
+.kitchen-mast nav { gap: clamp(.5rem, 2vw, 1.55rem); }
+.kitchen-mast :is(.wordmark, nav a, summary),
+.daily :is(button, input, select, .inline),
+.region-section :is(button, select, summary),
+#daily-reader :is(button, select, summary) { min-height: var(--kitchen-target); }
+.kitchen-mast nav a, #kitchen-menu summary {
+  padding-inline: .3rem;
+  font: 600 .92rem/1.25 var(--sans);
+}
+#kitchen-menu { position: relative; }
+#kitchen-menu summary { display: flex; align-items: center; gap: .55rem; list-style: none; }
+#kitchen-menu summary::-webkit-details-marker { display: none; }
+#kitchen-menu summary::after {
+  content: ""; width: .47rem; height: .47rem; border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0; transform: translateY(-.12rem) rotate(45deg);
+}
+#kitchen-menu[open] summary::after { transform: translateY(.12rem) rotate(225deg); }
+#kitchen-menu > div {
+  position: absolute; top: 100%; right: 0; z-index: 4; width: max-content;
+  max-width: min(20rem, 88vw); padding: .35rem .65rem; border: 1px solid var(--line);
+  border-radius: var(--kitchen-radius); background: var(--paper); box-shadow: 0 8px 20px #1d382c1c;
+}
+#kitchen-menu > div a + a { border-top: 1px solid var(--line); }
+
+.daily { background: #f6f4e9; border-bottom: 1px solid var(--line); }
+.daily-inner { padding-block: clamp(1.65rem, 4.5vw, 4.25rem) clamp(2rem, 4vw, 3.75rem); }
+.daily-heading, .daily-toolbar, .daily-foot, .region-title, .reader-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: .5rem 1rem;
+}
+.daily-heading { align-items: end; }
+.daily-heading h1 {
+  margin: .35rem 0 0; font-size: clamp(3.4rem, 6.2vw, 6.1rem);
+  line-height: 1; letter-spacing: -.043em; text-wrap: balance;
+}
+.daily-heading .inline { flex-shrink: 0; }
+.daily-controls, .region-filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(11rem, .85fr); gap: 1rem; }
+.daily-controls { margin-top: clamp(1.25rem, 2.6vw, 2.15rem); }
+.daily-controls label, .region-filters label {
+  min-width: 0; display: grid; align-content: start; gap: .35rem; font-size: .9rem; font-weight: 700;
+}
+.daily-controls :is(input, select), .region-filters select {
+  width: 100%; min-width: 0; margin: 0; border: 1px solid #899789; background-color: #fffef8;
+  padding: .65rem .85rem; font-size: 1rem; font-weight: 400;
+}
+.daily-controls select, .region-filters select { padding-inline-end: 2.25rem; }
+.daily-toolbar { margin-top: .85rem; gap: .5rem; }
+.k-tabs { display: inline-flex; max-width: 100%; flex-wrap: wrap; align-items: stretch; }
+.k-tabs button, .k-outline {
+  border: 1px solid #879781; padding: .55rem .9rem; font-weight: 600; font-size: .9rem;
+  line-height: 1.3; background: var(--paper); color: var(--ink);
+}
+.k-tabs button { min-width: var(--kitchen-target); }
+.k-tabs button + button { margin-inline-start: -1px; }
+.k-tabs button:first-child { border-radius: 4px 0 0 4px; }
+.k-tabs button:last-child { border-radius: 0 4px 4px 0; }
+.k-tabs button:focus-visible { position: relative; z-index: 1; }
+.k-outline { border-radius: var(--kitchen-radius); }
+.k-tabs [aria-pressed="true"], .k-outline[aria-pressed="true"] { color: #fffdf5; background: var(--dark); border-color: var(--dark); }
+.daily-count { margin: 1.25rem 0 .55rem; font-size: .92rem; font-weight: 600; color: var(--soft); }
+.daily-results { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.65rem, 1.6vw, 1.4rem); }
+.daily-tile {
+  display: flex; flex-direction: column; align-items: stretch; min-width: 0; padding: 0;
+  border: 1px solid var(--line); border-radius: var(--kitchen-radius); overflow: hidden; background: #fffdf6; text-align: left;
+}
+.daily-tile img { display: block; width: 100%; height: auto; aspect-ratio: 1.9; object-fit: cover; }
+.daily-caption {
+  display: flex; flex-direction: column; align-items: start; justify-content: center;
+  min-width: 0; gap: .3rem; padding: clamp(.75rem, 1.45vw, 1.2rem);
+}
+.daily-meta { color: var(--copper); font: 700 .8rem/1.4 var(--sans); }
+.daily-caption strong { font: 400 clamp(1.55rem, 2.35vw, 2.2rem)/1.08 var(--serif); letter-spacing: -.018em; overflow-wrap: anywhere; }
+.daily-origin { color: var(--soft); font-size: .85rem; line-height: 1.35; }
+.daily-tile:not(:has(img)) { justify-content: center; background: #eaf0e4; border-top: 3px solid #7b8c70; }
+.daily-foot { justify-content: flex-start; gap: 1rem; margin-top: .85rem; }
+.daily-foot:not(:has(button:not([hidden]))), #daily-status:empty, #reader-status:empty { display: none; }
+#daily-status { margin-top: .8rem; }
+
+.region-section { border-bottom: 1px solid var(--line); }
+.region-filters { max-width: 40rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#region-count { margin: .45rem 0 1.15rem; color: var(--soft); font-size: .87rem; }
+#region-card { background: #f5f3e8; border: 1px solid var(--line); border-radius: var(--kitchen-radius); padding: clamp(1rem, 2.6vw, 2rem); }
+.region-title { align-items: baseline; }
+.region-title h3 { font-size: clamp(2.25rem, 4vw, 3.55rem); }
+.region-title a, .region-stat a { display: inline-flex; align-items: center; min-height: var(--kitchen-target); font-size: .88rem; font-weight: 600; }
+.region-stats, #region-recipes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.8rem, 2.5vw, 2.5rem); }
+.region-stats { margin-top: .7rem; }
+.region-stat { border-top: 1px solid #a9b5a5; padding-top: .8rem; }
+.region-stat h4 { font: 700 .85rem/1.4 var(--sans); color: var(--soft); }
+.region-stat strong { display: block; margin: .3rem 0; font: 400 clamp(1.65rem, 2.7vw, 2.45rem)/1.12 var(--serif); }
+.region-stat p, .region-reading p { max-width: 65ch; font-size: .95rem; color: var(--soft); }
+.region-summary { margin-top: .6rem; padding: .7rem .9rem; border-left: 3px solid #81936f; background: var(--sage); }
+.region-reading { margin-top: .3rem; }
+.region-reading summary { padding: .75rem 0; font-size: .92rem; font-weight: 600; }
+.region-reading p + p { margin-top: .55rem; }
+#region-recipes { margin-top: 1.55rem; }
+.region-picks, .region-pick { min-width: 0; }
+.region-picks h3 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin-bottom: .65rem; }
+.region-pick { border-top: 1px solid var(--line); padding-block: .2rem .65rem; }
+.regional-recipe {
+  display: block; width: 100%; padding: .65rem 0 .12rem; color: var(--ink);
+  font: 600 1.04rem/1.35 var(--sans); text-align: left; text-decoration: underline; text-underline-offset: .21em;
+}
+.region-pick > span { display: block; color: var(--soft); font-size: .86rem; }
+
+#daily-reader {
+  background: var(--paper); width: min(56rem, calc(100% - 2rem)); max-width: 100%;
+  max-height: min(92vh, 62rem); max-height: min(92dvh, 62rem);
+  margin: auto; padding: 0; overscroll-behavior: contain; overflow-y: auto; overflow-wrap: anywhere;
+}
+.reader-toolbar {
+  position: sticky; top: 0; z-index: 1; justify-content: space-between; padding: .55rem clamp(.85rem, 2vw, 1.5rem);
+  background: var(--paper); border-bottom: 1px solid var(--line);
+}
+#reader-content { padding: clamp(.9rem, 2.4vw, 1.8rem); }
+#reader-status:not(:empty) { margin: .65rem 1rem 0; }
+#reader-content :is(#dish-detail, .recipe-card, .drink-planning) { margin-top: 0; padding: 0; border: 0; background: transparent; min-width: 0; }
+#reader-content .recipe-columns { grid-template-columns: minmax(0, .8fr) minmax(0, 1.35fr); }
+#reader-content :is(ul, ol) { padding-inline-start: 1.45rem; }
+#reader-content li + li { margin-top: .45rem; }
+#reader-content ol li::marker { color: var(--copper); font-weight: 700; }
+#reader-content .drink-planning { margin-top: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; color: var(--ink); }
+#reader-content .drink-planning button { background: var(--dark); color: white; }
+#reader-content :is(.recipe-card, .dish-credit, .study-note, .drink-planning) a { overflow-wrap: anywhere; }
+#reader-content select { max-width: 100%; }
+
+@media (hover: hover) {
+  .daily-tile:hover { border-color: #566d51; }
+  .daily-tile:hover strong, .regional-recipe:hover, #kitchen-menu summary:hover { color: var(--copper); text-decoration: underline; }
+  .k-tabs button:not([aria-pressed="true"]):hover, .k-outline:not([aria-pressed="true"]):hover { background: var(--sage); }
+}
+@media (max-width: 60rem) {
+  .daily-results { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 47rem) {
+  .daily-results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kitchen-mast .mast-inner { gap: .15rem .8rem; }
+  .kitchen-mast nav { gap: .15rem .6rem; }
+  .region-stats, #region-recipes, #reader-content .recipe-columns { grid-template-columns: minmax(0, 1fr); }
+  .region-stats { gap: .3rem; }
+}
+@media (max-width: 36rem) {
+  .kitchen-mast .mast-inner { display: block; padding-block: .15rem; }
+  .kitchen-mast .wordmark { font-size: 1.8rem; }
+  .kitchen-mast nav { position: relative; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 0 .25rem; }
+  #kitchen-menu { position: static; }
+  #kitchen-menu > div { inset-inline: 0; width: auto; max-width: none; }
+  .kitchen-mast nav a, #kitchen-menu summary { padding-inline: .1rem; font-size: .87rem; }
+  .daily-heading { gap: .25rem; }
+  .daily-heading h1 { font-size: clamp(2.9rem, 10vw, 3.4rem); }
+  .daily-heading .inline { padding: 0; }
+  .daily-controls { grid-template-columns: minmax(0, 1fr); gap: .6rem; margin-top: .65rem; }
+  .k-tabs button, .k-outline { padding-inline: .7rem; }
+  .daily-toolbar { align-items: stretch; }
+  .daily-caption { padding: .7rem; }
+  .daily-caption strong { font-size: 1.5rem; }
+  .daily-meta, .daily-origin { font-size: .78rem; }
+  #daily-reader {
+    width: 100%; height: 100%; max-height: 100vh; max-height: 100dvh; border: none; border-radius: 0;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  #reader-content :is(.dish-picker, .drink-planning) { align-items: stretch; }
+  #reader-content .dish-picker label { flex: 1 1 6rem; min-width: 0; }
+  #reader-content .dish-picker button { flex-basis: 100%; }
+}
+@media (max-width: 22rem) {
+  .daily-results, .region-filters { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.daily, .region-section, #daily-reader, .kitchen-mast) * { scroll-behavior: auto; animation: none; transition: none; }
+}
+
+@media (max-height: 30rem) {
+  .reader-toolbar { position: static; }
+}
+#daily-reader { scroll-padding-top: 5.5rem; }
+
+@media (max-width: 42rem) {
+  footer > .wrap { flex-wrap: wrap; justify-content: flex-start; }
+  footer .wordmark, .kitchen-mast .wordmark { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+  #pantry .plot-head label, #pantry .plot-head select { min-width: 0; width: 100%; }
+  #pantry .nutri-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 6.5rem), 1fr));
+  }
+  #pantry .nutrients, #pantry .nutri-item, .region-title h3 { min-width: 0; overflow-wrap: anywhere; }
+  #cookbook .dish-list {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+  }
+  #cookbook .dish-caption { min-width: 0; overflow-wrap: anywhere; }
+  #atlas .switch { max-width: 100%; flex-wrap: wrap; }
+  #atlas .switch button { flex: 1 1 6.5rem; }
+  #planner #food-matrix { position: relative; max-width: 100%; overflow-x: auto; }
+  #planner .food-matrix-table { min-width: 17rem; }
+}

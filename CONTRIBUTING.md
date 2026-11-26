@@ -8,6 +8,8 @@ Use the [community recipe form](https://github.com/bennewell35/open-food-source/
 
 For the cold-season collection, tell us what makes the recipe practical on a sick day. A soft texture, a short hands-on time or a broth you can make from the pantry are all useful details. If you describe a health effect, tell us whether the evidence concerns symptom relief, illness duration or prevention. A family tradition and a cooking tip are welcome on their own.
 
+For a regional recipe, name the state, describe its connection to the dish and link the cook, community or publication you learned from. A family adaptation can appear alongside a survey favorite with credit even when the survey studied a different version.
+
 ## Suggest a finding
 
 1. Open a [study or correction issue](https://github.com/bennewell35/open-food-source/issues/new?template=study-or-recipe.md). For a clinical finding, link the original human study. Give the number of people enrolled and analyzed when they differ, the preparation and dose, the timing, and the comparison group.
@@ -15,6 +17,8 @@ For the cold-season collection, tell us what makes the recipe practical on a sic
 3. Explain how the recipe differs from the trial. Include quantities, yield and preparation in your own words. Identify untested changes such as dilution, a single serving, switching from juice to concentrate, or starting after exercise.
 
 For the cherry cooler, the relay finish-line pain score and next-day marathon soreness belong on separate lines of evidence. Papers that measured only strength or an inflammatory marker cannot answer the soreness question by themselves.
+
+For a state-data correction, use the same study or correction issue. Include the state, publisher’s table or map, date, population and exact measure. Preserve ties. A grocery category with a high state share relative to national sales can differ from that state’s overall best seller.
 
 ## Work in your fork
 
@@ -25,12 +29,16 @@ For the cherry cooler, the relay finish-line pain score and next-day marathon so
 | `research.js` | Citations in `SOURCES` and interpretations in `NOTES` |
 | `dishes.js` | Community dishes, servings, methods and credit. New styles appear automatically from the dish records. |
 | `recipes.js` | Kitchen portions, method, evidence limits, source keys, goal categories and PubMed query |
+| `regional-data.js` | Published state results, dates, populations, limits and source links in `REGIONAL_SOURCES` |
+| `regions.js` | State selection, counted favorites and the cookbook recipes that match each survey side |
 | `weekly-map.js` | Food matching, weekly lessons and suggested applications |
 | `planner.js` | The sample menu, calendar and browser-local storage |
 
 Keep existing dish names and drink IDs stable. The planner uses those values to reopen saved recipes. Existing recipe IDs also appear in shared links. Reference third-party papers with links and your own summary. Include a source and redistribution license for any new asset.
 
 For a dish, supply the total time in minutes as well as the display text, including any assumption such as having cooked rice ready. Include one visible cue for doneness and a practical swap when possible. Dish illustrations and linked food notes are optional. Use a note only when the sources actually speak to that food.
+
+Quick Kitchen uses numeric `minutes` for both dishes and drinks. Include setup time or state the starting condition, such as chilled ingredients. To suggest a recipe in the state explorer, use the full `state` name and its Census `region` on the recipe record. Add a `tradition` object with a descriptive `label` and direct source `url`. The Maine chowder in `dishes.js` and Maine blueberry shake in `recipes.js` are examples. [Census region definitions](https://www.census.gov/programs-surveys/economic-census/guidance-geographies/levels.html)
 
 Set `coldSeason: true` on a dish or drink to include it in the cold-season collection. For a dish, add a `coldSeasonTip` with one practical adjustment, such as how to loosen thick porridge with broth.
 
@@ -56,6 +64,10 @@ python3 -m http.server 8000 --bind 127.0.0.1
 Open the [local site](http://127.0.0.1:8000/) in a fresh browser profile or private window. Find your dish in the cookbook or your drink in the kitchen. Check the ingredients, amounts and directions and open each source you added. Save the recipe to a day, reload, and confirm the same recipe appears on that day. For a cold-season submission, check that it also appears in the collection. Press Ctrl+C in the terminal to stop the preview.
 
 For a pantry submission, try its staple and sugar selections in the [local picker](http://127.0.0.1:8000/#pantry-picker). Leave one required staple unchecked, then check it and confirm the dish moves into the matches. For a zero-sugar option, compare each linked USDA food with the corresponding ingredient.
+
+For a regional change, open the state’s share link, refresh it and compare both results with the publishers’ tables. Check the recipe’s state credit, including when it appears as a suggestion in another state in the same region. For a Quick Kitchen recipe, try the time filter, open its directions, save it and find it again after reloading.
+
+For interface work, use `kitchen.css` for new kitchen components. Reuse the shared sizing tokens and the typography and color variables from `style.css`, including `--sans`, `--serif`, `--ink` and `--paper`. Keep source links next to the claim they support. Try the changed path on a phone-width screen and with enlarged text. Confirm that long ingredient names wrap, controls have room to tap, and the recipe reader opens and closes by keyboard with focus returning to the control that opened it.
 
 ## Send your edit
 

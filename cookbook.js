@@ -31,7 +31,7 @@ function dishCard(dish) {
   return button;
 }
 
-function mealPicker(dish) {
+function mealPicker(dish, fromReader = false) {
   const picker = node('div', undefined, 'dish-picker');
   const day = node('select');
   const meal = node('select');
@@ -40,10 +40,11 @@ function mealPicker(dish) {
   mapDays.forEach((name, i) => day.add(new Option(name, String(i))));
   for (const name of ['Breakfast', 'Lunch', 'Dinner']) meal.add(new Option(name, name.toLowerCase()));
   meal.value = 'lunch';
+  if (fromReader) day.value = String(defaultPlanningDay());
   dayLabel.append(day);
   mealLabel.append(meal);
   const result = node('div', '', 'meal-feedback');
-  result.id = 'dish-save-feedback';
+  result.id = fromReader ? 'reader-meal-feedback' : 'dish-save-feedback';
   result.setAttribute('role', 'status');
   for (const select of [day, meal]) select.addEventListener('change', () => result.replaceChildren());
   const add = action('Set meal', () => {
@@ -60,40 +61,20 @@ function mealPicker(dish) {
   return picker;
 }
 
-function stepReader(steps, instructions) {
-  const box = node('div', undefined, 'step-reader');
-  const reading = node('div', undefined, 'step-reading');
-  reading.hidden = true;
-  const current = node('p');
-  current.setAttribute('role', 'status');
-  let index = 0;
-  function showStep() {
-    current.replaceChildren(node('strong', 'Step ' + (index + 1) + ' of ' + steps.length), ' ', steps[index]);
-    previous.disabled = index === 0;
-    next.disabled = index === steps.length - 1;
-  }
-  const previous = action('Previous step', () => { index--; showStep(); if (previous.disabled) next.focus(); });
-  const next = action('Next step', () => { index++; showStep(); if (next.disabled) previous.focus(); });
-  const toggle = action('Read one step at a time', () => {
-    reading.hidden = !reading.hidden;
-    instructions.hidden = !reading.hidden;
-    toggle.textContent = reading.hidden ? 'Read one step at a time' : 'Show all steps';
-    toggle.setAttribute('aria-expanded', String(!reading.hidden));
-    if (!reading.hidden) showStep();
-  }, 'text-button');
-  toggle.setAttribute('aria-expanded', 'false');
-  reading.append(current, previous, next);
-  box.append(toggle, reading, instructions);
-  return box;
-}
-
-function openDish(dish, moveFocus = true, collectionButton) {
+function openDish(dish, moveFocus = true, collectionButton, fromReader = false) {
   const fromPantry = Boolean(collectionButton?.closest('#pantry-picker'));
-  byId(fromPantry ? 'picker-detail-slot' : 'cookbook-detail-slot').append(dishDetail);
-  openDishId = dish.id;
+  const detail = fromReader ? byId('reader-content') : dishDetail;
+  if (fromReader) {
+    setReaderRecipe('dish', dish);
+  } else {
+    byId(fromPantry ? 'picker-detail-slot' : 'cookbook-detail-slot').append(detail);
+    openDishId = dish.id;
+  }
   const baseId = dish.baseId || dish.id;
-  for (const button of byId('dish-list').children) {
-    button.setAttribute('aria-expanded', String(button === (byId('tile-' + dish.id) || byId('tile-' + baseId))));
+  if (!fromReader) {
+    for (const button of byId('dish-list').children) {
+      button.setAttribute('aria-expanded', String(button === (byId('tile-' + dish.id) || byId('tile-' + baseId))));
+    }
   }
   const heading = node('h3', dish.name);
   heading.tabIndex = -1;
@@ -105,12 +86,14 @@ function openDish(dish, moveFocus = true, collectionButton) {
     opener?.focus();
   }, 'text-button');
   const header = node('div', undefined, 'detail-heading');
-  header.append(heading, back);
+  header.append(heading);
+  if (!fromReader) header.append(back);
   const ingredients = node('ul');
   ingredients.append(...dish.ingredients.map(text => node('li', text)));
   const steps = node('ol');
   steps.append(...dish.steps.map(text => node('li', text)));
   const left = node('div');
+  if (dish.equipment) left.append(node('h4', 'Equipment'), node('p', dish.equipment));
   left.append(node('h4','Ingredients'), ingredients);
   if (dish.pantry) {
     left.append(node('h4', 'Sugar in this recipe'), node('p', dish.pantry.sugarNote));
@@ -140,35 +123,36 @@ function openDish(dish, moveFocus = true, collectionButton) {
   const credit = node('p', dish.credit, 'dish-credit');
   if (dish.tradition) credit.append(' ', link(dish.tradition.label, dish.tradition.url));
   const origin = document.createDocumentFragment();
-  origin.append(credit);
+  if (!fromReader) origin.append(credit);
   if (dish.pantry && versionsFor(dish).length > 1) {
     const label = node('label', 'Customize this recipe', 'picker-version');
     const select = node('select');
-    select.id = 'dish-version';
+    select.id = fromReader ? 'reader-version' : 'dish-version';
     for (const v of versionsFor(dish)) select.add(new Option(v.name, v.id));
     select.value = dish.id;
     select.addEventListener('change', () => {
       const next = dishById(select.value);
-      const mealInputs = [...dishDetail.querySelectorAll('.dish-picker select')].map(el => el.value);
+      const mealInputs = [...detail.querySelectorAll('.dish-picker select')].map(el => el.value);
       rememberVersion(next, Boolean(choices.get(baseId)?.shop));
       drawShoppingList();
       drawPantryResults();
       const opener = fromPantry ? byId('pick-' + baseId) || byId('picker-use') : collectionButton;
-      openDish(next, false, opener);
-      dishDetail.querySelectorAll('.dish-picker select').forEach((el, i) => { el.value = mealInputs[i]; });
-      byId('dish-version').focus();
+      openDish(next, false, opener, fromReader);
+      detail.querySelectorAll('.dish-picker select').forEach((el, i) => { el.value = mealInputs[i]; });
+      detail.querySelector('.picker-version select').focus();
     });
     label.append(select);
     origin.append(label);
   }
-  dishDetail.replaceChildren(node('p', dish.style + ' · ' + dish.time + ' · serves ' + dish.serves, 'eyebrow'),
-    header, origin, instructions, node('h4','Plan this dish'),
-    mealPicker(dish), citation);
+  detail.replaceChildren(node('p', dish.style + ' · ' + dish.time + ' · serves ' + dish.serves, 'eyebrow'),
+    header, origin, instructions, ...(fromReader ? [credit] : []), node('h4','Plan this dish'),
+    ...(fromReader ? [node('p', byId('cookbook-week').textContent, 'quiet')] : []),
+    mealPicker(dish, fromReader), citation);
   if (dish.pantry) {
     const feedback = 'kitchen-check.html?recipe=' + encodeURIComponent(dish.id) + '#cook';
-    dishDetail.append(' · ', link('Share a kitchen note', feedback));
+    detail.append(' · ', link('Share a kitchen note', feedback));
   }
-  dishDetail.hidden = false;
+  detail.hidden = false;
   if (moveFocus) heading.focus();
 }
 

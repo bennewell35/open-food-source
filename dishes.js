@@ -311,6 +311,111 @@ const DISHES = [
     ],
     technique: 'Cutting the pieces to the same size helps the centers soften at the same time. Mash while the potatoes are still hot.',
     foodNote: 'fuel', foodLabel: 'How did potatoes compare with gels during a cycling trial?'
+  },
+  {
+    image: 'assets/maine-corn-chowder.webp',
+    id: 'maine-corn-chowder', name: 'Corn and potato chowder', style: 'Maine-inspired', region: 'Northeast', state: 'Maine',
+    time: '25 minutes', minutes: 25, serves: 2, equipment: 'Saucepan with lid, knife and fork',
+    credit: 'University of Maine Cooperative Extension pairs potato, onion and corn with milk in its Mainely Dish chowder. Here a forkful of mashed potato thickens a small pot.',
+    tradition: {label: 'University of Maine’s corn chowder', url: 'https://extension.umaine.edu/food-health/recipes/corn-chowder/'},
+    ingredients: ['1 medium russet potato (about 6 oz), peeled', '½ small onion', '1 teaspoon butter', '1 cup water', '1 cup frozen sweet corn kernels', '1 cup milk', 'Black pepper and salt to taste'],
+    steps: [
+      'Cut the potato into ½-inch cubes and finely chop the onion. Melt the butter in a saucepan over medium heat. Cook the onion for about 3 minutes, stirring until it begins to soften.',
+      'Add the potato and water. Cover, bring to a boil and turn down to a simmer. Cook for 8–10 minutes, until a fork goes through the cubes. Press about half the potato against the pan to thicken the liquid.',
+      'Stir in the frozen corn and milk. Warm gently for 4–5 minutes, stirring occasionally, until the corn is tender and the chowder is steaming. Season with pepper and salt.'
+    ],
+    technique: 'A few crushed potato cubes give the soup body. Keep the heat low once the milk goes in.',
+    foodNote: 'banana', foodLabel: 'What mineral do potatoes bring to the bowl?'
+  },
+  {
+    image: 'assets/wisconsin-apple-cheddar-toast.webp',
+    id: 'wisconsin-apple-cheddar-toast', name: 'Apple and cheddar skillet toast', style: 'Wisconsin-inspired', region: 'Midwest', state: 'Wisconsin',
+    time: '12 minutes', minutes: 12, serves: 2, equipment: 'Lidded skillet, knife and spatula',
+    credit: 'Wisconsin 724 Reserve puts aged cheddar, apple and onion in a grilled sandwich. This open-faced version uses thin apple slices under a layer of cheddar.',
+    tradition: {label: 'Wisconsin 724 Reserve’s apple and aged-cheddar sandwich', url: 'https://www.wi724reserve.com/Recipes-Pairings/Grilled-Cheese-with-Aged-Cheddar%2C-Apples-and-Caram'},
+    ingredients: ['2 substantial slices whole-grain bread', '1 teaspoon butter, softened', '½ crisp apple, cored', '2 oz sharp cheddar, thinly sliced'],
+    steps: [
+      'Cut the apple into thin half-moons. Spread a little butter over one side of each slice of bread and set the slices butter-side down in a cool skillet.',
+      'Arrange the apple in a single layer on the bread and cover it with the sliced cheese. Put on the lid and turn the heat to medium-low.',
+      'Check after 4 minutes. Once the cheese softens to the edges, lift a corner with a spatula. When the underside is golden, uncover for about a minute to crisp the toast, then serve.'
+    ],
+    technique: 'The lid holds in enough warmth to melt the cheddar while the bread browns underneath.',
+    foodNote: 'appleForm', foodLabel: 'What did a feeding study find about sliced apples?'
+  },
+  {
+    image: 'assets/texas-black-eyed-pea-salad.webp',
+    id: 'texas-black-eyed-pea-salad', name: 'Texas black-eyed pea salad', style: 'Texas-inspired', region: 'South', state: 'Texas',
+    aliases: ['Texas caviar', 'cowboy caviar'], time: '10 minutes', minutes: 10, serves: 2, equipment: 'Strainer, knife, bowl and fork',
+    credit: 'The Nourish Program at UTHealth Houston makes Texas caviar with black-eyed peas, greens and crunchy vegetables. Our small bowl keeps the peas and bell pepper and takes its tang from lime.',
+    tradition: {label: 'UTHealth Houston’s Texas caviar (PDF)', url: 'https://sph.uth.edu/research/centers/dell/prescription-for-healthy-living/Texas%20Caviar.pdf'},
+    ingredients: ['1 can (15 oz) black-eyed peas, rinsed and drained', '1 small red bell pepper', '1 scallion', '1 tablespoon lime juice', '2 teaspoons olive oil', '¼ teaspoon ground cumin', 'Salt to taste'],
+    steps: [
+      'Leave the rinsed peas in a strainer while you chop the vegetables. Dice the pepper into pea-size pieces and thinly slice the scallion.',
+      'Beat the lime juice, oil, cumin and a pinch of salt in a large bowl with a fork until cloudy. Add the peas, pepper and scallion.',
+      'Fold together gently until the vegetables glisten. Taste a pea with a piece of pepper, adjust the salt and serve right away.'
+    ],
+    technique: 'Drain the peas well so the dressing clings. Cutting the pepper small gives you crunch in every forkful.',
+    foodNote: 'beans', foodLabel: 'How can vitamin C in peppers help with iron from pulses?'
+  },
+  {
+    image: 'assets/oregon-salmon-cakes.webp',
+    id: 'oregon-salmon-cakes', name: 'Skillet salmon cakes with scallion', style: 'Oregon-inspired', region: 'West', state: 'Oregon',
+    time: '20 minutes', minutes: 20, serves: 2, equipment: 'Bowl, fork, large skillet, spatula and food thermometer',
+    credit: 'Oregon State University’s Food Hero combines canned salmon, bread and egg for pan-browned patties. This version uses cracker crumbs and scallion to make four thin cakes.',
+    tradition: {label: 'Oregon State Food Hero’s salmon patties', url: 'https://foodhero.org/recipes/salmon-patties'},
+    ingredients: ['1 can (14.75 oz) pink salmon, drained', '1 egg', '⅓ cup finely crushed plain crackers', '1 scallion, thinly sliced', '2 teaspoons lemon juice', '2 teaspoons neutral oil'],
+    steps: [
+      'Flake the salmon in a bowl, crushing any soft edible bones with a fork. Beat the egg in one side of the bowl. Fold in the cracker crumbs, scallion and lemon juice until the mixture holds together when pinched.',
+      'Divide into four portions and press each into a cake about ½ inch thick. Warm the oil in a large skillet over medium heat. Place the cakes in the pan with space between them.',
+      'Cook for 3–5 minutes per side. Slide a spatula underneath when a golden crust forms. Check the center of the thickest cake with a thermometer. Serve when it reaches 160°F (71°C).'
+    ],
+    technique: 'Press the edges together when shaping the cakes. A browned underside helps each one hold its shape as you turn it.',
+    foodNote: 'salmon', foodLabel: 'What does the USDA record for canned pink salmon show?'
+  },
+  {
+    image: 'assets/skillet-sage-stuffing.webp',
+    id: 'skillet-sage-stuffing', name: 'Skillet stuffing with celery and sage', style: 'American home cooking',
+    aliases: ['bread dressing'], time: '20 minutes', minutes: 20, serves: 2, equipment: 'Large lidded skillet, knife and spatula',
+    credit: 'PJ Hamel’s bread tests for King Arthur Baking describe how torn edges and dry bread affect stuffing. This egg-free skillet side starts with fresh whole-wheat bread and toasts it in the pan.',
+    tradition: {label: 'PJ Hamel’s bread tests for stuffing', url: 'https://www.kingarthurbaking.com/blog/2024/11/19/best-bread-for-stuffing'},
+    ingredients: ['3 cups loosely packed ½-inch pieces of whole-wheat bread (about 3–4 slices)', '1 celery stalk', '¼ small onion', '1 tablespoon butter', '½ teaspoon rubbed sage', '½ cup lower-sodium vegetable broth, plus more as needed'],
+    steps: [
+      'Tear the bread into pieces. Toast in a dry skillet over medium heat for 4–6 minutes, tossing, until the edges feel crisp. Tip onto a plate. Meanwhile, finely chop the celery and onion.',
+      'Melt the butter in the same pan. Add the celery and onion and cook for 4–5 minutes until soft. Stir in the sage, then pour in the broth and let it bubble.',
+      'Fold in the bread. Cover and cook over low heat for 2 minutes, until the centers are soft. Add broth a spoonful at a time if dry. Uncover, raise the heat to medium and cook another 2 minutes to crisp the bottom.'
+    ],
+    technique: 'Let the last layer sit undisturbed against the hot pan for a mix of crisp edges and tender bread.',
+    foodNote: 'fiber', foodLabel: 'How does whole-grain bread fit into a fiber-rich diet?'
+  },
+  {
+    image: 'assets/one-pot-cheddar-macaroni.webp',
+    id: 'one-pot-cheddar-macaroni', name: 'One-pot cheddar macaroni', style: 'American home cooking',
+    aliases: ['mac and cheese', 'macaroni and cheese'], time: '25 minutes', minutes: 25, serves: 2, equipment: 'Medium saucepan, grater and wooden spoon',
+    credit: 'Oregon State University’s Food Hero cooks its skillet macaroni with just enough water to leave starch in the pan. This two-bowl version loosens whole-wheat elbows with milk and melts cheddar off the heat.',
+    tradition: {label: 'Oregon State Food Hero’s skillet mac and cheese', url: 'https://foodhero.org/recipes/skillet-mac-and-cheese'},
+    ingredients: ['5 oz dry whole-wheat elbow macaroni', '2 cups water, plus more if needed', '½ cup milk', '3 oz sharp cheddar, freshly grated', '¼ teaspoon dry mustard, optional'],
+    steps: [
+      'Bring the water to a boil in a medium saucepan, stir in the elbows and bring back to a steady simmer. Stir often, especially along the bottom. Grate the cheddar while the pasta cooks.',
+      'Start tasting a noodle a minute before the shortest package time. Add a little water if the pan dries out before the pasta is tender. Once tender, spoon off excess water if needed, leaving about 2 tablespoons in the pan.',
+      'Add the milk and optional mustard. Stir over medium-low heat until steaming, then remove from the heat. Fold in the cheese in small handfuls. Let stand for a minute. The sauce should coat the elbows.'
+    ],
+    technique: 'Grating the cheese finely lets it melt in the residual heat of the pasta without boiling the sauce.',
+    foodNote: 'cheddar', foodLabel: 'How much calcium does cheddar contribute?'
+  },
+  {
+    image: 'assets/quick-sweet-potato-mash.webp',
+    id: 'quick-sweet-potato-mash', name: 'Quick sweet potato mash with cinnamon', style: 'American home cooking',
+    time: '15 minutes', minutes: 15, serves: 2, equipment: 'Microwave, microwave-safe plate, fork and bowl',
+    credit: 'Illinois Extension microwaves a sweet potato for its cinnamon breakfast bowl. This side uses the same fork-tender cue, then adds a little butter and warm water.',
+    tradition: {label: 'Illinois Extension’s sweet potato breakfast bowl', url: 'https://extension.illinois.edu/lmw/recipes/sweet-potato-breakfast-bowl'},
+    ingredients: ['1 large orange-fleshed sweet potato (about 10 oz)', '1 teaspoon butter', 'Pinch of ground cinnamon', '1–2 tablespoons warm water', 'Pinch of salt, optional'],
+    steps: [
+      'Scrub the sweet potato, pierce the skin several times with a fork and place it on a microwave-safe plate. Microwave on high for 4 minutes, then carefully turn it over.',
+      'Microwave for 2 minutes more. Continue in 1-minute bursts until a fork slides easily into the thick center. Rest for 2 minutes, then split it open, letting the steam escape away from your face.',
+      'Scoop the flesh into a bowl. Mash with the butter and cinnamon, adding warm water a spoonful at a time until the texture suits you. Taste and salt if you like.'
+    ],
+    technique: 'Piercing lets steam escape. Cooking time varies with the size of the potato and the power of the microwave.',
+    foodNote: 'sweetPotato', foodLabel: 'Why is an orange sweet potato rich in vitamin A activity?'
   }
 ];
 

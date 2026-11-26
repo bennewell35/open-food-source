@@ -2,6 +2,9 @@
 const pub = id => 'https://pubmed.ncbi.nlm.nih.gov/' + id + '/';
 const ods = name => 'https://ods.od.nih.gov/factsheets/' + name + '-HealthProfessional/';
 const SOURCES = {
+  pinkSalmon: ['USDA · SR Legacy 175175', 'Pink salmon, canned, drained solids', 'Food composition', 'https://fdc.nal.usda.gov/food-details/175175/nutrients'],
+  cheddar: ['USDA · SR Legacy 173414', 'Cheddar cheese, calcium and protein', 'Food composition', 'https://fdc.nal.usda.gov/food-details/173414/nutrients'],
+  bakedSweetPotato: ['USDA · SR Legacy 168483', 'Orange sweet potato, baked flesh without salt', 'Food composition', 'https://fdc.nal.usda.gov/food-details/168483/nutrients'],
   potatoRide: ['Salvador et al. · 2019', 'Potato purée, carbohydrate gel and water during a two-hour ride', 'Randomized crossover trial', pub(31622159)],
   sportCarbs: ['Australian Institute of Sport', 'Carbohydrate needs during exercise of different durations', 'Sports nutrition guidance', 'https://www.ausport.gov.au/ais/nutrition/supplements/group_a/sports-foods2/sports-drink'],
   addedSugar: ['U.S. Food and Drug Administration', 'Reading total and added sugars on a U.S. food label', 'Label guidance', 'https://www.fda.gov/food/nutrition-facts-label/added-sugars-nutrition-facts-label'],
@@ -90,6 +93,22 @@ const PANTRY_GUIDES = {
 };
 // Title, evidence type, outcome groups, biology, human finding, kitchen use, source keys.
 const NOTES = {
+  appleForm: ['Whole apples, applesauce and juice', 'Crossover feeding study', [5],
+    'Intact apple slices take chewing. Food form can affect how full people feel even at the same weight and energy.',
+    'On separate visits, 58 adults ate peeled apple segments, applesauce, juice, juice with added fiber, or no starter before lunch. People felt fuller after the segments and ate less total energy at that lunch than after either juice or applesauce.',
+    'Slice an apple onto toast for crunch. The study served a portion of apple before a test lunch. It did not test an apple-and-cheese sandwich.', ['appleForm']],
+  salmon: ['Canned pink salmon', 'Food composition', [5],
+    'Pink salmon supplies protein. Canned fish may also contain soft bones you can mash. Check the label if you need to know whether the bones were removed.',
+    'USDA’s reference entry for drained canned pink salmon lists about 23 g protein per 100 g. That describes the fish alone. The weight of a finished patty also includes its crumbs and egg.',
+    'Drain the can before weighing a portion. Flake with a fork to distribute the salmon evenly through each cake.', ['pinkSalmon']],
+  cheddar: ['Cheddar cheese and calcium', 'Food composition', [5],
+    'Cheddar supplies calcium, a mineral used in bones and teeth. The quantity on the plate depends on how much cheese goes into each serving.',
+    'USDA’s cheddar reference lists 710 mg of calcium per 100 g. That works out to about 200 mg in a 1 oz portion. Cheddar products and serving sizes vary.',
+    'Grate the cheese before adding it to warm pasta so it melts evenly. For the cheese in your kitchen, use its own label and the weight you add.', ['cheddar']],
+  sweetPotato: ['Orange sweet potato and vitamin A', 'Food composition', [5],
+    'Orange sweet potato contains beta-carotene, which the body can use to make vitamin A. Vitamin A supports vision and normal immune function.',
+    'USDA lists 961 micrograms of vitamin A activity, measured in retinol activity equivalents, per 100 g of baked sweet potato flesh. The cooking method and variety matter. The microwave mash has not been analyzed.',
+    'Look for orange flesh when you want the color and beta-carotene in this recipe.', ['bakedSweetPotato','a']],
   sugarAttention: ['What did sugar studies measure in children?', 'Blinded diet and acute feeding studies', [3],
     'Researchers have measured behavior at home and school and attention on timed tests. These outcomes can give different answers, especially when a study lasts only a few hours.',
     'In a blinded trial, 23 children aged 6–10 whose parents described them as sensitive to sugar tried three diets, each for three weeks. Behavior and cognitive scores showed no clear difference across diets. In a separate experiment, 17 children with attention deficit disorder with hyperactivity showed greater inattention on one task after a sugary drink. Aggressive behavior showed no clear change.',
@@ -169,6 +188,12 @@ const NOTES = {
 };
 // Short notes shown when a dish is saved. The full note supplies the study context.
 const MEAL_LESSONS = {
+  appleForm: ['Apple', 'In a feeding study with 58 adults, apple segments before lunch led to greater fullness than an equal-energy serving of applesauce or juice. The researchers tested the food forms as starters.'],
+  salmon: ['Salmon', 'USDA lists about 23 g of protein per 100 g of drained canned pink salmon. Draining and weighing the fish gives you a closer estimate than using the weight printed on the front of the can.'],
+  cheddar: ['Cheddar', 'One ounce of cheddar contributes about 200 mg calcium using the USDA reference. The quantity of cheese in your own portion determines how much it supplies.'],
+  sweetPotato: ['Sweet potato', 'Beta-carotene contributes to the orange color of sweet potato flesh. Your body can convert it to vitamin A, which supports normal vision.'],
+  banana: ['Potato', 'Potatoes supply potassium, an electrolyte involved in normal nerve and muscle function. The size of the potato and the amount of chowder in your bowl both affect the portion.'],
+  fiber: ['Whole grains', 'Whole-wheat bread retains the bran of the wheat kernel, one source of fiber in the diet. The cancer-prevention guidance looks at usual fiber intake over time.'],
   cannedFish: ['Canned fish', 'USDA lists about 19 g protein per 100 g for drained light tuna in water and 25 g for drained sardines in oil with bones. Match the weight and kind of fish to your can.'],
   fuel: ['Starch', 'Twelve trained cyclists took about 33 minutes to finish a time trial after a long ride fueled with potato purée or gel, and about 39½ minutes with water. The study tested carbohydrate eaten during the ride.'],
   oats: ['Oats', 'Oats contain a soluble fiber called beta-glucan. In a four-week cereal trial, its effect on LDL cholesterol depended on how viscous the fiber was. The researchers measured the fiber dose in the cereal.'],

@@ -135,12 +135,43 @@ function choosePath(id) {
 ['All foods',...PATHS].forEach((p,i)=>byId('path-filters').append(action(p,()=>choosePath(i-1))));
 choosePath(-1);
 
+function stepReader(steps, instructions) {
+  if (steps.length < 2) return instructions;
+  const box = node('div', undefined, 'step-reader');
+  const reading = node('div', undefined, 'step-reading');
+  reading.hidden = true;
+  const current = node('p');
+  current.setAttribute('role', 'status');
+  let index = 0;
+  function showStep() {
+    current.replaceChildren(node('strong', 'Step ' + (index + 1) + ' of ' + steps.length), ' ', steps[index]);
+    previous.disabled = index === 0;
+    next.disabled = index === steps.length - 1;
+  }
+  const previous = action('Previous step', () => { index--; showStep(); if (previous.disabled) next.focus(); });
+  const next = action('Next step', () => { index++; showStep(); if (next.disabled) previous.focus(); });
+  const toggle = action('Read one step at a time', () => {
+    reading.hidden = !reading.hidden;
+    instructions.hidden = !reading.hidden;
+    toggle.textContent = reading.hidden ? 'Read one step at a time' : 'Show all steps';
+    toggle.setAttribute('aria-expanded', String(!reading.hidden));
+    if (!reading.hidden) showStep();
+  }, 'text-button');
+  toggle.setAttribute('aria-expanded', 'false');
+  reading.append(current, previous, next);
+  box.append(toggle, reading, instructions);
+  return box;
+}
+
 let selectedRecipeIndex = 0;
 function chooseRecipe(i, collectionButton) {
   selectedRecipeIndex = i;
   byId('drink-plan-status').textContent = '';
   const r=RECIPES[i];
   Array.from(byId('recipes').children).forEach((button,n)=>button.setAttribute('aria-pressed',String(i===n)));
+  renderDrink(byId('recipe-card'),r,collectionButton);
+}
+function renderDrink(card,r,collectionButton) {
   const ingredients=node('ul');
   ingredients.append(...r.ingredients.map(item=>node('li',item)));
   const note=node('div',undefined,'study-note');
@@ -152,8 +183,16 @@ function chooseRecipe(i, collectionButton) {
   note.append(more);
   const heading = node('h3', r.name);
   heading.tabIndex = -1;
-  const card = byId('recipe-card');
-  card.replaceChildren(node('p',r.time,'eyebrow'),heading,ingredients,node('h4','Make it'),node('p',r.method),note);
+  const directions = node('ol');
+  directions.append(...r.steps.map(text => node('li', text)));
+  card.replaceChildren(node('p', r.time, 'eyebrow'), heading, node('h4', 'Equipment'),
+    node('p', r.equipment), node('h4', 'Ingredients'), ingredients, node('h4', 'Make it'),
+    stepReader(r.steps, directions), note);
+  if (r.tradition) {
+    const credit = node('p', r.credit ? r.credit + ' ' : '', 'dish-credit');
+    credit.append(link(r.tradition.label, r.tradition.url));
+    card.append(credit);
+  }
   card.append(link('Link to this drink', '?drink=' + encodeURIComponent(r.id) + '#recipe-card'));
   if (collectionButton) card.append(action('Back to cold-season recipes', () => collectionButton.focus(), 'text-button'));
 }
@@ -167,7 +206,7 @@ byId('drink-goal').addEventListener('change',event => {
 });
 const requestedDrink = new URLSearchParams(location.search).get('drink');
 const requestedIndex = RECIPES.findIndex(recipe => recipe.id === requestedDrink);
-chooseRecipe(requestedIndex < 0 ? 0 : requestedIndex);
+chooseRecipe(requestedIndex < 0 ? RECIPES.findIndex(recipe => recipe.id === 'ginger-lemon') : requestedIndex);
 
 const nutrients = [['Energy','kcal'],['Protein','g'],['Fat','g'],['Carbohydrate','g'],['Fiber','g'],['Total sugars','g'],['Calcium','mg'],['Iron','mg'],['Magnesium','mg'],['Potassium','mg'],['Sodium','mg'],['Manganese','mg'],['Vitamin A','µg RAE'],['Vitamin C','mg'],['Riboflavin (B2)','mg'],['Vitamin B12','µg']];
 const quantity = new Intl.NumberFormat('en-US',{maximumSignificantDigits:3});

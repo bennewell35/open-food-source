@@ -6,24 +6,34 @@
 <meta name="description" content="Explore everyday foods and tonics through human research, real portions and practical recipes.">
 <title>Open Food Source — Food, drink &amp; human research</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="kitchen.css">
 <link rel="icon" type="image/webp" href="assets/maple-leaf.webp">
 <script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
 <script defer src="dishes.js"></script><script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="cookbook.js"></script><script defer src="pantry-picker.js"></script>
+<script defer src="regional-data.js"></script><script defer src="quick-kitchen.js"></script><script defer src="regions.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
-<header class="mast"><div class="wrap mast-inner">
+<header class="mast kitchen-mast"><div class="wrap mast-inner">
 <a class="wordmark" href="#main" aria-label="Open Food Source home"><span class="compass" aria-hidden="true">✳</span>Open Food Source</a>
-<nav aria-label="Main navigation"><a href="#atlas">Atlas</a><a href="#cookbook">Cookbook</a><a href="#kitchen">Drinks</a><a href="#planner">Weekly planner</a><a href="#pantry">Food index</a><a href="#sources">Sources</a></nav>
+<nav aria-label="Main navigation"><a href="#quick-kitchen">Quick kitchen</a><a href="#regions">By state</a><a href="#weekly-map">My week</a><details id="kitchen-menu"><summary>More</summary><div><a href="#pantry-picker">Pantry picker</a><a href="#cookbook">Full cookbook</a><a href="#kitchen">Drink kitchen</a><a href="#cold-season">Cold-season kitchen</a><a href="#atlas">Research atlas</a><a href="#pantry">USDA food index</a><a href="#sources">Sources &amp; contributions</a></div></details></nav>
 </div></header>
 <main id="main">
-<section class="hero"><div class="wrap hero-grid"><div class="hero-copy">
-<h1>Open Food<br><em>Source.</em></h1>
-<p class="lede">Find recipes by ingredient, explore what human studies found, and plan the meals you want to repeat.</p>
-<div class="hero-actions"><a class="primary" href="#pantry-picker">Open pantry picker</a><a class="inline" href="#cookbook">Browse recipes</a><a class="inline" href="#cold-season">Cold-season kitchen</a><a class="inline" href="#weekly-map">Weekly map</a></div></div>
-<figure class="hero-art"><img alt="Botanical watercolor of a sugar maple leaf, sliced ginger, an olive branch and blueberries" src="assets/botanical-plate.webp" width="1200" height="800">
-<figcaption>Sugar maple · Ginger · Olive · Blueberry</figcaption></figure>
-</div></section>
+<section class="daily" id="quick-kitchen" aria-labelledby="daily-title"><div class="wrap daily-inner">
+<div class="daily-heading"><div><p class="eyebrow">Quick kitchen</p><h1 id="daily-title">What can I make now?</h1></div><a class="inline" href="#pantry-picker">Cook from my pantry</a></div>
+<div class="daily-controls"><label for="daily-query">Recipe or ingredient<input type="search" id="daily-query" placeholder="Try oats, ginger or apple" autocomplete="off"></label>
+<label for="daily-time">Time available<select id="daily-time"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15" selected>15 minutes</option><option value="30">30 minutes</option><option value="">Any time</option></select></label></div>
+<div class="daily-toolbar"><div class="k-tabs" role="group" aria-label="Recipe type"><button type="button" data-kind="all" aria-pressed="true">All</button><button type="button" data-kind="dish" aria-pressed="false">Foods</button><button type="button" data-kind="drink" aria-pressed="false">Drinks</button></div>
+<button id="daily-saved" type="button" class="k-outline" aria-pressed="false">My saved recipes</button></div>
+<p id="daily-count" role="status" class="daily-count"></p><div id="daily-results" class="daily-results"></div>
+<div class="daily-foot"><button type="button" id="daily-more" class="k-outline" hidden>Show more recipes</button><button type="button" id="daily-clear" class="text-button" hidden>Reset filters</button></div>
+<p id="daily-status" role="status" class="quiet"></p></div></section>
+<section id="regions" class="region-section" aria-labelledby="regions-title"><div class="section wrap">
+<div class="section-head"><div><p class="eyebrow">Regional food guide</p><h2 id="regions-title">Explore by state.</h2></div></div>
+<p class="intro">Browse all 50 states. See what residents chose in a survey, what stands out in grocery orders, and what you can cook at home.</p>
+<div class="region-filters"><label for="region-area">U.S. region<select id="region-area"><option value="">All regions</option></select></label>
+<label for="region-state">State<select id="region-state"></select></label></div><p id="region-count" class="quiet" role="status"></p>
+<article id="region-card" aria-label="State food data"></article><div id="region-recipes"></div></div></section>
 <section class="section wrap picker" id="pantry-picker" aria-labelledby="picker-title">
 <div class="section-head"><div><p class="eyebrow">Pantry picker</p><h2 id="picker-title">Cook from your shelves.</h2></div><a class="inline" href="#picker-shopping">My shopping list</a></div>
 <p class="intro">Check the staples you have, then open a recipe to choose your version. Add what’s missing to your shopping list or put the meal straight into your week.</p>
@@ -126,5 +136,8 @@
 </section>
 </main><footer><div class="wrap"><a href="#main" class="wordmark"><span aria-hidden="true">✳</span> Open Food Source</a><a href="https://github.com/bennewell35/open-food-source" class="inline">Contribute on GitHub</a><a href="#main" class="inline">Back to top</a></div></footer>
 <dialog id="note-dialog" aria-labelledby="note-title"><div class="dialog-tools"><span class="eyebrow">Food field note</span><button id="close-note" aria-label="Close food field note" autofocus>Close</button></div><div id="note-body"></div></dialog>
+<dialog id="daily-reader" aria-label="Recipe directions"><div class="reader-toolbar">
+<button type="button" class="k-outline" id="reader-close">Back to results</button><button type="button" class="k-outline" id="reader-save" aria-pressed="false">Save recipe</button></div>
+<p id="reader-status" role="status" class="quiet"></p><div id="reader-content"></div></dialog>
 <noscript><p>Enable JavaScript to explore the maps and food index. Primary references include <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11522891/">the maple trial</a> and <a href="https://fdc.nal.usda.gov/download-datasets/">USDA food data</a>.</p></noscript>
 </body></html>

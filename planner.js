@@ -26,6 +26,10 @@ function calendarKey(date) {
   return [date.getFullYear(), String(date.getMonth()+1).padStart(2,'0'), String(date.getDate()).padStart(2,'0')].join('-');
 }
 let displayedMonday = mondayOf(new Date());
+function defaultPlanningDay() {
+  const today = new Date();
+  return calendarKey(displayedMonday) === calendarKey(mondayOf(today)) ? (today.getDay() + 6) % 7 : 0;
+}
 function readPlanValue(key, fallback, statusId = 'planner-status') {
   if (inMemoryEdits.has(key)) return inMemoryEdits.get(key);
   try {
@@ -51,7 +55,10 @@ function showDrinkRecipe(container, recipe) {
   const details = node('details', undefined, 'planner-recipe');
   const ingredients = node('ul');
   for (const item of recipe.ingredients) ingredients.append(node('li', item));
-  details.append(node('summary', 'Recipe for ' + recipe.name), ingredients, node('p', recipe.method));
+  const steps = node('ol');
+  steps.append(...recipe.steps.map(text => node('li', text)));
+  details.append(node('summary', 'Recipe for ' + recipe.name), node('p', recipe.time + ' · ' + recipe.equipment),
+    node('h4', 'Ingredients'), ingredients, node('h4', 'Method'), steps);
   details.append(node('h4', 'What the evidence supports'), node('p', recipe.reason), citations(recipe.refs));
   container.append(details);
 }
@@ -184,12 +191,14 @@ window.addEventListener('storage', event => {
   updateWeeklyMap();
 });
 mapDays.forEach((day,i) => byId('recipe-day').add(new Option(day,String(i))));
-byId('use-recipe').addEventListener('click', () => {
-  const index = Number(byId('recipe-day').value);
+function setPlannedDrink(recipe, index) {
   const date = addDays(displayedMonday,index);
   const control = byId(calendarKey(date) + '-drink');
-  control.value = RECIPES[selectedRecipeIndex].id;
+  control.value = recipe.id;
   control.dispatchEvent(new Event('change'));
-  byId('drink-plan-status').textContent = shortDateFormat.format(date) + ' · ' + control.selectedOptions[0].textContent + '. ' + byId('planner-status').textContent;
+  return shortDateFormat.format(date) + ' · ' + control.selectedOptions[0].textContent + '. ' + byId('planner-status').textContent;
+}
+byId('use-recipe').addEventListener('click', () => {
+  byId('drink-plan-status').textContent = setPlannedDrink(RECIPES[selectedRecipeIndex], Number(byId('recipe-day').value));
 });
 showWeek();

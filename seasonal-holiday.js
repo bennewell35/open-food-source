@@ -98,7 +98,7 @@ const HOLIDAY_TONICS = [
     reason: 'Ladle fruit into each mug along with the liquid. Tamarind pastes differ in strength, so taste as you add it.'
   },
   {
-    id: 'jamaican-sorrel', name: 'Jamaican sorrel with fresh ginger',
+    id: 'jamaican-sorrel', image: 'assets/jamaican-sorrel.webp', name: 'Jamaican sorrel with fresh ginger',
     seasons: ['christmas', 'winter'], serves: 4, minutes: 255, time: '4 hr 15 min including cold steep · serves 4',
     equipment: 'Saucepan, heatproof container with lid, strainer and pitcher',
     ingredients: ['½ cup dried food-grade sorrel (hibiscus calyces)', '1-inch piece of fresh ginger, sliced and bruised', '4 cups water', '2 tablespoons sugar, or to taste'],
@@ -112,7 +112,7 @@ const HOLIDAY_TONICS = [
     reason: 'Hibiscus calyces supply color and acidity. Taste the strained drink before adding sugar.'
   },
   {
-    id: 'filipino-tsokolate', name: 'Filipino tsokolate with tablea',
+    id: 'filipino-tsokolate', image: 'assets/filipino-tsokolate.webp', name: 'Filipino tsokolate with tablea',
     seasons: ['christmas', 'winter'], serves: 2, minutes: 12, time: '12 min · makes 2 small mugs',
     equipment: 'Small saucepan, knife and whisk or batidor',
     ingredients: ['1½ cups milk', '1½ oz unsweetened Filipino cacao tablea, chopped', '2 teaspoons smooth peanut butter', '2 teaspoons sugar, or to taste'],

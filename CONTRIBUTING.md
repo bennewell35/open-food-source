@@ -31,6 +31,7 @@ For a state-data correction, use the same study or correction issue. Include the
 | `recipes.js` | Kitchen portions, method, evidence limits, source keys, goal categories and PubMed query |
 | `seasonal-holiday.js` and `seasonal-everyday.js` | Seasonal drink recipes with occasion tags, preparation time, steps and a culinary source |
 | `tonic-evidence.js` | Human research and clinical guidance for the seasonal tonic guide |
+| `cancer-food-evidence.js` and `cardiometabolic-food-evidence.js` | Studies grouped by disease, with participants, exposure, result, limits and corresponding cookbook dishes |
 | `regional-data.js` | Published state results, dates, populations, limits and source links in `REGIONAL_SOURCES` |
 | `regions.js` | State selection, counted favorites and the cookbook recipes that match each survey side |
 | `weekly-map.js` | Food matching, weekly lessons and suggested applications |
@@ -43,6 +44,8 @@ For a dish, supply the total time in minutes as well as the display text, includ
 Quick Kitchen uses numeric `minutes` for both dishes and drinks. Include setup time or state the starting condition, such as chilled ingredients. To suggest a recipe in the state explorer, use the full `state` name and its Census `region` on the recipe record. Add a `tradition` object with a descriptive `label` and direct source `url`. The Maine chowder in `dishes.js` and Maine blueberry shake in `recipes.js` are examples. [Census region definitions](https://www.census.gov/programs-surveys/economic-census/guidance-geographies/levels.html)
 
 Set `coldSeason: true` on a dish or drink to include it in the cold-season collection. For a dish, add a `coldSeasonTip` with one practical adjustment, such as how to loosen thick porridge with broth.
+
+For the disease guide, link directly to the primary research. Distinguish a measured risk factor from a diagnosis or clinical event, an association from a causal effect, and a prevention study from treatment after diagnosis. Include important null or conflicting results. Connect the food to a practical recipe and identify how the recipe differs from the studied intervention.
 
 For a seasonal tonic, give the drink a stable ID, an occasion from `cold-flu`, `thanksgiving`, `christmas`, `winter`, `spring`, `summer` or `autumn`, and an attributed culinary source in `tradition`. Use `evidence: 'tradition'` for a culinary recipe. To connect a recipe to health research, cite the human study or agency guidance, describe the tested preparation and outcome, and explain how the kitchen serving compares. Include null or conflicting results when relevant. The guide, Quick Kitchen and planner all read the same recipe record. To check your contribution, open it from the seasonal guide, save it to a day, and reopen that day after refresh.
 

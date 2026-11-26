@@ -72,7 +72,7 @@ const RECIPES = [
       'Add a squeeze of lemon. Tear the basil leaves over the glass, stir them in and serve cold.'
     ],reason:'Tomatoes supply lycopene. Human studies disagree about its relationship to prostate cancer risk. This savory drink is an option when you want a vegetable drink without adding sugar.',refs:['prostate','fdc'],note:'prostate'},
   {
-    id: 'honey-turmeric',
+    id: 'honey-turmeric', image: 'assets/honey-turmeric.webp',
     seasons: ['cold-flu', 'thanksgiving', 'autumn'], evidence: 'honey',
     credit: 'An original Open Food Source recipe.',
     tradition: {label: 'Original recipe record', url: 'https://github.com/bennewell35/open-food-source/blob/fa69ba89a95e900215fd87f8b42e69bc3a14c39c/recipes.js#L72'},

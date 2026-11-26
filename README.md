@@ -8,6 +8,12 @@ Open Food Source is a community cookbook and weekly meal planner. Find something
 
 Looking for something to make when a cold hits? The [cold-season collection](https://bennewell35.github.io/open-food-source/#cold-season) brings together soft meals, brothy dishes and drinks you can add to your week. Its research notes explain which symptoms researchers measured and how the preparations compare with what you make at home.
 
+## December household kitchen test
+
+[Choose a drink](https://bennewell35.github.io/open-food-source/#december-kitchen) and make it in your own kitchen. The pilot features honey–turmeric tonic, Filipino tsokolate and Jamaican sorrel. We’re inviting five households. Use a [first-cook note](https://bennewell35.github.io/open-food-source/kitchen-check.html?pilot=december-2026#cook) to record time, yield and changes, then a [one-week check-in](https://bennewell35.github.io/open-food-source/kitchen-check.html?pilot=december-2026#return) to say whether you made it again and why.
+
+A report is shared only if its author sends it. For the five-household milestone, count a household once and keep its follow-up with the first report when the household provides the same optional code. Once a report identifies a reproducible improvement, credit that observation with permission, update the instructions and invite a second cook to try the change. Interface tests and unsubmitted drafts do not count as kitchen reports.
+
 ## Run locally
 
 Download the [latest source ZIP](https://github.com/bennewell35/open-food-source/archive/refs/heads/main.zip) and extract it, or clone this repository. From the project directory run
@@ -19,6 +25,8 @@ python3 -m http.server 8000 --bind 127.0.0.1
 Open [Open Food Source](http://127.0.0.1:8000/). The site runs as ordinary HTML, CSS and JavaScript with bundled fonts and data. No API keys or build step are required. Pinned lessons, meals and weekly notes belong to the browser and site address where you saved them. The application sends no planner entries to a server.
 
 ## Try a research question
+
+The [Food & disease guide](https://bennewell35.github.io/open-food-source/#food-and-disease) connects cookbook dishes to published human research on cancer, cardiovascular disease, blood pressure and type 2 diabetes. Each study names the people, food comparison, outcome and limits. The recipes are practical ways to use those ingredients.
 
 Short on time? In **Quick Kitchen**, type an ingredient, choose how many minutes you have and switch between foods and drinks. Open a recipe for its ingredients and directions. **Save recipe** keeps it in **My saved recipes** in this browser. [Open Quick Kitchen](https://bennewell35.github.io/open-food-source/#quick-kitchen)
 

@@ -237,3 +237,93 @@
   .region-filters, .tonic-results { grid-template-columns: minmax(0,1fr); }
   .tonic-result { gap: .2rem; padding: .85rem 1rem; }
 }
+
+.daily-inner {
+  padding-block: clamp(1.35rem, 3.8vw, 3.5rem) clamp(2rem, 4vw, 3.75rem);
+}
+.daily-heading .inline { text-underline-offset: .25em; }
+.daily-count { display: flex; align-items: center; gap: .8rem; }
+.daily-count::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.daily-caption { flex: 1; justify-content: flex-start; }
+.daily-origin { margin-top: auto; padding-top: .15rem; }
+.daily-results .daily-empty { grid-column: 1 / -1; max-width: 60ch; padding: .55rem 0; }
+.daily-tile img { aspect-ratio: 1.75; }
+.daily-foot { margin-top: 1rem; }
+.daily-foot .k-outline { min-width: min(100%, 10rem); }
+
+:is(.daily-tile, .tonic-result, .dish-tile):focus-visible {
+  outline: 3px solid var(--copper); outline-offset: 3px; border-color: var(--dark);
+}
+:is(.daily-tile, .tonic-result, .dish-tile, .picker-opener):focus-visible strong,
+.regional-recipe:focus-visible { color: var(--copper); text-decoration: underline; text-underline-offset: .12em; }
+.k-outline:not([aria-pressed=true]):focus-visible,
+.k-tabs button:not([aria-pressed=true]):focus-visible { background: var(--sage); }
+
+#daily-reader { --reader-inset: clamp(1rem, 2.5vw, 2rem); }
+.reader-toolbar, #reader-content { padding-inline: var(--reader-inset); }
+#reader-content { padding-top: 0; }
+#reader-status, #reader-status:empty, #reader-status:not(:empty) {
+  display: block; min-block-size: 1.5rem; margin: 0; padding-inline: var(--reader-inset);
+  font-size: .84rem; line-height: 1.5rem;
+}
+#reader-content :is(.detail-heading h3, .recipe-card h3) {
+  margin: .45rem 0 .55rem; line-height: 1.04; text-wrap: balance;
+  font-size: clamp(2.25rem, 4.5vw, 3.65rem);
+}
+#reader-content .recipe-columns { margin-top: .35rem; }
+#reader-content .recipe-columns > div > h4:first-child { margin-top: .45rem; }
+#reader-content :is(ul, ol) { margin-block: .6rem .9rem; }
+.step-reading { border-color: #738263; background: #edf0e5; border-radius: 0 var(--kitchen-radius) var(--kitchen-radius) 0; }
+.step-reading strong { color: var(--copper); font-size: .9rem; }
+.step-reading button { min-height: var(--kitchen-target); background: var(--paper); border-radius: var(--kitchen-radius); }
+.step-reading button:focus-visible { border-color: var(--dark); }
+
+.kitchen-check h1 { margin: .45rem 0 .85rem; line-height: 1.02; text-wrap: balance; overflow-wrap: anywhere; }
+.mast:has(+ .kitchen-check) .wordmark { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.kitchen-check .intro { max-width: 62ch; }
+.kitchen-check :is(input, select, textarea) {
+  padding: .58rem .75rem; border: 1px solid #899789; border-radius: var(--kitchen-radius);
+  background-color: #fffef8; color: var(--ink); font-size: 1rem; font-weight: 400;
+}
+.kitchen-check select { padding-inline-end: 2.3rem; }
+.kitchen-check input[type=date] { min-inline-size: 0; padding-inline: .1em; }
+.kitchen-check :is(input, select, button, .primary, .inline) { min-height: var(--kitchen-target); }
+.kitchen-check fieldset > label + label { margin-top: 1.15rem; }
+.kitchen-check legend { color: var(--ink); font-size: clamp(1.65rem, 3.3vw, 2.15rem); }
+.kitchen-check #pilot-repeat-details { border-inline-start: 3px solid #738263; background: var(--paper); }
+.kitchen-check #pilot-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 .75rem; }
+.kitchen-check .check-actions { gap: .35rem 1rem; }
+.kitchen-check :is(#report-box, fieldset) { overflow-wrap: anywhere; }
+.kitchen-check #check-report { line-height: 1.55; }
+
+@media (min-width: 22.6rem) and (max-width: 36rem) {
+  .daily-controls { grid-template-columns: minmax(0, 1fr) minmax(8.5rem, .65fr); gap: .65rem; }
+}
+@media (max-width: 36rem) {
+  .daily-toolbar { gap: .45rem .65rem; }
+  .daily-caption { padding: .7rem .65rem; }
+  .daily-caption strong { font-size: clamp(1.45rem, 6vw, 1.75rem); }
+  .daily-foot { margin-top: .8rem; }
+  #reader-content .recipe-columns { gap: .55rem; }
+  .kitchen-check .check-actions { align-items: start; }
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.daily-tile, .tonic-result, .dish-tile):hover {
+    border-color: #738263; box-shadow: 0 3px 12px #1d382c15;
+  }
+  :is(.daily-tile, .tonic-result, .dish-tile):hover strong {
+    color: var(--copper); text-decoration: underline; text-underline-offset: .12em;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :is(.daily-tile, .tonic-result, .dish-tile) { transition: transform 120ms ease-out, box-shadow 120ms ease-out; }
+  :is(.daily-tile, .tonic-result, .dish-tile):active { transform: translateY(1px); box-shadow: none; }
+  #daily-reader[open] { animation: reader-arrive 160ms ease-out; }
+  #daily-reader[open]::backdrop { animation: reader-backdrop 140ms ease-out; }
+  .reader-toolbar:has(+ #reader-status:not(:empty)) #reader-save[aria-pressed=true] { animation: favorite-saved 170ms ease-out; }
+  .step-reading:not([hidden]) strong { animation: step-change 150ms ease-out; }
+}
+@keyframes reader-arrive { from { opacity: .35; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+@keyframes reader-backdrop { from { opacity: .3; } to { opacity: 1; } }
+@keyframes favorite-saved { from { transform: scale(.97); } to { transform: none; } }
+@keyframes step-change { from { opacity: .45; transform: translateY(2px); } to { opacity: 1; transform: none; } }

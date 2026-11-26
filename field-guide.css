@@ -1,0 +1,86 @@
+.daily-shortcuts { display:flex; align-items:center; flex-wrap:wrap; gap:0 1.2rem; }
+.daily-shortcuts, .daily-shortcuts a { min-width:0; max-width:100%; white-space:normal; overflow-wrap:anywhere; }
+.december-kitchen { background:var(--dark); color:var(--paper); }
+.december-heading, .december-feedback { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.65rem 2rem; }
+.december-kitchen .eyebrow { color:#e9cb9f; }
+.december-heading h2 { margin-top:.45rem; font-size:clamp(3.2rem,6vw,5.2rem); }
+.december-share { min-height:var(--kitchen-target); border:1px solid #a1b4a5; border-radius:var(--kitchen-radius); padding:.55rem 1rem; color:var(--paper); font-weight:600; }
+.december-share:hover { background:#304e40; }
+.december-intro { max-width:61ch; margin:.85rem 0 1.65rem; color:#e4eadf; }
+#december-share-status:empty { display:none; }
+#december-share-status { margin-bottom:.75rem; }
+#december-invitation { max-width:48rem; margin-bottom:1rem; }
+#december-invitation textarea { display:block; width:100%; color:var(--ink); }
+.december-drinks { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(.8rem,1.8vw,1.6rem); padding:0; margin:0; list-style:none; }
+.december-drinks > li, .december-card, .december-caption { min-width:0; overflow-wrap:anywhere; }
+.december-card { display:flex; flex-direction:column; height:100%; width:100%; text-align:left; background:var(--paper); color:var(--ink); border:1px solid transparent; border-radius:var(--kitchen-radius); overflow:hidden; padding:0; }
+.december-card img { width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; }
+.december-caption { display:flex; flex-direction:column; flex:1; gap:.35rem; padding:clamp(.85rem,1.5vw,1.35rem); }
+.december-caption small { color:var(--copper); font:600 .85rem/1.45 var(--sans); }
+.december-caption strong { font:400 clamp(1.65rem,2.9vw,2.5rem)/1.08 var(--serif); letter-spacing:-.02em; }
+.december-caption > span { font-size:.9rem; color:var(--soft); }
+.december-feedback { border-top:1px solid #789184; margin-top:1.5rem; padding-top:1rem; }
+.december-feedback h3 { font-size:1.7rem; }
+.december-feedback > div, .pilot-reader-links { display:flex; flex-wrap:wrap; align-items:center; gap:.3rem 1.25rem; }
+.december-feedback a, .pilot-reader-links a { min-height:var(--kitchen-target); }
+.pilot-reader-links { border-block:1px solid var(--line); padding:.6rem 0; margin:1rem 0; }
+.pilot-reader-links a { display:inline-flex; align-items:center; }
+.pilot-reader-links h4 { flex-basis:100%; }
+@media (hover:hover) { .december-card:hover strong { text-decoration:underline; text-underline-offset:.13em; } }
+@media (prefers-reduced-motion:no-preference) {
+  .december-card { transition:transform 160ms ease-out; }
+  @media (hover:hover) { .december-card:hover { transform:translateY(-2px); } }
+  .december-card:active { transform:scale(.99); }
+}
+@media (max-width:42rem) {
+  .december-drinks { grid-template-columns:minmax(0,1fr); }
+  .december-card { display:grid; grid-template-columns:minmax(0,30%) minmax(0,1fr); }
+  .december-card img { height:100%; min-height:7.5rem; }
+  .december-feedback { align-items:start; }
+}
+@media (max-width:22rem) { .december-card { grid-template-columns:minmax(0,1fr); } .december-card img { height:auto; } }
+
+.disease-guide { background:var(--paper); border-block:1px solid var(--line); }
+.disease-heading { margin-bottom:clamp(1.35rem,3vw,2.4rem); }
+.disease-heading h2 { margin-top:.35rem; }
+.disease-layout { display:grid; grid-template-columns:minmax(12rem,.65fr) minmax(0,2fr); gap:clamp(1.25rem,4vw,4.25rem); align-items:start; }
+.disease-navigation { min-width:0; }
+.disease-navigation label, #disease-choice { display:none; }
+#disease-menu h3 { color:var(--copper); font:700 .9rem/1.4 var(--sans); margin:0 0 .35rem; }
+#disease-menu > div + div { margin-top:1.25rem; }
+#disease-menu button { display:block; width:100%; padding:.65rem .8rem; min-height:var(--kitchen-target); text-align:left; font-weight:600; border-inline-start:3px solid transparent; }
+#disease-menu button[aria-pressed=true] { background:var(--sage); border-color:var(--ink); }
+#disease-reading { border-top:2px solid var(--ink); min-width:0; padding-top:1rem; }
+.condition-header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0 1rem; }
+.condition-header h3 { font-size:clamp(2.2rem,4vw,3.3rem); }
+.condition-header .inline { min-height:var(--kitchen-target); font-size:.85rem; }
+.condition-food { color:var(--copper); font-weight:600; margin:.35rem 0; }
+.condition-question { color:var(--soft); max-width:66ch; }
+.condition-study { margin-top:1.25rem; border-top:1px solid var(--line); padding-top:1rem; }
+.condition-design { font-size:.88rem; font-weight:600; color:var(--soft); }
+.condition-study h4 { margin:.4rem 0 .8rem; font:400 clamp(1.4rem,2vw,1.75rem)/1.22 var(--serif); }
+.condition-study dl { display:grid; grid-template-columns:minmax(7.9rem,1fr) minmax(0,3fr); gap:.55rem 1.2rem; margin:0; }
+.condition-study dt { font-weight:600; }
+.condition-study dd { margin:0; max-width:70ch; }
+.condition-kitchen { background:var(--sage); margin-top:1.4rem; padding:1rem clamp(1rem,2vw,1.5rem); border-radius:var(--kitchen-radius); }
+.condition-kitchen h4 { font:400 1.65rem/1.1 var(--serif); margin-bottom:.5rem; }
+.condition-recipes { display:flex; flex-wrap:wrap; gap:0 1.2rem; margin-top:.3rem; }
+.condition-recipes .regional-recipe { width:auto; min-height:var(--kitchen-target); }
+@media (max-width:48rem) {
+  .disease-layout { grid-template-columns:minmax(0,1fr); }
+  #disease-menu { display:none; }
+  .disease-navigation label { display:block; font-size:.93rem; font-weight:700; margin-bottom:.35rem; }
+  #disease-choice { display:block; width:100%; min-width:0; min-height:var(--kitchen-target); color:var(--ink); font-size:1rem; }
+}
+@media (max-width:34rem) {
+  .condition-study dl { display:block; }
+  .condition-study dd + dt { margin-top:.7rem; }
+}
+
+.condition-result { max-width:72ch; }
+.condition-limit { max-width:72ch; color:var(--soft); margin:.45rem 0; }
+.condition-method summary, .research-key summary { padding-block:.7rem; min-height:var(--kitchen-target); cursor:pointer; font-weight:600; }
+.condition-method dl { margin-bottom:.6rem; }
+.research-key { border-top:1px solid var(--line); margin-top:.9rem; }
+.research-key p { color:var(--soft); font-size:.93rem; margin-bottom:.65rem; }
+.disease-footer { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.2rem 1rem; border-top:1px solid var(--line); padding-top:.5rem; margin-top:1.5rem; color:var(--soft); font-size:.9rem; }

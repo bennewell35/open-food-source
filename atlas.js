@@ -214,6 +214,12 @@ function renderDrink(card,r,collectionButton) {
   card.replaceChildren(node('p', r.time, 'eyebrow'), heading, node('h4', 'Equipment'),
     node('p', r.equipment), node('h4', 'Ingredients'), ingredients, node('h4', 'Make it'),
     stepReader(r.steps, directions), note);
+  if (DECEMBER_PILOT.drinks.some(entry => entry.id === r.id)) {
+    const report = node('div', undefined, 'pilot-reader-links');
+    report.append(node('h4', 'December kitchen test'), link('Leave a kitchen note', decemberReportLink(r.id, 'cook')),
+      link('One-week check-in', decemberReportLink(r.id, 'return')));
+    note.before(report);
+  }
   card.append(link('Link to this drink', '?drink=' + encodeURIComponent(r.id) + '#recipe-card'));
   if (collectionButton) card.append(action('Back to cold-season recipes', () => collectionButton.focus(), 'text-button'));
 }

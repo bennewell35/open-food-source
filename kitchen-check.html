@@ -4,23 +4,26 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#1e3a2e">
 <title>Kitchen check · Open Food Source</title>
-<link rel="stylesheet" href="style.css"><link rel="icon" type="image/webp" href="assets/maple-leaf.webp">
-<script defer src="dishes.js"></script><script defer src="kitchen-check.js"></script>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="kitchen.css"><link rel="icon" type="image/webp" href="assets/maple-leaf.webp">
+<script defer src="dishes.js"></script><script defer src="seasonal-holiday.js"></script><script defer src="seasonal-everyday.js"></script><script defer src="recipes.js"></script><script defer src="december-pilot.js"></script><script defer src="kitchen-check.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 <header class="mast"><div class="wrap mast-inner">
 <a class="wordmark" href="./"><span class="compass" aria-hidden="true">✳</span>Open Food Source</a>
-<a class="inline" href="./#pantry-picker">Pantry picker</a>
+<a class="inline" id="check-back" href="./#pantry-picker">Pantry picker</a>
 </div></header>
 <main id="main" class="wrap section kitchen-check">
-<p class="eyebrow">Reader feedback</p><h1>Kitchen check.</h1>
-<p class="intro">Tell us what happened when you used the picker or cooked a recipe. An unfinished attempt is worth sharing. You can copy your answers and reply to whoever invited you.</p>
+<p class="eyebrow" id="check-eyebrow">Reader feedback</p><h1 id="check-title" tabindex="-1">Kitchen check.</h1>
+<p class="intro" id="check-intro">Tell us what happened when you used the picker or cooked a recipe. An unfinished attempt is worth sharing. You can copy your answers and reply to whoever invited you.</p>
+<p id="pilot-links" hidden><a class="inline" id="pilot-recipe-link" href="./#december-kitchen">Open the recipe</a> <a class="inline" id="pilot-followup-link" href="#return">Day 7 follow-up</a></p>
 <noscript>With JavaScript turned off, try the <a href="./#pantry-picker">pantry picker</a> and reply to your inviter with the recipe, what happened and how long it took.</noscript>
 <form id="check-form" hidden>
+<label id="pilot-drink-label" for="pilot-drink" hidden>Which drink did your household try?
+<select id="pilot-drink" disabled><option value="">Choose a pilot drink</option></select></label>
 <label for="check-kind">What would you like to report?</label>
 <select id="check-kind"><option value="picker">My first pantry task</option><option value="cook">A recipe I cooked</option><option value="return">Whether I came back</option></select>
-<label for="check-code">Your participant code <small>(optional)</small></label>
+<label for="check-code"><span id="check-code-label">Your participant code</span> <small>(optional)</small></label>
 <input id="check-code" name="code" data-prompt="Participant code" maxlength="36" aria-describedby="code-hint" autocomplete="off">
 <p class="check-hint" id="code-hint">Choose a short made-up code and reuse it if you report back next week. Leave names and health details out.</p>
 
@@ -51,6 +54,27 @@
 <label>When did you return, if you did?<input name="returned" data-prompt="Return visit date" type="date"></label>
 <label>What have you done since the first try?<select name="activity" data-prompt="Actual return activity" required><option value="">Choose one</option><option>Planned another meal</option><option>Cooked another meal</option><option>Visited again without choosing a meal</option><option>Did not return before this check</option></select></label>
 <label>Which meal, if any? What brought you back or got in the way?<textarea name="followup" data-prompt="Meal and reason" rows="3"></textarea></label>
+</fieldset>
+
+<fieldset id="pilot-cook" hidden disabled><legend>Your first cook</legend>
+<label>What happened?<select name="outcome" data-prompt="First cook outcome" required><option value="">Choose one</option><option>Made and served the drink</option><option>Started and stopped</option></select></label>
+<label>Date you made or tried the drink<input type="date" name="firstDate" data-prompt="First cook date"></label>
+<label>Actual minutes from starting to serving or stopping<input type="number" name="minutes" data-prompt="Actual elapsed minutes" min="0" step="any"></label>
+<label>Actual yield<input name="yield" data-prompt="Actual yield" placeholder="For example, two 8-ounce mugs" maxlength="120"></label>
+<label>Did you change any ingredients or steps?<select name="changes" data-prompt="Recipe changes" required><option value="">Choose one</option><option>Followed the recipe as written</option><option>Made substitutions or changed a step</option></select></label>
+<label>What did you change, or what would help another cook? <small>(optional)</small><textarea name="observations" data-prompt="Substitutions or cooking notes" rows="3"></textarea></label>
+</fieldset>
+
+<fieldset id="pilot-return" hidden disabled><legend>One week after the first cook</legend>
+<label>Date you first tried this drink<input type="date" name="firstDate" data-prompt="First cook date"></label>
+<label>Did your household make this same drink a second time?<select id="pilot-repeat" name="repeat" data-prompt="Made the drink a second time" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+<label>What led to that choice?<textarea name="why" data-prompt="Reason for repeating or skipping" rows="2" required></textarea></label>
+<fieldset id="pilot-repeat-details" hidden disabled><legend>The second batch</legend>
+<label>When did you make it again?<input name="repeatDate" data-prompt="Second cook date" type="date"></label>
+<label>Actual minutes, if you timed it<input name="minutes" data-prompt="Second cook minutes" type="number" min="0" step="any"></label>
+<label>Actual yield<input name="yield" data-prompt="Second batch yield" maxlength="120"></label>
+<label>Any ingredients or steps you changed this time? <small>(optional)</small><textarea name="observations" data-prompt="Second batch substitutions" rows="2"></textarea></label>
+</fieldset>
 </fieldset>
 
 <p class="check-hint">Your answers stay on this page until you choose how to share. Save a copy before closing or reloading this page.</p>

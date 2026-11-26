@@ -7,20 +7,22 @@
 <title>Open Food Source — Food, drink &amp; human research</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="kitchen.css">
+<link rel="stylesheet" href="field-guide.css">
 <link rel="icon" type="image/webp" href="assets/maple-leaf.webp">
-<script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="tonic-evidence.js"></script><script defer src="seasonal-holiday.js"></script><script defer src="seasonal-everyday.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
+<script defer src="research.js"></script><script defer src="assets/land.js"></script><script defer src="assets/composition.js"></script><script defer src="plot.js"></script><script defer src="tonic-evidence.js"></script><script defer src="seasonal-holiday.js"></script><script defer src="seasonal-everyday.js"></script><script defer src="december-pilot.js"></script><script defer src="recipes.js"></script><script defer src="atlas.js"></script>
 <script defer src="dishes.js"></script><script defer src="weekly-map.js"></script><script defer src="planner.js"></script><script defer src="cookbook.js"></script><script defer src="pantry-picker.js"></script>
-<script defer src="regional-data.js"></script><script defer src="quick-kitchen.js"></script><script defer src="regions.js"></script><script defer src="seasonal-guide.js"></script>
+<script defer src="regional-data.js"></script><script defer src="quick-kitchen.js"></script><script defer src="regions.js"></script><script defer src="seasonal-guide.js"></script><script defer src="december-kitchen.js"></script>
+<script defer src="cancer-food-evidence.js"></script><script defer src="cardiometabolic-food-evidence.js"></script><script defer src="disease-guide.js"></script>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 <header class="mast kitchen-mast"><div class="wrap mast-inner">
 <a class="wordmark" href="#main" aria-label="Open Food Source home"><span class="compass" aria-hidden="true">✳</span>Open Food Source</a>
-<nav aria-label="Main navigation"><a href="#quick-kitchen">Quick kitchen</a><a href="#seasonal-tonics" aria-label="Seasonal tonics">Tonics</a><a href="#regions">By state</a><a href="#weekly-map">My week</a><details id="kitchen-menu"><summary>More</summary><div><a href="#pantry-picker">Pantry picker</a><a href="#cookbook">Full cookbook</a><a href="#kitchen">Drink kitchen</a><a href="#cold-season">Cold-season kitchen</a><a href="#atlas">Research atlas</a><a href="#pantry">USDA food index</a><a href="#sources">Sources &amp; contributions</a></div></details></nav>
+<nav aria-label="Main navigation"><a href="#quick-kitchen">Quick kitchen</a><a href="#seasonal-tonics" aria-label="Seasonal tonics">Tonics</a><a href="#regions">By state</a><a href="#weekly-map">My week</a><details id="kitchen-menu"><summary>More</summary><div><a href="#food-and-disease">Food &amp; disease research</a><a href="#pantry-picker">Pantry picker</a><a href="#cookbook">Full cookbook</a><a href="#kitchen">Drink kitchen</a><a href="#cold-season">Cold-season kitchen</a><a href="#december-kitchen">December kitchen test</a><a href="#atlas">Research atlas</a><a href="#pantry">USDA food index</a><a href="#sources">Sources &amp; contributions</a></div></details></nav>
 </div></header>
 <main id="main">
 <section class="daily" id="quick-kitchen" aria-labelledby="daily-title"><div class="wrap daily-inner">
-<div class="daily-heading"><div><p class="eyebrow">Quick kitchen</p><h1 id="daily-title">What can I make now?</h1></div><a class="inline" href="#pantry-picker">Cook from my pantry</a></div>
+<div class="daily-heading"><div><p class="eyebrow">Quick kitchen</p><h1 id="daily-title">What can I make now?</h1></div><div class="daily-shortcuts"><a class="inline" href="#pantry-picker">Cook from my pantry</a><a class="inline" href="#december-kitchen">December kitchen test</a></div></div>
 <div class="daily-controls"><label for="daily-query">Recipe or ingredient<input type="search" id="daily-query" placeholder="Try oats, ginger or apple" autocomplete="off"></label>
 <label for="daily-time">Time available<select id="daily-time"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15" selected>15 minutes</option><option value="30">30 minutes</option><option value="">Any time</option></select></label></div>
 <div class="daily-toolbar"><div class="k-tabs" role="group" aria-label="Recipe type"><button type="button" data-kind="all" aria-pressed="true">All</button><button type="button" data-kind="dish" aria-pressed="false">Foods</button><button type="button" data-kind="drink" aria-pressed="false">Drinks</button></div>
@@ -28,6 +30,14 @@
 <p id="daily-count" role="status" class="daily-count"></p><div id="daily-results" class="daily-results"></div>
 <div class="daily-foot"><button type="button" id="daily-more" class="k-outline" hidden>Show more recipes</button><button type="button" id="daily-clear" class="text-button" hidden>Reset filters</button></div>
 <p id="daily-status" role="status" class="quiet"></p></div></section>
+<section id="december-kitchen" class="december-kitchen" aria-labelledby="december-title"><div class="section wrap">
+<div class="december-heading"><div><p class="eyebrow">Community kitchen · December 2026</p><h2 id="december-title">Three drinks to try.</h2></div>
+<button type="button" id="december-share" class="december-share">Share invitation</button></div>
+<p class="december-intro">We’re inviting five households to make one drink. Tell us what you changed and, a week later, whether you made it again.</p>
+<p id="december-share-status" role="status"></p><div id="december-invitation" hidden><label for="december-invite-text">Copy this invitation</label><textarea id="december-invite-text" readonly rows="3"></textarea></div>
+<ul class="december-drinks" id="december-drinks"></ul>
+<div class="december-feedback"><h3>Already made one?</h3><div><a class="inline" href="kitchen-check.html?pilot=december-2026#cook">Leave a kitchen note</a><a class="inline" href="kitchen-check.html?pilot=december-2026#return">One-week check-in</a></div></div>
+</div></section>
 <section id="seasonal-tonics" class="tonic-guide" aria-labelledby="tonic-title"><div class="section wrap">
 <div class="tonic-heading"><div><h2 id="tonic-title">Seasonal tonics.</h2>
 <p class="intro">Find a warm cup for a sore throat, a punch for the holiday table, or a cool drink for summer. Open a recipe for its directions, source and research.</p></div>
@@ -38,7 +48,16 @@
 <details class="tonic-care" id="tonic-care"><summary>When flu symptoms need medical care</summary><div id="tonic-care-body"></div></details>
 <div class="tonic-results-heading"><p id="tonic-count" role="status"></p><a id="tonic-share" class="inline" href="#seasonal-tonics">Link to this collection</a></div>
 <ul id="tonic-results" class="tonic-results"></ul><div class="tonic-actions"><button class="k-outline" id="tonic-more" type="button" hidden>Show more drinks</button><button class="text-button" id="tonic-clear" type="button" hidden>Show all seasonal drinks</button></div>
-<details class="tonic-shelf" id="tonic-studies"><summary>Read the cold and flu research</summary><div id="tonic-evidence-list"></div></details>
+<details class="tonic-shelf" id="tonic-studies"><summary>Read the cold and flu research</summary><p class="quiet">Evidence reviewed <time datetime="2026-11-26">November 26, 2026</time>. The honey note includes a second trial in children that found similar results with honey and syrup placebo.</p><div id="tonic-evidence-list"></div></details>
+</div></section>
+<section id="food-and-disease" class="disease-guide" aria-labelledby="disease-title"><div class="section wrap">
+<div class="disease-heading"><p class="eyebrow">Food research</p><h2 id="disease-title">Food &amp; disease.</h2>
+<p class="intro">Explore what people ate in human studies, which outcomes changed, and how the foods fit into a meal.</p></div>
+<div class="disease-layout"><div class="disease-navigation"><label for="disease-choice">Choose a condition</label><select id="disease-choice"></select>
+<div id="disease-menu" aria-label="Conditions"></div>
+<details class="research-key"><summary>How to read the evidence</summary><p>In a cohort study, researchers follow people who choose their own foods. In a randomized trial, researchers assign the groups being compared. Check whether the study tracked a diagnosis, a symptom, or a risk factor such as blood pressure.</p><p>A risk or hazard ratio of 1 means the groups had the same estimated risk or rate. A ratio of 0.84 describes a relative difference. To know the difference in cases per 100 people, you also need the underlying risks.</p><p>The 95% confidence interval shows uncertainty around the estimate. If it includes 1, the data are compatible with no difference between groups.</p></details></div>
+<article id="disease-reading" aria-labelledby="condition-name"></article></div>
+<div class="disease-footer"><p>Sources reviewed <time datetime="2026-11-26">November 26, 2026</time>.</p><a class="inline" href="https://github.com/bennewell35/open-food-source/issues/new?template=study-or-recipe.md">Suggest a study or condition</a></div>
 </div></section>
 <section id="regions" class="region-section" aria-labelledby="regions-title"><div class="section wrap">
 <div class="section-head"><div><p class="eyebrow">Regional food guide</p><h2 id="regions-title">Explore by state.</h2></div></div>
@@ -125,7 +144,7 @@
 <h3 id="week-menu" class="menu-heading">This week’s meals</h3>
 <p class="intro">Open a day to change its suggested meals or drink. Edits update the map and save in this browser.</p>
 <div id="planner-days"></div><p id="planner-status" role="status" class="quiet"></p>
-<aside class="prevention" aria-labelledby="risk-title"><div><p class="eyebrow">Research behind the menu</p><h3 id="risk-title">Food and cancer risk</h3></div>
+<aside class="prevention" aria-labelledby="risk-title"><div><p class="eyebrow">Research behind the menu</p><h3 id="risk-title">Food and cancer risk</h3><a class="inline" href="?condition=colorectal-cancer#food-and-disease">Browse the disease studies</a></div>
 <div><p>Whole grains and foods containing fiber are linked to lower colorectal cancer risk. That’s why oats, beans and lentils show up several times this week. The American Cancer Society also recommends limiting processed meat and sugary drinks and says it is best to avoid alcohol. <a href="https://www.wcrf.org/research-policy/evidence-for-our-recommendations/wholegrains-veg-fruit-beans/">WCRF evidence</a> · <a href="https://www.cancer.org/cancer/risk-prevention/diet-physical-activity/acs-guidelines-nutrition-physical-activity-cancer-prevention.html">ACS guideline</a></p>
 <p><strong>For prostate cancer specifically,</strong> dietary lycopene studies have mixed results. Human research has yet to establish that beetroot juice or a turmeric tonic prevents or treats prostate cancer. In the MEAL trial, increasing vegetables did not significantly slow progression in men already on active surveillance. Enjoy tomatoes, beets and spices for the foods they are. <a href="https://www.cancer.gov/types/prostate/patient/prostate-prevention-pdq">NCI prevention review</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/31935026/">MEAL trial</a></p></div></aside>
 </section>
@@ -138,7 +157,7 @@
 <p class="meta" role="status" id="result-count"></p><label for="matches">Matching foods</label><select id="matches"></select></div>
 <article class="nutrients" id="nutrients" aria-label="Food composition"></article></div></section>
 <section class="field-note"><div class="wrap goal-grid"><div><p class="eyebrow">One week in the kitchen</p><h2>A goal you can taste.</h2></div><div><p>At three breakfasts this week, pair a food you already eat with a plant food you enjoy. Try plain yogurt with berries and oats. On a rushed morning, add a handful of frozen berries.</p><p>Pick one drink from the tonic kitchen to try alongside a meal. At the end of the week, ask which combination tasted good, fit your day, and is worth repeating. Three breakfasts is a practical starting point. A week of trying a recipe cannot establish a change in inflammation or immunity.</p></div></div></section>
-<section class="section wrap shelf" id="sources"><div><p class="eyebrow">Research notes</p><h2>The source shelf.</h2></div>
+<section class="section wrap shelf" id="sources"><div><p class="eyebrow">Research notes</p><h2>The source shelf.</h2><a class="inline" href="#food-and-disease">Find research by condition</a></div>
 <p class="intro">Selected human trials, food composition tables, and guidance from public health agencies. Sources checked November 26, 2026.</p>
 <details><summary>How to read the evidence</summary><p>A cardiovascular event is a clinical outcome. LDL cholesterol and blood pressure are risk markers. An attention task or symptom rating answers a narrower question. Nutrient content tells you what a food contributes. A plausible biological mechanism is a reason to test a claim.</p><p>This is a curated guide. We selected studies that speak to these foods, checked comparison groups and serving sizes, and included conflicting findings where they affect a kitchen decision. Study pins identify selected research settings, not where foods originated. Multi-site trials have one representative pin.</p></details>
 <details id="source-disclosure"><summary id="source-count">Browse sources</summary><div id="source-list" class="source-list"></div></details>

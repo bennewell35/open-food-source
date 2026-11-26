@@ -63,6 +63,13 @@ dialog{color:var(--ink);border:1px solid #bcc4b5;border-radius:5px;padding:clamp
 @media(max-width:800px){.weekly-workbench{grid-template-columns:1fr}.weekly-lesson h3:focus{scroll-margin-top:2rem}}
 @media(max-width:500px){.food-matrix-table th:first-child{width:32%}.food-matrix-table tbody th button{font-size:.84rem}.food-matrix-table .map-count{min-width:1.25rem;min-height:1.25rem}.drink-planning>div{width:100%}}
 .mast .wordmark{white-space:nowrap}
+@media(min-width:681px){
+  .hero-grid{padding-block:1.35rem;gap:1.5rem}.hero-copy{padding-block:.25rem}
+  .hero h1{font-size:clamp(4.1rem,6.1vw,6rem);margin:0}
+  .hero .lede{margin-top:1rem}.hero-actions{margin-top:1.3rem}
+  .hero-art img{max-height:17rem;object-fit:contain}
+  #cookbook{padding-block:2.4rem}
+}
 #cookbook{border-bottom:1px solid var(--line)}
 .dish-filters{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:1rem;align-items:end}
 .dish-filters label,.dish-picker label{font-size:.88rem;font-weight:700}
